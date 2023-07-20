@@ -30,9 +30,7 @@ const testDataUploader = async () => {
         await eBooks.forEach( book => book.addGenre(Math.floor(Math.random() * 11 + 1)))
 
 
-
         console.log('Datos cargados exitosamente!');
-
 
 
         return;
@@ -45,17 +43,17 @@ const testDataUploader = async () => {
 
 }
 
-// const testDataCheck = async () => {
+const testDataCheck = async () => {
 
-//     const activitiesCheck = await Activity.count();
+    const eBookCheck = await eBook.count();
 
-//     const productsCheck = await Products.count();
+    const publisherCheck = await Products.count();
 
-//     return { activitiesCheck, productsCheck };
+    return { eBookCheck, publisherCheck };
 
-// }
+}
 
 module.exports = {
     testDataUploader,
-    // testDataCheck
+    testDataCheck
  }; 

@@ -276,7 +276,7 @@ const formatTest = [
     }
 ];
 
-moduel.exports = {
+module.exports = {
     eBooksTest,
     genreTest,
     publisherTest,
