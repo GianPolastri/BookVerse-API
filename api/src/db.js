@@ -47,19 +47,19 @@ let capsEntries = entries.map((entry) => [
 
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { bookGenre, Cart_Products, Cart, EBook, Format, Language, Publisher, Reviews, Rol, User } = sequelize.models;
+const { bookGenre, Cart_Products, Cart, eBook, Format, Language, Publisher, Reviews, Rol, User } = sequelize.models;
 
-EBook.hasOne(Language);
-Language.belongsTo(EBook);
+eBook.hasOne(Language);
+Language.belongsTo(eBook);
 
-EBook.hasOne(Publisher);
-Publisher.belongsTo(EBook);
+eBook.hasOne(Publisher);
+Publisher.belongsTo(eBook);
 
-EBook.belongsToMany(Format, { through: EBook_Format });
-Format.belongsToMany(EBook, { through: EBook_Format });
+eBook.belongsToMany(Format, { through: eBook_Format });
+Format.belongsToMany(eBook, { through: eBook_Format });
 
-EBook.belongsToMany(bookGenre, { through: EBook_bookGenre });
-bookGenre.belongsToMany(EBook, { through: EBook_bookGenre });
+eBook.belongsToMany(bookGenre, { through: eBook_bookGenre });
+bookGenre.belongsToMany(eBook, { through: eBook_bookGenre });
 
 module.exports = {
     ...sequelize.models,
