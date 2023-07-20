@@ -6,6 +6,7 @@ const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME} = process.env;
 
 const sequelize = new Sequelize( 
     `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
+
     { 
         logging: false, 
         native: false,
@@ -47,6 +48,18 @@ let capsEntries = entries.map((entry) => [
 sequelize.models = Object.fromEntries(capsEntries);
 
 const { bookGenre, Cart_Products, Cart, eBook, Format, Language, Publisher, Reviews, Rol, User } = sequelize.models;
+
+eBook.hasOne(Language);
+Language.belongsTo(eBook);
+
+eBook.hasOne(Publisher);
+Publisher.belongsTo(eBook);
+
+eBook.belongsToMany(Format, { through: eBook_Format });
+Format.belongsToMany(eBook, { through: eBook_Format });
+
+eBook.belongsToMany(bookGenre, { through: eBook_bookGenre });
+bookGenre.belongsToMany(eBook, { through: eBook_bookGenre });
 
 module.exports = {
     ...sequelize.models,

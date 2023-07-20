@@ -1,134 +1,59 @@
-// const {
-//     Activity,
-//     ActivityType,
-//     Children,
-//     Products,
-//     ProductsType,
-//     User,
-//     Rol,
-//     // Cart
-// } = require("../db");
-// const {
-//     productsTestData,
-//     activityTestData,
-//     childrenTestData,
-//     userTestData,
-//     activityTypeTestData,
-//     productsTypeTestData,
-//     rolTestData,
-//     activityTestDataArte,
-//     activityTestDataDeportes,
-//     activityTestDataEducacion,
-//     activityTestDataMedicina,
-//     // cartTestData
-// } = require("./testData");
+const { bookGenre, eBook, Format, Language, Publisher, } = require('../db');
+const {
+    eBooksTest,
+    genreTest,
+    publisherTest,
+    languageTest,
+    formatTest,
+} = require('./testData');
 
-// const CreateAdmin = async () => {
-//    const roladmin = await Rol.findOne({where: {
-//        name:"admin" 
-//     }})
-//     const admin = {
-//         fullName: "lagruta",
-//         username: "lagruta",
-//         birthDate: "",
-//         image: "",
-//         phone: "",
-//         mail: "lagrutacdi@gmail.com",
-//         password: "Lagruta2011",
-//     }
-//     const newAdmin = await User.create(admin)
-//     await newAdmin.setRols([roladmin.id])
-// }
-// /* const newAdmin = await User.findOne({where:{username:"admin"}})
-// const rol = await Rol.findByPk(3) */
-// /*  await rol.addUser(newAdmin)
-// }*/
-// /* 87e4d961-ea70-49fc-9e9d-5729553d7568 | Pattie Senecaux  */
+const testDataUploader = async () => {
 
-// const testDataUploader = async () => {
+    try {
 
-//     try {
+        const eBooks = await eBook.bulkCreate( eBooksTest, { ignoreDuplicates: true });
 
-//         const testUser = await User.bulkCreate(userTestData, { ignoreDuplicates: true });
-
-//         await Rol.bulkCreate(rolTestData, { ignoreDuplicates: true });
-
-//         await Children.bulkCreate(childrenTestData, { ignoreDuplicates: true });
-
-//         const testProduct = await Products.bulkCreate(productsTestData, { ignoreDuplicates: true });
-
-//         await ProductsType.bulkCreate(productsTypeTestData, { ignoreDuplicates: true });
-
-// /*         const testActivity = await Activity.bulkCreate(activityTestData, { ignoreDuplicates: true });
-//  */
-//           await ActivityType.bulkCreate(activityTypeTestData, { ignoreDuplicates: true });
-
-//         const activityArt = await Activity.bulkCreate(activityTestDataArte);
-
-//         const activitySports = await Activity.bulkCreate(activityTestDataDeportes);
-
-//         const activityEduc = await Activity.bulkCreate(activityTestDataEducacion);
-
-//         const activityMed = await Activity.bulkCreate(activityTestDataMedicina);
-
-//         // await Cart.bulkCreate(cartTestData);
-
-
-//         await testUser.forEach(user => user.addRol(Math.floor(Math.random() * 2)));
-//         await CreateAdmin();
-
-// /*         await testUser.forEach(user => user.addActivity(testActivity[Math.floor(Math.random() * 8)].id));
-//  */
-//       /*   await testProduct.forEach(product => product.addProductsType(Math.floor(Math.random() * 3 + 1))); */
-
-// /*         await testActivity.forEach(activity => activity.addActivityType(Math.floor(Math.random() * 8))); */
-
-//         await testProduct.forEach(product => product.addProductsType(Math.floor(Math.random()*3 + 1)));
-
-//         await activityArt.forEach(activity => activity.addActivityType(4));
-
-//         await activitySports.forEach(activity => activity.addActivityType(3));
+        const genre = await bookGenre.bulkCreate( genreTest, { ignoreDuplicates: true });
         
-//         await activityEduc.forEach(activity => activity.addActivityType(1));
+        const publisher = await Publisher.bulkCreate( publisherTest, { ignoreDuplicates: true });
 
-//         await activityMed.forEach(activity => activity.addActivityType(2));
+        const language = await Language.bulkCreate( languageTest, { ignoreDuplicates: true });
 
+        const format = await Format.bulkCreate( formatTest, { ignoreDuplicates: true });
 
-// /*         const userAdmin = async () => {
-//             const user = await User.findOne({
-//                 where: {
-//                     mail: ""
-//                 }
-//             })
-//             if (user) {
-//                 user.setRol(3)
-//             }
-//         }
-//         userAdmin(); */
+        await eBooks.forEach( book => book.addPublisher(Math.floor(Math.random() * 11 + 1)))
+        
+        await eBooks.forEach( book => book.addFormat(Math.floor(Math.random() * 11 + 1)))
+        
+        await eBooks.forEach( book => book.addLanguage(Math.floor(Math.random() * 11 + 1)))
+        
+        await eBooks.forEach( book => book.addGenre(Math.floor(Math.random() * 11 + 1)))
 
 
-//         console.log('Datos cargados exitosamente!');
+        console.log('Datos cargados exitosamente!');
 
-//         // console.log(testUser);
 
-//         return;
+        return;
 
-//     } catch (error) {
+    } catch (error) {
 
-//         console.log(error);
+        console.log(error);
 
-//     }
+    }
 
-// }
+}
 
-// const testDataCheck = async () => {
+const testDataCheck = async () => {
 
-//     const activitiesCheck = await Activity.count();
+    const eBookCheck = await eBook.count();
 
-//     const productsCheck = await Products.count();
+    const publisherCheck = await Products.count();
 
-//     return { activitiesCheck, productsCheck };
+    return { eBookCheck, publisherCheck };
 
-// }
+}
 
-// module.exports = { testDataUploader, testDataCheck };
+module.exports = {
+    testDataUploader,
+    testDataCheck
+ }; 
