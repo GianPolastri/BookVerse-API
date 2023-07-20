@@ -46,7 +46,7 @@ let capsEntries = entries.map((entry) => [
 
 sequelize.models = Object.fromEntries(capsEntries);
 
-const {} = sequelize.models;
+const { bookGenre, Cart_Products, Cart, eBook, Format, Language, Publisher, Reviews, Rol, User } = sequelize.models;
 
 module.exports = {
     ...sequelize.models,
