@@ -51,7 +51,7 @@ const filtroNombre = async (name) => {
     const librosFiltrados = await eBook.findAll({
         where: {
             name: {
-                [Op.iLike]: name,
+                [Op.iLike]: name, //<-- o title?
             },
         },
         include: {
@@ -66,4 +66,22 @@ const filtroNombre = async (name) => {
     return librosFiltrados;
 }
 
-module.exports = { filtroGenero, filtroNombre, filtroFormato };
+const filtroAutor = async (name) => {
+    const allBooks = await eBook.findAll({
+        where: {
+            name: {
+                [Op.iLike]: name, //<-- o title?
+            },
+        },
+    });
+    /* console.log(allProducts); */
+    const filteredBooks = allBooks.filter((Books) =>
+    Books.dataValues.bookGenre.some((p) => p.name === name));  //<---- arreglar metodo some "no se puede aplicar some en un array vacio, pero no esta vacio"
+
+    if (!filteredBooks.length) {
+        throw new Error ("Genero de libros no encontrados");
+    }
+    return filteredBooks;
+};
+
+module.exports = { filtroGenero, filtroNombre, filtroFormato, filtroAutor };
