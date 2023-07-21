@@ -1,6 +1,6 @@
 //* Acá van los datos de prueba
 
-const eBooksTest = [
+const BooksTest = [
     {
         "title": "El nombre del viento",
         "author": "Patrick Rothfuss",
@@ -277,9 +277,10 @@ const formatTest = [
 ];
 
 module.exports = {
-    eBooksTest,
+    BooksTest,
     genreTest,
     publisherTest,
     languageTest,
     formatTest,
 }
+

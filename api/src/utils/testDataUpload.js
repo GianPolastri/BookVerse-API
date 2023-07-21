@@ -1,6 +1,6 @@
-const { bookGenre, eBook, Format, Language, Publisher, } = require('../db');
+const { Genre, Book, Format, Language, Publisher, } = require('../db');
 const {
-    eBooksTest,
+    BooksTest,
     genreTest,
     publisherTest,
     languageTest,
@@ -11,9 +11,9 @@ const testDataUploader = async () => {
 
     try {
 
-        const eBooks = await eBook.bulkCreate( eBooksTest, { ignoreDuplicates: true });
+        const Books = await Book.bulkCreate( BooksTest, { ignoreDuplicates: true });
 
-        const genre = await bookGenre.bulkCreate( genreTest, { ignoreDuplicates: true });
+        const genre = await Genre.bulkCreate( genreTest, { ignoreDuplicates: true });
         
         const publisher = await Publisher.bulkCreate( publisherTest, { ignoreDuplicates: true });
 
@@ -21,14 +21,15 @@ const testDataUploader = async () => {
 
         const format = await Format.bulkCreate( formatTest, { ignoreDuplicates: true });
 
-        await eBooks.forEach( book => book.addPublisher(Math.floor(Math.random() * 11 + 1)))
+        console.log(Books);
         
-        await eBooks.forEach( book => book.addFormat(Math.floor(Math.random() * 11 + 1)))
+        await Books.forEach( book => book.addFormat(Math.floor(Math.random() * 11 + 1)))
         
-        await eBooks.forEach( book => book.addLanguage(Math.floor(Math.random() * 11 + 1)))
+        await Books.forEach( book => book.addLanguage(Math.floor(Math.random() * 11 + 1)))
         
-        await eBooks.forEach( book => book.addGenre(Math.floor(Math.random() * 11 + 1)))
-
+        await Books.forEach( book => book.addGenre(Math.floor(Math.random() * 11 + 1)))
+        
+        await Books.forEach( book => book.addPublisher(Math.floor(Math.random() * 11 + 1)))
 
         console.log('Datos cargados exitosamente!');
 
@@ -45,11 +46,11 @@ const testDataUploader = async () => {
 
 const testDataCheck = async () => {
 
-    const eBookCheck = await eBook.count();
+    const BookCheck = await Book.count();
 
     const publisherCheck = await Products.count();
 
-    return { eBookCheck, publisherCheck };
+    return { BookCheck, publisherCheck };
 
 }
 
