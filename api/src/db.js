@@ -49,8 +49,8 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 const { bookGenre, Cart_Products, Cart, eBook, Format, Language, Publisher, Reviews, Rol, User } = sequelize.models;
 
-eBook.hasOne(Language);
-Language.belongsTo(eBook);
+// eBook.hasOne(Language);
+// Language.belongsTo(eBook);
 
 eBook.hasOne(Publisher);
 Publisher.belongsTo(eBook);
