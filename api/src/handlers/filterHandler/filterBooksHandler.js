@@ -35,21 +35,10 @@ const filterByName = async (req, res) => {
     }
 }
 
-const filterByAuthor = async (req, res) => {
-    const { name } = req.query;
-    try {
-        const filteredAuthor = await filtroAutor(name);
-        res.status(200).json({filteredAuthor});
-    } catch (error) {
-        res.status(400).json({ error: error.message })
-    }
-}
-
 module.exports = {
     filterByFormat,
     filterByGenre,
-    filterByName,
-    filterByAuthor
+    filterByName
 }
 
 /* http://localhost:3001/filter/byType?productType=Otcom    Topiramate*/

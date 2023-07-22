@@ -1,5 +1,6 @@
 const {
-    porPrecio
+    porPrecio,
+    porNombre
 } = require ("../../controllers/filterControllers/orderControllers")
 
 const orderByPrice = async (req, res) => {
@@ -13,4 +14,15 @@ const orderByPrice = async (req, res) => {
     }
 }
 
-module.exports = { orderByPrice }
+const orderByTitle = async (req, res) => {
+    const { title } = req.query;
+    const titulo = title === 'asc' ? 'ASC' : 'DESC';
+    try {
+        const filteredBooks = await porNombre(titulo);
+        res.status(200).json(filteredBooks);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+}
+
+module.exports = { orderByPrice, orderByTitle }

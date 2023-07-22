@@ -6,6 +6,5 @@ const filterRouter = Router();
 filterRouter.get("/byGenre", filterByGenre);
 filterRouter.get("/name", filterByName);
 filterRouter.get('/format', filterByFormat);
-filterRouter.get('/author', filterByAuthor);
 
 module.exports = filterRouter; 
