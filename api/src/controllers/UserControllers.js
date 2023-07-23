@@ -57,26 +57,23 @@ const userById = async (id) => {
 //*---------------CREATE USER---------------------
 
 const postUser = async (
-    fullName,
-    username,
+    name,
     birthDate,
     image,
     phone,
-    mail,
+    email,
     password,
-    occupation,
-    address,
-    rol
+    country
 ) => {
 
-    console.log("username:", fullName);
-    console.log("email:", mail);
+    console.log("username:", name);
+    console.log("email:", email);
 
-    if (!fullName || !mail)
+    if (!name || !email)
         throw new Error("Faltan datos");
 
-    const findUserByUsername = await User.findOne({ where: { fullName } });
-    const findUserByEmail = await User.findOne({ where: { mail } });
+    const findUserByUsername = await User.findOne({ where: { name } });
+    const findUserByEmail = await User.findOne({ where: { email } });
 
     if (findUserByUsername) throw new Error("Ya existe el nombre de usuario");
 
@@ -84,19 +81,16 @@ const postUser = async (
         throw new Error("Ya existe un usuario con el mismo email");
 
     const newUser = await User.create({
-        fullName,
-        username,
+        name,
         birthDate,
         image,
         phone,
-        mail,
+        email,
         password,
-        occupation,
-        address,
-
+        country
     });
 
-    await newUser.addRol(rol);
+    await newUser;
     return newUser;
 };
 
@@ -117,15 +111,15 @@ const postUser = async (
 // }
 
 //*-----------------GET USER---------------------
-const getUser = async (/* password, */ mail) => {
+const getUser = async (/* password, */ email) => {
  /*  if (!password) {
     throw new Error("No puede enviar una contraseña vacia");
-  } else if (!mail) {
+  } else if (!email) {
     throw new Error("No puede enviar un email vacio");
   } else {};*/
     const findUser = await User.findOne({ 
         where: {
-            mail: mail,
+            email: email,
         }, 
         include: [
             {
@@ -147,8 +141,8 @@ const getUser = async (/* password, */ mail) => {
       throw new Error("El usuario no existe");
     }  else {
       const findUser2 = await User.findOne({
-        where: { mail },
-        attributes: ["id", "fullName","birthDate", "image", "phone", "email", "admin","password", "volunteer", "sponsor"],
+        where: { email },
+        attributes: ["id", "name","birthDate", "image", "phone", "email", "admin", "password", "volunteer", "sponsor"],
       });
       if (!findUser2) {
         throw new Error("Contraseña equivocada");
@@ -158,10 +152,10 @@ const getUser = async (/* password, */ mail) => {
 
 
 // //*---------------PUT USER---------------------
-const putEditUser = async (mail, password, birthDate, image, phone, occupation, address, rol, fullName) => {
+const putEditUser = async (email, password, birthDate, image, phone, country, name) => {
     const findUser = await User.findOne({
         where: {
-            mail,
+            email,
         }
     })
 
@@ -171,13 +165,8 @@ const putEditUser = async (mail, password, birthDate, image, phone, occupation, 
     if (birthDate) findUser.birthDate = birthDate
     if (image) findUser.image = image
     if (phone) findUser.phone = phone
-    if (occupation) findUser.occupation = occupation
-    if (address) findUser.address = address
-    if (fullName) findUser.fullName = fullName
-
-    if(rol){
-        await findUser.setRols(rol)
-     }
+    if (country) findUser.country = country
+    if (name) findUser.name = name
 
     findUser.save()
 
@@ -185,19 +174,19 @@ const putEditUser = async (mail, password, birthDate, image, phone, occupation, 
 }
 
 // //*---------------PUT ROL USER---------------------
- const putRolUser = async (id_user, rol) => {
-   const findUser = await User.findByPk(id_user);
+//  const putRolUser = async (id_user, rol) => {
+//    const findUser = await User.findByPk(id_user);
 
-   if (findUser) {
-     findUser.rol = rol;
+//    if (findUser) {
+//      findUser.rol = rol;
 
-     await findUser.save();
-   } else {
-     throw new Error("El usuario no existe");
-   }
+//      await findUser.save();
+//    } else {
+//      throw new Error("El usuario no existe");
+//    }
 
-   return findUser;
- };
+//    return findUser;
+//  };
 
 // //*------------- INACTIVAR USER -------------------------
 const putStatusUser = async (id_user) => {
@@ -234,7 +223,7 @@ module.exports = {
     postUser,
     getAllUsers,
     userById,
-    putRolUser,
+    //putRolUser,
     putEditUser,
     putStatusUser,
     restoreStatusUser

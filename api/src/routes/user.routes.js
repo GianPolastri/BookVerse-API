@@ -6,11 +6,11 @@ const {
   postUserHandler,
   getAllUsersHandler,
   getUserById,
-  putRolUserHandler,
+  // putRolUserHandler,
   putEditUserHandler,
   putStatusUserHandler,
   restoreStatusUserHandler,
-  getUserByMail
+  getUserByEmail
 } = require("../handlers/userHandler");
 
 const UserRouter = Router();
@@ -19,12 +19,12 @@ const UserRouter = Router();
 
 UserRouter.get("/", getAllUsersHandler);
 UserRouter.get("/:user_id", getUserById);
-UserRouter.post("/", postUserHandler)
+UserRouter.post("/", postUserHandler);
 // UserRouter.get("/:id_user", getAllUsersHandler);
-UserRouter.put("/edit", putEditUserHandler)
-UserRouter.delete("/status/:id_user",putStatusUserHandler)
-UserRouter.post("/restore/:id_user", restoreStatusUserHandler)
-UserRouter.put("/", putRolUserHandler);
-UserRouter.get('/mail/:mail', getUserHandler);
+UserRouter.put("/edit", putEditUserHandler);
+UserRouter.delete("/status/:id_user",putStatusUserHandler);
+UserRouter.post("/restore/:id_user", restoreStatusUserHandler);
+// UserRouter.put("/", putRolUserHandler);
+UserRouter.get('/email/:email', getUserHandler);
 
 module.exports = UserRouter;

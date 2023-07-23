@@ -43,12 +43,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 // Para relacionarlos hacemos un destructuringy
 const { Genre, Cart_Products, Cart, Book, Format, Language, Publisher, Review, Rol, User } = sequelize.models;
 
-<<<<<<< HEAD
-// eBook.hasOne(Language);
-// Language.belongsTo(eBook);
-=======
 console.log(Genre);
->>>>>>> main
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);

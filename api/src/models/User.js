@@ -8,14 +8,9 @@ module.exports = (sequelize) => {
             defaultValue: DataTypes.UUIDV4,
             primaryKey: true
         },
-        fullName: {
+        name: {
             type: DataTypes.STRING,
             allowNull: false,
-        },
-        username: {
-            type: DataTypes.STRING,
-            unique: true,
-            allowNull: true,
         },
         birthDate: {
             type: DataTypes.STRING,
@@ -32,7 +27,7 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             defaultValue: 0,
         },
-        mail: {
+        email: {
             type: DataTypes.STRING,
             allowNull: false,
             unique: true,
@@ -40,11 +35,7 @@ module.exports = (sequelize) => {
                 msg: "Debe ingresar un email válido"
             }
         },
-        occupation: {
-            type: DataTypes.STRING,
-
-        },
-        address: {
+        country: {
             type: DataTypes.STRING,
             allowNull: true,
         },

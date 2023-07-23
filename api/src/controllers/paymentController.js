@@ -46,7 +46,7 @@ const createCartOrder = async (user_id) => {
     return result.body;
 };
 
-const createDonationOrder = async (user_mail, amount) => {
+const createDonationOrder = async (user_email, amount) => {
     
 
     // console.log(date);
@@ -107,14 +107,14 @@ const paymentVerification = async (info) => {
    
     if(info.status === 'approved'){
 
-        const user = await User.findOne({ where: { mail: info.payer.email } });
+        const user = await User.findOne({ where: { email: info.payer.email } });
 
         if (user) {
             // console.log('hola');
             const donation = {
                 date: info.date_approved,
                 amount: info.transaction_amount,
-                payer_mail: user.mail,
+                payer_email: user.email,
             };
             const newDonation = await Donation.create(donation);
             await user.addDonation(newDonation);
@@ -122,7 +122,7 @@ const paymentVerification = async (info) => {
             const donation = {
                 date: info.date_approved,
                 amount: info.transaction_amount,
-                payer_mail: info.payer.email,
+                payer_email: info.payer.email,
             };
             const dona = await Donation.create(donation);
             return dona;
@@ -166,8 +166,8 @@ const paymentVerification = async (info) => {
           };
 
           await Promise.all([
-            transporter.sendMail(mensajeFundacion),
-            transporter.sendMail(mensajeUsuario),
+            transporter.sendEmail(mensajeFundacion),
+            transporter.sendEmail(mensajeUsuario),
           ]);
 
     }
@@ -223,8 +223,8 @@ const cartPaymentVerification = async (info) => {
           };
 
           await Promise.all([
-            transporter.sendMail(mensajeFundacion),
-            transporter.sendMail(mensajeUsuario),
+            transporter.sendEmail(mensajeFundacion),
+            transporter.sendEmail(mensajeUsuario),
           ]);
 
     }
