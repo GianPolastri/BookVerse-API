@@ -1,5 +1,5 @@
 const { Console } = require('console');
-const { eBook, bookGenre, Reviews } = require('../db');
+const { Book, Genre, Review, Format, Language, Publisher } = require('../db');
 require('dotenv').config();
 const cloudinary = require('cloudinary').v2;
 const { v4: uuidv4 } = require('uuid');
@@ -18,81 +18,110 @@ cloudinary.config({
 
 
 const getAllBooks = async () => {
-    const dbBooks = await eBook.findAll({
+    const dbBooks = await Book.findAll({
         include: [{
-            model: bookGenre,
-            attributes: [ "name" ],
+            model: Genre,
+            attributes: ["name"],
             through: { attributes: [] }
         },
         {
-            model: Reviews,
-            attributes: [ 'content', 'rating' ],
-    }]
+            model: Review,
+            attributes: ['content', 'rating'],
+        },
+        {
+            model: Format,
+            attributes: ['name'],
+        },
+        {
+            model: Language,
+            attributes: ['name'],
+        },
+        {
+            model: Publisher,
+            attributes: ['name'],
+        }]
     });
     return dbBooks;
 }
 
 const postBooks = async (image, title, author, price, description, pages, publicationDate, format, language, publisher, genre) => {
-/*     const imgPath = ASSET_PATH_PRODUCTS;
+    /*     const imgPath = ASSET_PATH_PRODUCTS;
+        
+        const files = await fs.promises.readdir(imgPath);
+        for (const file of files) {
+            const imageFullPath = imgPath + file;
+            console.log("outside", imageFullPath);
     
-    const files = await fs.promises.readdir(imgPath);
-    for (const file of files) {
-        const imageFullPath = imgPath + file;
-        console.log("outside", imageFullPath);
+            try {
+                console.log("inside", imageFullPath)
+                const result = await cloudinary.uploader.upload(imageFullPath, { public_id: `image_${uuidv4()}` });
+                const imgLink = result.secure_url;
+                await fs.promises.unlink(imageFullPath);
+                image = imgLink;
+            } catch (error) {
+                throw new Error(error);
+            } */
 
-        try {
-            console.log("inside", imageFullPath)
-            const result = await cloudinary.uploader.upload(imageFullPath, { public_id: `image_${uuidv4()}` });
-            const imgLink = result.secure_url;
-            await fs.promises.unlink(imageFullPath);
-            image = imgLink;
-        } catch (error) {
-            throw new Error(error);
-        } */
+    if (!title) {
+        throw new Error("No puedes enviar un nombre vacio.")
+    };
 
-        if(!title) {
-            throw new Error("No puedes enviar un nombre vacio.")
-        };
+    const existingBook = await Book.findOne({ where: { title } })
 
-        const existingBook = await eBook.findOne({ where: { title } })
+    if (existingBook) {
+        throw new Error("El producto ya existe.");
+    } else {
+        const newBook = await Book.create({ image, title, author, price, description, pages, publicationDate, format, language, publisher, genre })
+        newBook.addGenre(genre)
+        newBook.addFormat(format)
+        newBook.addLanguage(language)
+        newBook.addPublisher(publisher) 
 
-        if (existingBook) {
-            throw new Error("El producto ya existe.");
-        } else {
-            const newBook = await eBook.create({ image, title, author, price, description, pages, publicationDate, format, language, publisher, genre })
-            newBook.addBookGenre(genre)
-/*             newBook.addFormat(format)
-            newBook.addLanguage(language)
-            newBook.addPublisher(publisher) */
-
-            return newBook;
-        }
+        return newBook;
+    }
 }
 
-const getDetailBooks = async (id)=> {
-    const books = await eBook.findByPk(id, {
+const getDetailBooks = async (id) => {
+    const books = await Book.findByPk(id, {
         include: [
             {
-                model: bookGenre,
+                model: Genre,
                 attributes: ['name'],
                 through: { attributes: [] }
             },
             {
-                model: Reviews,
-                attributes: [ 'content', 'rating' ]
+                model: Review,
+                attributes: ['content', 'rating']
+            },
+            {
+                model: Review,
+                attributes: ['content', 'rating'],
+            },
+            {
+                model: Format,
+                attributes: ['name'],
+            },
+            {
+                model: Language,
+                attributes: ['name'],
+            },
+            {
+                model: Publisher,
+                attributes: ['name'],
             }
         ]
     })
+    return books;
 }
 
 const deleteBook = async (id) => {
-    const deletBook = await eBook.findByPk(id)
+    const deletBook = await Book.findByPk(id)
     const deletedBook = await deletBook.destroy();
     return deletedBook;
 }
 
 const restoreBook = async (id) => {
-    const resBook = await eBook.findByPk(id, { paranoid: false })
+    const resBook = await Book.findByPk(id, { paranoid: false })
     if (!resBook) {
         throw new Error("Producto no encontrado")
     }
@@ -101,9 +130,9 @@ const restoreBook = async (id) => {
 }
 
 module.exports = {
-        getAllBooks,
-        postBooks,
-        getDetailBooks,
-        deleteBook,
-        restoreBook
+    getAllBooks,
+    postBooks,
+    getDetailBooks,
+    deleteBook,
+    restoreBook
 } 
