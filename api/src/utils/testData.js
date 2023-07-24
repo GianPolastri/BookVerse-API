@@ -146,28 +146,28 @@ const BooksTest = [
         "image": "https://contentv2.tap-commerce.com/cover/large/9789878000169_1.jpg?id_com=1113"
     },
     {
-        "title": "El señor de los anillos: La comunidad del anillo",
+        "title": "The Lord of The Rings: The Fellowship Of The Ring",
         "author": "J.R.R. Tolkien",
         "price": 28,
-        "description": "La primera parte de la trilogía épica que sigue las aventuras de Frodo Bolsón mientras lleva el Anillo Único para destruirlo.",
+        "description": "One Ring to rule them all, One Ring to find them, One Ring to bring them all and in the darkness bind them. In ancient times the Rings of Power were crafted by the Elven-smiths, and Sauron, the Dark Lord, forged the One Ring, filling it with his own power so that he could rule all others. But the One Ring was taken from him, and though he sought it throughout Middle-earth, it remained lost to him. After many ages it fell into the hands of Bilbo Baggins, as told in The Hobbit. In a sleepy village in the Shire, young Frodo Baggins finds himself faced with an immense task, as his elderly cousin Bilbo entrusts the Ring to his care. Frodo must leave his home and make a perilous journey across Middle-earth to the Cracks of Doom, there to destroy the Ring and foil the Dark Lord in his evil purpose.",
         "pages": 576,
         "publicationDate": "1954-07-29",
-        "image": "https://contentv2.tap-commerce.com/cover/large/9789505470662_1.jpg?id_com=1113"
+        "image": "https://http2.mlstatic.com/D_NQ_NP_2X_866648-MLA49451927533_032022-F.webp"
     },
     {
-        "title": "El señor de los anillos: Las dos torres",
+        "title": "The Lord of The Rings: The Two Towers",
         "author": "J.R.R. Tolkien",
         "price": 28,
-        "description": "La Compañía se ha disuelto y sus integrantes emprenden caminos separados. Frodo y Sam continúan solos su viaje a lo largo del gran río Anduin, perseguidos por la sombra misteriosa de un ser extraño que también ambiciona la posesión del Anillo. Mientras los hobbits deben enfrentarse al horror y tomar graves decisiones a las puertas del País Oscuro, hombres, elfos y enanos se preparan para la batalla final con las fuerzas del Señor del Mal.",
+        "description": "While the evil might of the Dark Lord Sauron swarms out to conquer all Middle-earth, Frodo and Sam struggle deep into Mordor, seat of Sauron’s power. To defeat the Dark Lord, the One Ring, ruler of the accursed Rings of Power, must be destroyed in the fires of Mount Doom. But the way is impossibly hard, and Frodo is weakening. Weighed down by the compulsion of the Ring, he begins finally to despair.",
         "pages": 464,
         "publicationDate": "1954-11-11",
         "image": "https://contentv2.tap-commerce.com/cover/large/9789505470655_1.jpg?id_com=1113"
     },
     {
-        "title": "El señor de los anillos: El retorno del rey",
+        "title": "The Lord of The Rings: The Return of the King",
         "author": "J.R.R. Tolkien",
         "price": 29,
-        "description": "Los ejércitos del Señor Oscuro van extendiendo cada vez más su maléfica sombra por la Tierra Media. Hombres, elfos y enanos unen sus fuerzas para presentar batalla contra Sauron y sus huestes. Ajenos a estos preparativos, Frodo y Sam se internan cada vez más en el país de Mordor en su heroico viaje para destruir el Anillo de Poder en las Grietas del Destino.",
+        "description": "The Dark Lord has risen, and as he unleashes hordes of Orcs to conquer all Middle-earth, Frodo and Sam struggle deep into his realm in Mordor. To defeat Sauron, the One Ring must be destroyed in the fires of Mount Doom. But the way is impossibly hard, and Frodo is weakening. The Ring corrupts all who bear it and Frodo’s time is running out. Will Sam and Frodo succeed, or will the Dark Lord rule Middle-earth once more?",
         "pages": 416,
         "publicationDate": "1955-10-20",
         "image": "https://contentv2.tap-commerce.com/cover/large/9789505470662_1.jpg?id_com=1113"
@@ -270,6 +270,87 @@ const BooksTest = [
         "pages": 256,
         "publicationDate": "2020-07-10",
         "image": "https://contentv2.tap-commerce.com/cover/large/9788418006814_1.jpg?id_com=1113"
+    },
+    {
+        "title": "Behind the Net",
+        "author": "Stephanie Archer",
+        "price": 5,
+        "description": "Behind the Net is a grumpy-sunshine pro hockey romance with lots of spice and an HEA. It’s the first book in the Vancouver Storm series, and can be read as a standalone.",
+        "pages": 424,
+        "publicationDate": "2023-06-30",
+        "image": "https://m.media-amazon.com/images/I/51SqcpP2tML.jpg"
+    },
+    {
+        "title": "Joey",
+        "author": "Sadie Kincaid",
+        "price": 7,
+        "description": "Notorious Mafia enforcer and right hand of the Cosa Nostra, Maximo DiMarco has always looked out for me. He’s my protector. My brothers’ best friend. My crush—with the body of a god and the mind of a devil. And I am just a spoiled Mafia princess. At least that’s who most people think I am. They don’t look at me long enough to see the real me. But he sees… He is dark and dangerous and lethal, but he’s the only man who makes me feel like I’m alive. It’s a pity he’s too loyal to my brothers to ever act on the sparks that constantly fly between us…",
+        "pages": 408,
+        "publicationDate": "2023-06-30",
+        "image": "https://m.media-amazon.com/images/I/41uGfACAeaL.jpg"
+    },
+    {
+        "title": "After Death",
+        "author": "Dean Koontz",
+        "price": 18,
+        "description": "A modern-day Lazarus is humanity’s last hope in a breathtaking novel about the absolute powers of good and evil by Dean Koontz, the #1 New York Times bestselling master of suspense.",
+        "pages": 382,
+        "publicationDate": "2023-07-18",
+        "image": "https://m.media-amazon.com/images/I/51BiVJXWFuL.jpg"
+    },
+    {
+        "title": "Meet Your Match",
+        "author": "Kandi Steiner",
+        "price": 6,
+        "description": "Meet Your Match is book one in the Kings of the Ice series: a series of interconnected standalones following a team of professional hockey players and the women who bring them to their knees. They do not need to be read in order, but you will gain glimpses of future characters/couples in each book.",
+        "pages": 347,
+        "publicationDate": "2023-07-07",
+        "image": "https://m.media-amazon.com/images/I/51Dmd-BFFML.jpg"
+    },
+    {
+        "title": "Plays Well With Others",
+        "author": "Lauren blakely",
+        "price": 5,
+        "description": "So I'm throwing myself a breakup party, a glittery fete where I envision I'll lift a glass and celebrate being free and single again. What I actually do: Drink too much champagne and blurt out to my best guy friend that I'd really like to get back on the horse.",
+        "pages": 424,
+        "publicationDate": "2023-07-12",
+        "image": "https://m.media-amazon.com/images/I/519Q+F+a5ML.jpg"
+    },
+    {
+        "title": "Never Give Your Heart To A Hookup",
+        "author": "Lauren Landish",
+        "price": 4,
+        "description": "Never Give Your Heart To A Hookup is a full-length romance with a Happily Ever After. It can be read as a standalone.",
+        "pages": 347,
+        "publicationDate": "2023-07-11",
+        "image": "https://m.media-amazon.com/images/I/51d09ogVY2L.jpg"
+    },
+    {
+        "title": "Shutout: Rules of the Game Book 2",
+        "author": "Avery Keelan",
+        "price": 12,
+        "description": "After my life goes sideways in the middle of sophomore year, I'm forced to move in with my older brother and two of his hockey teammates. I'm less than thrilled at the idea of living with three athletes and their stinky gear, their rotating door of hookups, and their tendency to inhale every snack in the house. But when I walk in the front door with an armload of boxes, I'm faced with another problem entirely. One of my new roommates is the tall, tattooed stranger from my one-night stand on Halloween.",
+        "pages": 344,
+        "publicationDate": "2023-06-30",
+        "image": "https://m.media-amazon.com/images/P/199088606X.01._SCLZZZZZZZ_SX500_.jpg"
+    },
+    {
+        "title": "The Broken Protector",
+        "author": "Nicole Snow",
+        "price": 4,
+        "description": "This big slice of feel-good small-town romance brings enemies to lovers fire, hilarious sweetness, heart-thumping suspense, and all the butterflies. Smile yourself silly as one big bossy lunk tries to keep his heart and his secrets from the headstrong new girl destined to make him whole.",
+        "pages": 471,
+        "publicationDate": "2023-06-20",
+        "image": "https://m.media-amazon.com/images/I/51GUarg3UBL.jpg"
+    },
+    {
+        "title": "The Anti-hero",
+        "author": "Sara Cate",
+        "price": 14,
+        "description": "As the eldest son of Austin’s most prominent preacher, I’ve lived my life on the virtuous side. No scandals. Flawless image. Clean reputation. That’s the way it must be if I’m going to take his place someday. But everything changes when I find out my father is a VIP member of a local kink club. A liar. A cheater. A hypocrite. Now, I’m done being righteous.",
+        "pages": 366,
+        "publicationDate": "2023-07-14",
+        "image": "https://m.media-amazon.com/images/I/41sLZOpQcRL.jpg"
     },
 ];
 
