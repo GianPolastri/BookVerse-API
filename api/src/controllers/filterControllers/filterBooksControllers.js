@@ -64,7 +64,6 @@ const filtroFormato = async (name) => {
             }
         ]
     });
-    /* console.log(allProducts); */
     const filteredFormats = allBook.filter((Books) =>
     Books.dataValues.Formats.some((p) => p.name === name));  //<---- arreglar metodo some "no se puede aplicar some en un array vacio, pero no esta vacio"
 
