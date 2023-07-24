@@ -155,19 +155,19 @@ const BooksTest = [
         "image": "https://http2.mlstatic.com/D_NQ_NP_2X_866648-MLA49451927533_032022-F.webp"
     },
     {
-        "title": "El señor de los anillos: Las dos torres",
+        "title": "The Lord of The Rings: The Two Towers",
         "author": "J.R.R. Tolkien",
         "price": 28,
-        "description": "La Compañía se ha disuelto y sus integrantes emprenden caminos separados. Frodo y Sam continúan solos su viaje a lo largo del gran río Anduin, perseguidos por la sombra misteriosa de un ser extraño que también ambiciona la posesión del Anillo. Mientras los hobbits deben enfrentarse al horror y tomar graves decisiones a las puertas del País Oscuro, hombres, elfos y enanos se preparan para la batalla final con las fuerzas del Señor del Mal.",
+        "description": "While the evil might of the Dark Lord Sauron swarms out to conquer all Middle-earth, Frodo and Sam struggle deep into Mordor, seat of Sauron’s power. To defeat the Dark Lord, the One Ring, ruler of the accursed Rings of Power, must be destroyed in the fires of Mount Doom. But the way is impossibly hard, and Frodo is weakening. Weighed down by the compulsion of the Ring, he begins finally to despair.",
         "pages": 464,
         "publicationDate": "1954-11-11",
         "image": "https://contentv2.tap-commerce.com/cover/large/9789505470655_1.jpg?id_com=1113"
     },
     {
-        "title": "El señor de los anillos: El retorno del rey",
+        "title": "The Lord of The Rings: The Return of the King",
         "author": "J.R.R. Tolkien",
         "price": 29,
-        "description": "Los ejércitos del Señor Oscuro van extendiendo cada vez más su maléfica sombra por la Tierra Media. Hombres, elfos y enanos unen sus fuerzas para presentar batalla contra Sauron y sus huestes. Ajenos a estos preparativos, Frodo y Sam se internan cada vez más en el país de Mordor en su heroico viaje para destruir el Anillo de Poder en las Grietas del Destino.",
+        "description": "The Dark Lord has risen, and as he unleashes hordes of Orcs to conquer all Middle-earth, Frodo and Sam struggle deep into his realm in Mordor. To defeat Sauron, the One Ring must be destroyed in the fires of Mount Doom. But the way is impossibly hard, and Frodo is weakening. The Ring corrupts all who bear it and Frodo’s time is running out. Will Sam and Frodo succeed, or will the Dark Lord rule Middle-earth once more?",
         "pages": 416,
         "publicationDate": "1955-10-20",
         "image": "https://contentv2.tap-commerce.com/cover/large/9789505470662_1.jpg?id_com=1113"
