@@ -1,6 +1,6 @@
 //?----------------------------IMPORTS--------------------------------
 
-const { User, Rol, Activity, Cart, Roles, Donation } = require("../db");
+const { User, Activity, Cart } = require("../db");
 const { Op } = require("sequelize");
 //?----------------------------CONTROLLERS------------------------------
 
@@ -9,19 +9,7 @@ const getAllUsers = async () => {
     const allUsers = await User.findAll({
         include: [
             {
-                model: Rol,
-
-                through: { attributes: [] },
-            },
-            {
-                model: Activity,
-                through: { attributes: [] },
-            },
-            {
                 model: Cart,
-            },
-            {
-                model: Donation,
             },
         ],
     });
@@ -37,11 +25,6 @@ const userById = async (id) => {
 
     const user = await User.findByPk(id, {
         include: [
-            {
-                model: Rol,
-
-                through: { attributes: [] },
-            },
             {
                 model: Activity,
                 through: { attributes: [] },
@@ -121,16 +104,6 @@ const getUser = async (/* password, */ email) => {
         where: {
             email: email,
         }, 
-        include: [
-            {
-                model: Rol,
-                through: { attributes: [] },
-            },
-            {
-                model: Activity,
-                through: { attributes: [] },
-            },
-        ],
      });
      return findUser;
    }
