@@ -75,7 +75,7 @@ const filtroFormato = async (name) => {
 
 const filtroNombre = async (name) => {
     const normalizedSearchTerm = diacritic.clean(name).replace(/[^\w\s]/g, '').toLowerCase(); //<--- tratar de normalizar el title, y no el name
-    const librosFiltrados = await Book.findOne({
+    const librosFiltrados = await Book.findAll({
         where: {
             [Op.or]: [
                 {
