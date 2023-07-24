@@ -332,7 +332,7 @@ const BooksTest = [
         "description": "After my life goes sideways in the middle of sophomore year, I'm forced to move in with my older brother and two of his hockey teammates. I'm less than thrilled at the idea of living with three athletes and their stinky gear, their rotating door of hookups, and their tendency to inhale every snack in the house. But when I walk in the front door with an armload of boxes, I'm faced with another problem entirely. One of my new roommates is the tall, tattooed stranger from my one-night stand on Halloween.",
         "pages": 344,
         "publicationDate": "2023-06-30",
-        "image": "https://m.media-amazon.com/images/I/51N6HlGmSTL.jpg"
+        "image": "https://m.media-amazon.com/images/P/199088606X.01._SCLZZZZZZZ_SX500_.jpg"
     },
     {
         "title": "The Broken Protector",
