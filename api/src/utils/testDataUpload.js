@@ -23,13 +23,13 @@ const testDataUploader = async () => {
 
         console.log(Books);
         
-        await Books.forEach( book => book.addFormat(Math.floor(Math.random() * 11 + 1)))
+        await Books.forEach( book => book.addFormat(Math.floor(Math.random() * 4 + 1)))
         
-        await Books.forEach( book => book.addLanguage(Math.floor(Math.random() * 11 + 1)))
+        await Books.forEach( book => book.addLanguage(Math.floor(Math.random() * 4 + 1)))
         
-        await Books.forEach( book => book.addGenre(Math.floor(Math.random() * 11 + 1)))
+        await Books.forEach( book => book.addGenre(Math.floor(Math.random() * 9 + 1)))
         
-        await Books.forEach( book => book.addPublisher(Math.floor(Math.random() * 11 + 1)))
+        await Books.forEach( book => book.addPublisher(Math.floor(Math.random() * 7 + 1)))
 
         console.log('Datos cargados exitosamente!');
 
