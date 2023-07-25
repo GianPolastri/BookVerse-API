@@ -21,7 +21,7 @@ const testDataUploader = async () => {
 
         const format = await Format.bulkCreate( formatTest, { ignoreDuplicates: true });
 
-        console.log(Books);
+        // console.log(Books);
         
         await Books.forEach( book => book.addFormat(Math.floor(Math.random() * 4 + 1)))
         
