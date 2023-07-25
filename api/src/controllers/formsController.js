@@ -2,11 +2,12 @@ const transporter = require('../utils/nodemailer');
 
 const formFooter = async (formData) => {
   try {
+    console.log(formData)
     const email = formData.email;
     const mensajeCorreo = {
       from: '"BOOK VERSE" <bookverseweb@gmail.com>',
       to: email, // Asegúrate de obtener el correo electrónico del usuario desde los datos del formulario
-      subject: 'Gracias por completar el formulario de LA GRUTA!',
+      subject: 'Welcome to the BOOKVERSE family!',
       html: `
       <div style="background-color: #f3f3f3; padding: 20px;">
       <h1 style="color: #B9362C; font-family: 'wicked-grit', sans-serif;">Thank You for Subscribing to Bookverse!</h1>
@@ -22,7 +23,7 @@ const formFooter = async (formData) => {
     };
 
     // Envía el correo electrónico utilizando el transporter
-    await transporter.sendEmail(mensajeCorreo);
+    await transporter.sendMail(mensajeCorreo);
   } catch (error) {
     throw error;
   }

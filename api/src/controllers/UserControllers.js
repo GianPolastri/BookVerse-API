@@ -7,11 +7,11 @@ const { Op } = require("sequelize");
 //*---------------GET ALL USERS----------------------
 const getAllUsers = async () => {
     const allUsers = await User.findAll({
-        include: [
-            {
-                model: Cart,
-            },
-        ],
+        // include: [
+        //     {
+        //         model: Cart,
+        //     },
+        // ],
     });
 
 
@@ -24,12 +24,12 @@ const userById = async (id) => {
     if (!id) throw new Error("Falta el id del Usuario");
 
     const user = await User.findByPk(id, {
-        include: [
-            {
-                model: Activity,
-                through: { attributes: [] },
-            },
-        ],
+        // include: [
+        //     {
+        //         model: Activity,
+        //         through: { attributes: [] },
+        //     },
+        // ],
     });
 
     if (!user) throw new Error("No existe el Usuario");

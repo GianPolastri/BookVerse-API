@@ -166,8 +166,8 @@ const paymentVerification = async (info) => {
           };
 
           await Promise.all([
-            transporter.sendEmail(mensajeFundacion),
-            transporter.sendEmail(mensajeUsuario),
+            transporter.sendMail(mensajeFundacion),
+            transporter.sendMail(mensajeUsuario),
           ]);
 
     }
@@ -223,8 +223,8 @@ const cartPaymentVerification = async (info) => {
           };
 
           await Promise.all([
-            transporter.sendEmail(mensajeFundacion),
-            transporter.sendEmail(mensajeUsuario),
+            transporter.sendMail(mensajeFundacion),
+            transporter.sendMail(mensajeUsuario),
           ]);
 
     }
