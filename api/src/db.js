@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
 
-console.log(DB_USER, DB_PASSWORD, DB_HOST, DB_NAME);
+// console.log(DB_USER, DB_PASSWORD, DB_HOST, DB_NAME);
 
 const sequelize = new Sequelize(
    `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
@@ -43,7 +43,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 // Para relacionarlos hacemos un destructuringy
 const { Genre, Cart_Products, Cart, Book, Format, Language, Publisher, Review, Rol, User } = sequelize.models;
 
-console.log(Genre);
+// console.log(Genre);
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
