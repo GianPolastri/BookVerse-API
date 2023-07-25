@@ -2,6 +2,20 @@
 
 const { User, Rol, Activity, Cart, Roles, Donation } = require("../db");
 const { Op } = require("sequelize");
+const cloudinary = require('cloudinary').v2;
+const { v4: uuidv4 } = require('uuid');
+const fs = require('fs');
+
+const API_KEY = process.env.API_KEY;
+const API_SECRET = process.env.API_SECRET;
+const CLOUD_NAME = process.env.CLOUD_NAME;
+const ASSET_PATH_PRODUCTS = process.env.ASSET_PATH_PRODUCTS;
+
+cloudinary.config({
+    cloud_name: CLOUD_NAME,
+    api_key: API_KEY,
+    api_secret: API_SECRET,
+})
 //?----------------------------CONTROLLERS------------------------------
 
 //*---------------GET ALL USERS----------------------
@@ -68,6 +82,23 @@ const postUser = async (
     address,
     rol
 ) => {
+
+        /*     const imgPath = ASSET_PATH_PRODUCTS;
+        
+        const files = await fs.promises.readdir(imgPath);
+        for (const file of files) {
+            const imageFullPath = imgPath + file;
+            console.log("outside", imageFullPath);
+    
+            try {
+                console.log("inside", imageFullPath)
+                const result = await cloudinary.uploader.upload(imageFullPath, { public_id: `image_${uuidv4()}` });
+                const imgLink = result.secure_url;
+                await fs.promises.unlink(imageFullPath);
+                image = imgLink;
+            } catch (error) {
+                throw new Error(error);
+            } */
 
     console.log("username:", fullName);
     console.log("email:", mail);

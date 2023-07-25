@@ -1,5 +1,5 @@
 const { Router } = require("express");
-
+const uploadImage = require('./storage')
 
 const {
   getUserHandler,
@@ -19,7 +19,7 @@ const UserRouter = Router();
 
 UserRouter.get("/", getAllUsersHandler);
 UserRouter.get("/:user_id", getUserById);
-UserRouter.post("/", postUserHandler)
+UserRouter.post("/", uploadImage, postUserHandler)
 // UserRouter.get("/:id_user", getAllUsersHandler);
 UserRouter.put("/edit", putEditUserHandler)
 UserRouter.delete("/status/:id_user",putStatusUserHandler)

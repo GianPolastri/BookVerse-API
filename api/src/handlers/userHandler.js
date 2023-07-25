@@ -33,7 +33,8 @@ const getAllUsersHandler = async (req, res) => {
 
 //* Handler que postea el user en la DB
 const postUserHandler = async (req, res) => {
-  const { fullName, username, birthDate, image, phone, mail, password, occupation, rol, address } = req.body;
+  const {image} = req.file
+  const { fullName, username, birthDate, phone, mail, password, occupation, rol, address } = req.body;
 
   if (!fullName || !mail ) res.status(400).json({ msg: 'Faltan datos necesarios' });
 
