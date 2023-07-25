@@ -48,7 +48,9 @@ const testDataCheck = async () => {
 
     const BookCheck = await Book.count();
 
-    const publisherCheck = await Products.count();
+    console.log(BookCheck);
+
+    const publisherCheck = await Publisher.count();
 
     return { BookCheck, publisherCheck };
 
