@@ -2,15 +2,20 @@ require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
-const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
+const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, DB_DEPLOY } = process.env;
 
-console.log(DB_USER, DB_PASSWORD, DB_HOST, DB_NAME);
+// console.log(DB_USER, DB_PASSWORD, DB_HOST, DB_NAME);
 
 const sequelize = new Sequelize(
-   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
+   DB_DEPLOY,
    {
       logging: false, // set to console.log to see the raw SQL queries
       native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+      dialectOptions: {
+        ssl: {
+                require: true,
+        }
+    }
    }
 );
 const basename = path.basename(__filename);
@@ -43,7 +48,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 // Para relacionarlos hacemos un destructuringy
 const { Genre, Cart_Products, Cart, Book, Format, Language, Publisher, Review, Rol, User } = sequelize.models;
 
-console.log(Genre);
+// console.log(Genre);
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
