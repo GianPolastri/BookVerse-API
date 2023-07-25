@@ -20,7 +20,7 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             defaultValue: "",
             isUrl: {
-                msg: "La imagen debe ser una URL"
+                msg: "Image must be an URL"
             }
         },
         phone: {
@@ -32,7 +32,7 @@ module.exports = (sequelize) => {
             allowNull: false,
             unique: true,
             isEmail: {
-                msg: "Debe ingresar un email válido"
+                msg: "Please enter a valid email"
             }
         },
         country: {
@@ -44,7 +44,7 @@ module.exports = (sequelize) => {
             allowNull: false,
             defaultValue: 12345678,
             isAlphanumeric: {
-                msg: "La contraseña debe ser alfanumérica"
+                msg: "The password must be alphanumeric"
             }, //Chequea que sea alfanumerico
             // len: {
             //     arg: [[6, 14]],

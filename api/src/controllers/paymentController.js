@@ -95,141 +95,141 @@ const createDonationOrder = async (user_email, amount) => {
 };
 
 const paymentVerification = async (info) => {
-    /*
-      date_approved
+  /*
+    date_approved
     payer.email
     status
     status_detail
     transaction_amount
     body.
-    description: 'Donación'  
-    */
-   
-    if(info.status === 'approved'){
+    description: 'Donation'
+  */
 
-        const user = await User.findOne({ where: { email: info.payer.email } });
+  if (info.status === 'approved') {
+      const user = await User.findOne({ where: { email: info.payer.email } });
 
-        if (user) {
-            // console.log('hola');
-            const donation = {
-                date: info.date_approved,
-                amount: info.transaction_amount,
-                payer_email: user.email,
-            };
-            const newDonation = await Donation.create(donation);
-            await user.addDonation(newDonation);
-        }else{
-            const donation = {
-                date: info.date_approved,
-                amount: info.transaction_amount,
-                payer_email: info.payer.email,
-            };
-            const dona = await Donation.create(donation);
-            return dona;
-        }
-
-        // ${info.payer.first_name}
-
-        const mensajeUsuario = {
-            from: '"LA GRUTA" <lagrutaweb@gmail.com>',
-            to: "sofiaparraweb@gmail.com",
-            subject: 'Gracias por tu donación!',
-            html: `
-              <div style="background-color: #f3f3f3; padding: 20px;">
-                <h1 style="color: #B9362C; font-family: 'dk-lemon-yellow-sun', sans-serif;">Gracias por tu donación!</h1>
-                <p style="color: #555555;">Hola Sofía!</p>
-                <p style="color: #555555;">Los niños y la fundación estamos muy agradecidos por tu generosidad.</p>
-                <p style="color: #555555;">Si te interesa ayudar a LA GRUTA de otras maneras, podes mandar un email para que te brindemos más información sobre nuestro programa de voluntarios.</p>
-                <p style="color: #555555;">¡Esperamos contar contigo como parte de nuestra familia de LA GRUTA!</p>
-                <p style="color: #555555;">Saludos,</p>
-                <p style="color: #555555;">Equipo de LA GRUTA</p>
-              </div>
-            `,
+      if (user) {
+          const purchase = {
+              date: info.date_approved,
+              amount: info.transaction_amount,
+              payer_email: user.email,
           };
-
-          const mensajeFundacion = {
-            from: '"LA GRUTA" <lagrutaweb@gmail.com>',
-            to: 'lagrutacdi@gmail.com', // Dirección de correo de la fundación
-            subject: 'Nueva donación a LA GRUTA',
-            html: `
-              <div style="background-color: #f3f3f3; padding: 20px;">
-                <h1 style="color: #B9362C; font-family: 'wicked-grit', sans-serif;">Nueva donación a LA GRUTA</h1>
-                <p style="color: #555555;">¡Hola!</p>
-                <p style="color: #555555;">Se ha recibido una nueva donación en LA GRUTA.</p>
-                <p style="color: #555555;">Datos del donante:</p>
-                <p style="color: #555555;">Nombre: ${info.payer.first_name}</p>
-                <p style="color: #555555;">Email: ${info.payer.email}</p>
-                <p style="color: #555555;">Saludos,</p>
-                <p style="color: #555555;">Equipo de LA GRUTA</p>
-              </div>
-            `,
+          const newPurchase = await Purchase.create(purchase);
+          await user.addPurchase(newPurchase);
+      } else {
+          const purchase = {
+              date: info.date_approved,
+              amount: info.transaction_amount,
+              payer_email: info.payer.email,
           };
+          const newPurchase = await Purchase.create(purchase);
+          return newPurchase;
+      }
 
-          await Promise.all([
-            transporter.sendMail(mensajeFundacion),
-            transporter.sendMail(mensajeUsuario),
-          ]);
+      const mensajeUsuario = {
+          from: '"Ebook Store" <ebookstore@gmail.com>',
+          to: info.payer.email,
+          subject: 'Thank you for your purchase!',
+          html: `
+            <div style="background-color: #f3f3f3; padding: 20px;">
+              <h1 style="color: #B9362C; font-family: 'dk-lemon-yellow-sun', sans-serif;">Thank you for your purchase!</h1>
+              <p style="color: #555555;">Hello ${info.payer.first_name}</p>
+              <p style="color: #555555;">We are grateful for your support and hope you enjoy your new ebook.</p>
+              <p style="color: #555555;">If you have any questions or need further assistance, feel free to reach out to us.</p>
+              <p style="color: #555555;">We hope to see you again soon at Ebook Store!</p>
+              <p style="color: #555555;">Best regards,</p>
+              <p style="color: #555555;">Ebook Store Team</p>
+            </div>
+          `,
+      };
 
-    }
+      const mensajeEbookStore = {
+          from: '"Ebook Store" <ebookstore@gmail.com>',
+          to: 'ebookstoreorders@gmail.com', // Email address of the ebook store
+          subject: 'New Ebook Purchase',
+          html: `
+            <div style="background-color: #f3f3f3; padding: 20px;">
+              <h1 style="color: #B9362C; font-family: 'wicked-grit', sans-serif;">New Ebook Purchase</h1>
+              <p style="color: #555555;">Hello!</p>
+              <p style="color: #555555;">A new ebook purchase has been made at Ebook Store.</p>
+              <p style="color: #555555;">Donor's Information:</p>
+              <p style="color: #555555;">Name: ${info.payer.first_name}</p>
+              <p style="color: #555555;">Email: ${info.payer.email}</p>
+              <p style="color: #555555;">Total Amount: ${info.transaction_amount}</p>
+              <p style="color: #555555;">Status: ${info.status}</p>
+              <p style="color: #555555;">Status Detail: ${info.status_detail}</p>
+              <p style="color: #555555;">Description: ${info.body.description}</p>
+              <p style="color: #555555;">Best regards,</p>
+              <p style="color: #555555;">Ebook Store Team</p>
+            </div>
+          `,
+      };
 
+      await Promise.all([
+          transporter.sendMail(mensajeEbookStore),
+          transporter.sendMail(mensajeUsuario),
+      ]);
+  }
 };
 
 const cartPaymentVerification = async (info) => {
-    /*
-      date_approved
+  /*
+    date_approved
     payer.email
     status
     status_detail
     transaction_amount
     body.
-    description: 'Donación'  
-    */
-   
-    if(info.status === 'approved'){
+    description: 'Donation'
+  */
 
-        const mensajeUsuario = {
-            from: '"LA GRUTA" <lagrutaweb@gmail.com>',
-            to: info.payer.email,
-            subject: 'Gracias por tu donación!',
-            html: `
-              <div style="background-color: #f3f3f3; padding: 20px;">
-                <h1 style="color: #B9362C; font-family: 'dk-lemon-yellow-sun', sans-serif;">Gracias por tu donación!</h1>
-                <p style="color: #555555;">Hola ${info.payer.first_name}</p>
-                <p style="color: #555555;">Los niños y la fundación estamos muy agradecidos por tu generosidad.</p>
-                <p style="color: #555555;">Si te interesa ayudar a LA GRUTA de otras maneras, podes mandar un email para que te brindemos más información sobre nuestro programa de voluntarios.</p>
-                <p style="color: #555555;">¡Esperamos contar contigo como parte de nuestra familia de LA GRUTA!</p>
-                <p style="color: #555555;">Saludos,</p>
-                <p style="color: #555555;">Equipo de LA GRUTA</p>
-              </div>
-            `,
-          };
+  if (info.status === 'approved') {
 
-          const mensajeFundacion = {
-            from: '"LA GRUTA" <lagrutaweb@gmail.com>',
-            to: 'lagrutacdi@gmail.com', // Dirección de correo de la fundación
-            subject: 'Nueva donación a LA GRUTA',
-            html: `
-              <div style="background-color: #f3f3f3; padding: 20px;">
-                <h1 style="color: #B9362C; font-family: 'wicked-grit', sans-serif;">Nueva donación a LA GRUTA</h1>
-                <p style="color: #555555;">¡Hola!</p>
-                <p style="color: #555555;">Se ha recibido una nueva donación en LA GRUTA.</p>
-                <p style="color: #555555;">Datos del donante:</p>
-                <p style="color: #555555;">Nombre: ${info.payer.first_name}</p>
-                <p style="color: #555555;">Email: ${info.payer.email}</p>
-                <p style="color: #555555;">Saludos,</p>
-                <p style="color: #555555;">Equipo de LA GRUTA</p>
-              </div>
-            `,
-          };
+      const mensajeUsuario = {
+          from: '"Ebook Store" <ebookstore@gmail.com>',
+          to: info.payer.email,
+          subject: 'Thank you for your purchase!',
+          html: `
+            <div style="background-color: #f3f3f3; padding: 20px;">
+              <h1 style="color: #B9362C; font-family: 'dk-lemon-yellow-sun', sans-serif;">Thank you for your purchase!</h1>
+              <p style="color: #555555;">Hello ${info.payer.first_name}</p>
+              <p style="color: #555555;">We are grateful for your support and hope you enjoy your new ebook.</p>
+              <p style="color: #555555;">If you have any questions or need further assistance, feel free to reach out to us.</p>
+              <p style="color: #555555;">We hope to see you again soon at Ebook Store!</p>
+              <p style="color: #555555;">Best regards,</p>
+              <p style="color: #555555;">Ebook Store Team</p>
+            </div>
+          `,
+      };
 
-          await Promise.all([
-            transporter.sendMail(mensajeFundacion),
-            transporter.sendMail(mensajeUsuario),
-          ]);
+      const mensajeEbookStore = {
+          from: '"BOOK VERSE" <bookverseweb@gmail.com>',
+          to: 'ebookstoreorders@gmail.com', // Email address of the ebook store
+          subject: 'New Ebook Purchase',
+          html: `
+            <div style="background-color: #f3f3f3; padding: 20px;">
+              <h1 style="color: #B9362C; font-family: 'wicked-grit', sans-serif;">New Ebook Purchase</h1>
+              <p style="color: #555555;">Hello!</p>
+              <p style="color: #555555;">A new ebook purchase has been made at Ebook Store.</p>
+              <p style="color: #555555;">Donor's Information:</p>
+              <p style="color: #555555;">Name: ${info.payer.first_name}</p>
+              <p style="color: #555555;">Email: ${info.payer.email}</p>
+              <p style="color: #555555;">Total Amount: ${info.transaction_amount}</p>
+              <p style="color: #555555;">Status: ${info.status}</p>
+              <p style="color: #555555;">Status Detail: ${info.status_detail}</p>
+              <p style="color: #555555;">Description: ${info.body.description}</p>
+              <p style="color: #555555;">Best regards,</p>
+              <p style="color: #555555;">Ebook Store Team</p>
+            </div>
+          `,
+      };
 
-    }
+      await Promise.all([
+          transporter.sendMail(mensajeEbookStore),
+          transporter.sendMail(mensajeUsuario),
+      ]);
 
-
+  }
 };
 
 module.exports = { createCartOrder, createDonationOrder, paymentVerification, cartPaymentVerification };

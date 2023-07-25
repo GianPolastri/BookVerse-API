@@ -3,10 +3,10 @@ const formsController = require('../controllers/formsController');
 const formFooterHandler = async (req, res) => {
   try {
     await formsController.formFooter(req.body); 
-    res.send('Correo electrónico enviado correctamente');
+    res.send('Email sent successfully');
   } catch (error) {
     console.error(error);
-    res.status(500).send('Error al enviar el correo electrónico');
+    res.status(500).send('Error sending the email');
   }
 };
 

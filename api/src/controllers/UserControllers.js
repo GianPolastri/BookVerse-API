@@ -21,7 +21,7 @@ const getAllUsers = async () => {
 //*---------------GET USER BY ID------------------
 
 const userById = async (id) => {
-    if (!id) throw new Error("Falta el id del Usuario");
+    if (!id) throw new Error("User ID is missing");
 
     const user = await User.findByPk(id, {
         // include: [
@@ -32,7 +32,7 @@ const userById = async (id) => {
         // ],
     });
 
-    if (!user) throw new Error("No existe el Usuario");
+    if (!user) throw new Error("User not found");
 
     return user;
 };
@@ -51,18 +51,18 @@ const postUser = async (
 
     console.log("username:", name);
     console.log("email:", email);
-
+    
     if (!name || !email)
-        throw new Error("Faltan datos");
-
+        throw new Error("Missing data");
+    
     const findUserByUsername = await User.findOne({ where: { name } });
     const findUserByEmail = await User.findOne({ where: { email } });
-
-    if (findUserByUsername) throw new Error("Ya existe el nombre de usuario");
-
+    
+    if (findUserByUsername) throw new Error("Username already exists");
+    
     if (findUserByEmail)
-        throw new Error("Ya existe un usuario con el mismo email");
-
+        throw new Error("User with the same email already exists");
+    
     const newUser = await User.create({
         name,
         birthDate,
@@ -72,10 +72,10 @@ const postUser = async (
         password,
         country
     });
-
+    
     await newUser;
     return newUser;
-};
+}    
 
 //!-------lógica útil pero que sirve para admin------
 
@@ -132,7 +132,7 @@ const putEditUser = async (email, password, birthDate, image, phone, country, na
         }
     })
 
-    if (!findUser) { throw new Error("El usuario no existe") }
+    if (!findUser) { throw new Error("User does not exist") }
 
     if (password) findUser.password = password
     if (birthDate) findUser.birthDate = birthDate
@@ -166,7 +166,7 @@ const putStatusUser = async (id_user) => {
     const findUser = await User.findByPk(id_user);
 
     if (!findUser) {
-        throw new Error("El usuario no existe");
+        throw new Error("User does not exist");
     } else {
         await findUser.update({ status: false }, { where: { id: id_user } });
         return;
@@ -179,7 +179,7 @@ const restoreStatusUser = async (id_user) => {
     const findUser = await User.findByPk(id_user);
 
     if (!findUser) {
-        throw new Error("El Usuario no existe");
+        throw new Error("User does not exist");
     } else {
         await findUser.update({
             status: true
