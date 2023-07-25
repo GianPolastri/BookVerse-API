@@ -118,4 +118,62 @@ const filtroNombre = async (name) => {
     return librosFiltrados;
 }
 
-module.exports = { filtroGenero, filtroNombre, filtroFormato };
+const filtrarLibrosCombinados = async (filtros) => {
+    let librosFiltrados = null;
+
+    const { rows } = await Book.findAndCountAll({
+        where: {
+          // aqui se podrian agregar condiciones adicionales
+        }, 
+        include: [
+          {
+            model: Genre,
+            attributes: ['name'],
+            through: { attributes: [] },
+          },
+          {
+            model: Review,
+            attributes: ['content', 'rating'],
+          },
+          {
+            model: Format,
+            attributes: ['name'],
+          },
+          {
+            model: Language,
+            attributes: ['name'],
+          },
+          {
+            model: Publisher,
+            attributes: ['name'],
+          },
+        ],
+      });
+  
+      if (filtros.name) {
+        librosFiltrados = rows.filter((Books) =>
+          Books.dataValues?.title.toLowerCase().includes(filtros.name.toLowerCase())
+        );
+      } else {
+        librosFiltrados = rows;
+      }
+    
+      if (filtros.genre) {
+        librosFiltrados = librosFiltrados.filter((Books) =>
+        Books.dataValues?.Genres.some((genero) => genero.name === filtros.genre)
+        );
+      }
+    
+      if (filtros.format) {
+        librosFiltrados = librosFiltrados.filter(
+          (Books) => Books.dataValues?.Formats.name === filtros.format
+        );
+      }
+    
+      // Agregar más filtros aquí según tus necesidades
+      console.log(rows);
+
+      return librosFiltrados;
+    };
+
+module.exports = { filtroGenero, filtroNombre, filtroFormato, filtrarLibrosCombinados };
