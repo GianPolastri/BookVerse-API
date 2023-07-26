@@ -1,7 +1,8 @@
 const {
     filtroGenero,
     filtroNombre,
-    filtroFormato
+    filtroFormato,
+    filtrarLibrosCombinados
 } = require ('../../controllers/filterControllers/filterBooksControllers');
 
 
@@ -35,10 +36,23 @@ const filterByName = async (req, res) => {
     }
 }
 
+const combinedFilters =  async (req, res) => {
+    const { name, genre, format } = req.query;
+  
+    try {
+      const filtros = { name, genre, format };
+      const librosFiltrados = await filtrarLibrosCombinados(filtros);
+      res.json(librosFiltrados);
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  };
+
 module.exports = {
     filterByFormat,
     filterByGenre,
-    filterByName
+    filterByName,
+    combinedFilters
 }
 
 /* http://localhost:3001/filter/byType?productType=Otcom    Topiramate*/

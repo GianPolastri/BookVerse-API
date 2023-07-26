@@ -8,14 +8,9 @@ module.exports = (sequelize) => {
             defaultValue: DataTypes.UUIDV4,
             primaryKey: true
         },
-        fullName: {
+        name: {
             type: DataTypes.STRING,
             allowNull: false,
-        },
-        username: {
-            type: DataTypes.STRING,
-            unique: true,
-            allowNull: true,
         },
         birthDate: {
             type: DataTypes.STRING,
@@ -25,26 +20,22 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             defaultValue: "",
             isUrl: {
-                msg: "La imagen debe ser una URL"
+                msg: "Image must be an URL"
             }
         },
         phone: {
             type: DataTypes.STRING,
             defaultValue: 0,
         },
-        mail: {
+        email: {
             type: DataTypes.STRING,
             allowNull: false,
             unique: true,
             isEmail: {
-                msg: "Debe ingresar un email válido"
+                msg: "Please enter a valid email"
             }
         },
-        occupation: {
-            type: DataTypes.STRING,
-
-        },
-        address: {
+        country: {
             type: DataTypes.STRING,
             allowNull: true,
         },
@@ -53,7 +44,7 @@ module.exports = (sequelize) => {
             allowNull: false,
             defaultValue: 12345678,
             isAlphanumeric: {
-                msg: "La contraseña debe ser alfanumérica"
+                msg: "The password must be alphanumeric"
             }, //Chequea que sea alfanumerico
             // len: {
             //     arg: [[6, 14]],

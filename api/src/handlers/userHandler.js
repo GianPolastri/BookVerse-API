@@ -3,7 +3,6 @@ const {
   postUser,
   getAllUsers,
   userById,
-  putRolUser,
   putEditUser,
   putStatusUser,
   restoreStatusUser
@@ -12,9 +11,9 @@ const {
 
 //* Handler que verifica en la DB si existe el User
 const getUserHandler = async (req, res) => {
-    const { mail } = req.params;
+    const { email } = req.params;
     try {
-      const user = await getUser(mail);
+      const user = await getUser(email);
       res.status(200).json(user);
     } catch (error) {
       res.status(400).json({ error: error.message });
@@ -33,15 +32,17 @@ const getAllUsersHandler = async (req, res) => {
 
 //* Handler que postea el user en la DB
 const postUserHandler = async (req, res) => {
-  const { fullName, username, birthDate, image, phone, mail, password, occupation, rol, address } = req.body;
+  const {image} = req.file
+  const { name, birthDate, phone, email, password, country } = req.body;
 
-  if (!fullName || !mail ) res.status(400).json({ msg: 'Faltan datos necesarios' });
+
+  if (!name || !email) res.status(400).json({ msg: 'Missing required data' });
 
   try {
-    const newUser = await postUser(fullName, username, birthDate, image, phone, mail, password, occupation, rol, address);
-    res.status(200).json({msg: "Usuario agregado con exito", userId: [newUser.id]});
+    const newUser = await postUser(name, birthDate, image, phone, email, password, country);
+    res.status(200).json({ msg: "User added successfully", userId: [newUser.id] });
   } catch (error) {
-      console.log(error, "ESTE ES EL ERROR LOCOOO")
+      console.log(error, "THIS IS THE ERROR")
     res.status(400).json({ error: error.message });
   }
 };
@@ -59,26 +60,14 @@ const getUserById = async (req, res) => {
 
 // //* Handler que modifica datos del usuario
 const putEditUserHandler = async (req, res) => {
-  const { mail, password, birthDate, image, phone, occupation, address, fullName, rol } = req.body
+  const { name, birthDate, image, phone, email, password, country } = req.body
   try {
-    await putEditUser(mail, password, birthDate, image, phone, occupation, address, rol, fullName)
-    res.status(200).json("Datos cambiados con exito")
+    await putEditUser(name, birthDate, image, phone, email, password, country)
+    res.status(200).json("Data changed successfully")
   } catch (error) {
     res.status(400).json({ error: error.message })
   }
 }
-
-// //* Handler que modifica el rol de usuario
-const putRolUserHandler = async (req, res) => {
-  const { id_user, admin, padrino, voluntario} = req.body; //ID DEL USUARIO QUE LE VAMOS A CAMBIAR EL ROL
-
-  try {
-    putUser = await putRolUser(id_user, admin, padrino, voluntario);
-    res.status(200).json(putUser);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-};
 
 // //* Handler para inactivar un user
 const putStatusUserHandler = async (req, res) => {
@@ -86,7 +75,7 @@ const putStatusUserHandler = async (req, res) => {
 
   try {
     await putStatusUser(id_user);
-    res.status(200).json("Usuario eliminado con exito");
+    res.status(200).json("User deleted successfully");
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -98,7 +87,7 @@ const restoreStatusUserHandler = async (req, res) => {
 
   try {
     await restoreStatusUser(id_user);
-    res.status(200).json("El usuario se restauro con exito");
+    res.status(200).json("The user has been restored successfully");
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -109,7 +98,6 @@ module.exports = {
   postUserHandler,
   getAllUsersHandler,
   getUserById,
-  putRolUserHandler,
   putEditUserHandler,
   putStatusUserHandler,
   restoreStatusUserHandler,
