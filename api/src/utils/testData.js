@@ -44,7 +44,7 @@ const BooksTest = [
         "description": "La historia de amor entre Fermina Daza y Florentino Ariza, en el escenario de un pueblecito portuario del Caribe y a lo largo de más de sesenta años, podría parecer un melodrama de amantes contrariados que al final vencen por la gracia del tiempo y la fuerza de sus propios sentimientos, ya que García Márquez se complace en utilizar los más clásicos recursos de los folletines tradicionales. Pero este tiempo -por una vez sucesivo, y no circular-, este escenario y estos personajes son como una mezcla tropical de plantas y arcillas que la mano del maestro modela y fantasea a su placer, para al final ir a desembocar en los territorios del mito y la leyenda. Los zumos, olores y sabores del trópico alimentan una prosa alucinatoria que en esta ocasión llega al puerto oscilante del final feliz.",
         "pages": 496,
         "publicationDate": "1985-08-11",
-        "image": "https://contentv2.tap-commerce.com/cover/large/9789871138012_1.jpg?id_com=1113"
+        "image": "https://contentv2.tap-commerce.com/cover/large/9789871138135_1.jpg?id_com=1113"
     },
     {
         "title": "La sombra del viento",
