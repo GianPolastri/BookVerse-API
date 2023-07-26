@@ -44,9 +44,9 @@ const BooksTest = [
         "description": "The novel portrays the love story between Fermina Daza and Florentino Ariza, set in a Caribbean port town over more than sixty years.",
         "pages": 496,
         "publicationDate": "1985-08-11",
-        "image": "https://contentv2.tap-commerce.com/cover/large/9789871138012_1.jpg?id_com=1113"
-        },
-        {
+        "image": "https://contentv2.tap-commerce.com/cover/large/9789871138135_1.jpg?id_com=1113"
+    },
+    {
         "title": "La sombra del viento",
         "author": "Carlos Ruiz Zafón",
         "price": 20,
