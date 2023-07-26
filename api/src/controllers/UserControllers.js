@@ -21,23 +21,13 @@ cloudinary.config({
 //*---------------GET ALL USERS----------------------
 const getAllUsers = async () => {
     const allUsers = await User.findAll({
-        include: [
+/*         include: [
             {
                 model: Rol,
 
                 through: { attributes: [] },
-            },
-            {
-                model: Activity,
-                through: { attributes: [] },
-            },
-            {
-                model: Cart,
-            },
-            {
-                model: Donation,
-            },
-        ],
+            }
+        ], */
     });
 
 
@@ -83,22 +73,22 @@ const postUser = async (
     rol
 ) => {
 
-        /*     const imgPath = ASSET_PATH_PRODUCTS;
-        
-        const files = await fs.promises.readdir(imgPath);
-        for (const file of files) {
-            const imageFullPath = imgPath + file;
-            console.log("outside", imageFullPath);
-    
-            try {
-                console.log("inside", imageFullPath)
-                const result = await cloudinary.uploader.upload(imageFullPath, { public_id: `image_${uuidv4()}` });
-                const imgLink = result.secure_url;
-                await fs.promises.unlink(imageFullPath);
-                image = imgLink;
-            } catch (error) {
-                throw new Error(error);
-            } */
+    const imgPath = ASSET_PATH_PRODUCTS;
+
+    const files = await fs.promises.readdir(imgPath);
+    for (const file of files) {
+        const imageFullPath = imgPath + file;
+        console.log("outside", imageFullPath);
+
+        try {
+            console.log("inside", imageFullPath)
+            const result = await cloudinary.uploader.upload(imageFullPath, { public_id: `image_${uuidv4()}` });
+            const imgLink = result.secure_url;
+            await fs.promises.unlink(imageFullPath);
+            image = imgLink;
+        } catch (error) {
+            throw new Error(error);
+        } 
 
     console.log("username:", fullName);
     console.log("email:", mail);
@@ -129,6 +119,7 @@ const postUser = async (
 
     await newUser.addRol(rol);
     return newUser;
+}
 };
 
 //!-------lógica útil pero que sirve para admin------

@@ -40,7 +40,7 @@ const postUserHandler = async (req, res) => {
 
   try {
     const newUser = await postUser(fullName, username, birthDate, image, phone, mail, password, occupation, rol, address);
-    res.status(200).json({msg: "Usuario agregado con exito", userId: [newUser.id]});
+    res.status(200).json({msg: "Usuario agregado con exito", newUser /*userId : [newUser.id] */});
   } catch (error) {
       console.log(error, "ESTE ES EL ERROR LOCOOO")
     res.status(400).json({ error: error.message });
