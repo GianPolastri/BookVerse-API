@@ -14,7 +14,7 @@ try {
 
 const deleteReviewHandler = async (req, res) => {
 try {
-    res.status(200).json("esta es la vista para eliminar reviews");
+    res.status(200).json("This is the view for deleting reviews");
 } catch (error) {
     res.status(400).json({error: error.message}); 
 }
@@ -22,7 +22,7 @@ try {
 
 const putReviewHandler = async (req, res) => {
 try {
-    res.status(200).json("esta es la vista para modificar reviews");
+    res.status(200).json("This is the view for modifying reviews");
 } catch (error) {
     res.status(400).json({error: error.message}); 
 }

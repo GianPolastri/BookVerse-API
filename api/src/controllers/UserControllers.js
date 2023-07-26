@@ -1,6 +1,6 @@
 //?----------------------------IMPORTS--------------------------------
 
-const { User, Rol, Activity, Cart, Roles, Donation } = require("../db");
+const { User, Activity, Cart } = require("../db");
 const { Op } = require("sequelize");
 const cloudinary = require('cloudinary').v2;
 const { v4: uuidv4 } = require('uuid');
@@ -21,13 +21,11 @@ cloudinary.config({
 //*---------------GET ALL USERS----------------------
 const getAllUsers = async () => {
     const allUsers = await User.findAll({
-/*         include: [
-            {
-                model: Rol,
-
-                through: { attributes: [] },
-            }
-        ], */
+        // include: [
+        //     {
+        //         model: Cart,
+        //     },
+        // ],
     });
 
 
@@ -37,23 +35,18 @@ const getAllUsers = async () => {
 //*---------------GET USER BY ID------------------
 
 const userById = async (id) => {
-    if (!id) throw new Error("Falta el id del Usuario");
+    if (!id) throw new Error("User ID is missing");
 
     const user = await User.findByPk(id, {
-        include: [
-            {
-                model: Rol,
-
-                through: { attributes: [] },
-            },
-            {
-                model: Activity,
-                through: { attributes: [] },
-            },
-        ],
+        // include: [
+        //     {
+        //         model: Activity,
+        //         through: { attributes: [] },
+        //     },
+        // ],
     });
 
-    if (!user) throw new Error("No existe el Usuario");
+    if (!user) throw new Error("User not found");
 
     return user;
 };
@@ -61,16 +54,13 @@ const userById = async (id) => {
 //*---------------CREATE USER---------------------
 
 const postUser = async (
-    fullName,
-    username,
+    name,
     birthDate,
     image,
     phone,
-    mail,
+    email,
     password,
-    occupation,
-    address,
-    rol
+    country
 ) => {
 
     const imgPath = ASSET_PATH_PRODUCTS;
@@ -90,34 +80,31 @@ const postUser = async (
             throw new Error(error);
         } 
 
-    console.log("username:", fullName);
-    console.log("email:", mail);
-
-    if (!fullName || !mail)
-        throw new Error("Faltan datos");
-
-    const findUserByUsername = await User.findOne({ where: { fullName } });
-    const findUserByEmail = await User.findOne({ where: { mail } });
-
-    if (findUserByUsername) throw new Error("Ya existe el nombre de usuario");
-
+    console.log("username:", name);
+    console.log("email:", email);
+    
+    if (!name || !email)
+        throw new Error("Missing data");
+    
+    const findUserByUsername = await User.findOne({ where: { name } });
+    const findUserByEmail = await User.findOne({ where: { email } });
+    
+    if (findUserByUsername) throw new Error("Username already exists");
+    
     if (findUserByEmail)
-        throw new Error("Ya existe un usuario con el mismo email");
-
+        throw new Error("User with the same email already exists");
+    
     const newUser = await User.create({
-        fullName,
-        username,
+        name,
         birthDate,
         image,
         phone,
-        mail,
+        email,
         password,
-        occupation,
-        address,
-
+        country
     });
-
-    await newUser.addRol(rol);
+    
+    await newUser;
     return newUser;
 }
 };
@@ -139,26 +126,16 @@ const postUser = async (
 // }
 
 //*-----------------GET USER---------------------
-const getUser = async (/* password, */ mail) => {
+const getUser = async (/* password, */ email) => {
  /*  if (!password) {
     throw new Error("No puede enviar una contraseña vacia");
-  } else if (!mail) {
+  } else if (!email) {
     throw new Error("No puede enviar un email vacio");
   } else {};*/
     const findUser = await User.findOne({ 
         where: {
-            mail: mail,
+            email: email,
         }, 
-        include: [
-            {
-                model: Rol,
-                through: { attributes: [] },
-            },
-            {
-                model: Activity,
-                through: { attributes: [] },
-            },
-        ],
      });
      return findUser;
    }
@@ -169,8 +146,8 @@ const getUser = async (/* password, */ mail) => {
       throw new Error("El usuario no existe");
     }  else {
       const findUser2 = await User.findOne({
-        where: { mail },
-        attributes: ["id", "fullName","birthDate", "image", "phone", "email", "admin","password", "volunteer", "sponsor"],
+        where: { email },
+        attributes: ["id", "name","birthDate", "image", "phone", "email", "admin", "password", "volunteer", "sponsor"],
       });
       if (!findUser2) {
         throw new Error("Contraseña equivocada");
@@ -180,26 +157,21 @@ const getUser = async (/* password, */ mail) => {
 
 
 // //*---------------PUT USER---------------------
-const putEditUser = async (mail, password, birthDate, image, phone, occupation, address, rol, fullName) => {
+const putEditUser = async (email, password, birthDate, image, phone, country, name) => {
     const findUser = await User.findOne({
         where: {
-            mail,
+            email,
         }
     })
 
-    if (!findUser) { throw new Error("El usuario no existe") }
+    if (!findUser) { throw new Error("User does not exist") }
 
     if (password) findUser.password = password
     if (birthDate) findUser.birthDate = birthDate
     if (image) findUser.image = image
     if (phone) findUser.phone = phone
-    if (occupation) findUser.occupation = occupation
-    if (address) findUser.address = address
-    if (fullName) findUser.fullName = fullName
-
-    if(rol){
-        await findUser.setRols(rol)
-     }
+    if (country) findUser.country = country
+    if (name) findUser.name = name
 
     findUser.save()
 
@@ -207,26 +179,26 @@ const putEditUser = async (mail, password, birthDate, image, phone, occupation, 
 }
 
 // //*---------------PUT ROL USER---------------------
- const putRolUser = async (id_user, rol) => {
-   const findUser = await User.findByPk(id_user);
+//  const putRolUser = async (id_user, rol) => {
+//    const findUser = await User.findByPk(id_user);
 
-   if (findUser) {
-     findUser.rol = rol;
+//    if (findUser) {
+//      findUser.rol = rol;
 
-     await findUser.save();
-   } else {
-     throw new Error("El usuario no existe");
-   }
+//      await findUser.save();
+//    } else {
+//      throw new Error("El usuario no existe");
+//    }
 
-   return findUser;
- };
+//    return findUser;
+//  };
 
 // //*------------- INACTIVAR USER -------------------------
 const putStatusUser = async (id_user) => {
     const findUser = await User.findByPk(id_user);
 
     if (!findUser) {
-        throw new Error("El usuario no existe");
+        throw new Error("User does not exist");
     } else {
         await findUser.update({ status: false }, { where: { id: id_user } });
         return;
@@ -239,7 +211,7 @@ const restoreStatusUser = async (id_user) => {
     const findUser = await User.findByPk(id_user);
 
     if (!findUser) {
-        throw new Error("El Usuario no existe");
+        throw new Error("User does not exist");
     } else {
         await findUser.update({
             status: true
@@ -256,7 +228,7 @@ module.exports = {
     postUser,
     getAllUsers,
     userById,
-    putRolUser,
+    //putRolUser,
     putEditUser,
     putStatusUser,
     restoreStatusUser

@@ -4,9 +4,9 @@ const { Products, User, Review } = require('../db');
 const postReview = async (user_id, content, rating, product_id) => {
 
     const user = await User.findByPk(user_id);
-    if(!user) throw new Error ('Para comentar primero debes logearte');
+    if(!user) throw new Error ('To leave a comment, you must first log in');
     const product = await Products.findByPk(product_id);
-    if(!product) throw new Error ('Producto inexistente');
+    if(!product) throw new Error ('Product not found');
     console.log(product_id);
 
     const review = await Review.create ({ user_id, content, rating, product_id })

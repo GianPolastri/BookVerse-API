@@ -31,7 +31,7 @@ const testDataUploader = async () => {
         
         await Books.forEach( book => book.addPublisher(Math.floor(Math.random() * 7 + 1)))
 
-        console.log('Datos cargados exitosamente!');
+        console.log('Data loaded successfully!');
 
 
         return;
