@@ -62,6 +62,14 @@ const { Genre, Cart_Products, Cart, Book, Format, Language, Publisher, Review, R
 
 // User.hasOne(Rol);
 // Rol.belongsTo(User);
+User.belongsToMany(Rol, { through: "User_Roles" });
+Rol.belongsToMany(User, { through: "User_Roles"});
+
+User.hasOne(Cart);
+Cart.belongsTo(User);
+
+/* Products.belongsToMany(Cart, { through: Cart_Products});
+Cart.belongsToMany(Products, { through: Cart_Products}); */
 
 Book.belongsToMany(Language, { through: 'Book_Language' });
 Language.belongsToMany(Book, { through: 'Book_Language' });
