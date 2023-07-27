@@ -63,23 +63,6 @@ const postUser = async (
     country
 ) => {
 
-    const imgPath = ASSET_PATH_PRODUCTS;
-
-    const files = await fs.promises.readdir(imgPath);
-    for (const file of files) {
-        const imageFullPath = imgPath + file;
-        console.log("outside", imageFullPath);
-
-        try {
-            console.log("inside", imageFullPath)
-            const result = await cloudinary.uploader.upload(imageFullPath, { public_id: `image_${uuidv4()}` });
-            const imgLink = result.secure_url;
-            await fs.promises.unlink(imageFullPath);
-            image = imgLink;
-        } catch (error) {
-            throw new Error(error);
-        } 
-
     console.log("username:", name);
     console.log("email:", email);
     
@@ -107,7 +90,6 @@ const postUser = async (
     await newUser;
     return newUser;
 }
-};
 
 //!-------lógica útil pero que sirve para admin------
 
@@ -158,9 +140,27 @@ const getUser = async (/* password, */ email) => {
 
 // //*---------------PUT USER---------------------
 const putEditUser = async (email, password, birthDate, image, phone, country, name) => {
+    const imgPath = ASSET_PATH_PRODUCTS;
+
+
+    const files = await fs.promises.readdir(imgPath);
+    for (const file of files) {
+        const imageFullPath = imgPath + file;
+        console.log("outside", imageFullPath);
+
+        try {
+            console.log("inside", imageFullPath)
+            const result = await cloudinary.uploader.upload(imageFullPath, { public_id: `image_${uuidv4()}` });
+            const imgLink = result.secure_url;
+            await fs.promises.unlink(imageFullPath);
+            image = imgLink;
+        } catch (error) {
+            throw new Error(error);
+        } 
+
     const findUser = await User.findOne({
         where: {
-            email,
+            email: email
         }
     })
 
@@ -176,6 +176,7 @@ const putEditUser = async (email, password, birthDate, image, phone, country, na
     findUser.save()
 
     return;
+}
 }
 
 // //*---------------PUT ROL USER---------------------
