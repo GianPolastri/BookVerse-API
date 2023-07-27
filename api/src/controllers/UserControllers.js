@@ -109,7 +109,6 @@ const getUser = async (/* password, */ email) => {
    }
 
 
-
     /*if (!findUser) {
       throw new Error("El usuario no existe");
     }  else {
@@ -122,24 +121,24 @@ const getUser = async (/* password, */ email) => {
       }
       if(!findUser2.status) throw new Error("Usuario bloqueado") */
   
-
-
 // //*---------------PUT USER---------------------
-const putEditUser = async (email, password, birthDate, image, phone, country, name) => {
+   
+const putEditUser = async (email, name, birthDate, image, phone, password, country) => {
     const findUser = await User.findOne({
         where: {
-            email,
-        }
-    })
+            email: email,
+        },
+    });
 
     if (!findUser) { throw new Error("User does not exist") }
 
-    if (password) findUser.password = password
+    if (name) findUser.name = name
     if (birthDate) findUser.birthDate = birthDate
     if (image) findUser.image = image
     if (phone) findUser.phone = phone
+    if (password) findUser.password = password
     if (country) findUser.country = country
-    if (name) findUser.name = name
+    
 
     findUser.save()
 
