@@ -17,7 +17,7 @@ const uploadImage = multer({
         if(mimetype && extname) {
             return cb(null, true);
         }
-        cb("Error: El archivo no es de tipo imagen.");
+        cb("Error: The file is not an image type.");
     },
 }).single("image");
 

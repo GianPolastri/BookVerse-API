@@ -1,7 +1,10 @@
 const {
     filtroGenero,
     filtroNombre,
-    filtroFormato
+    filtroFormato,
+    filtroLenguaje,
+    filtroEditorial,
+    filtrarLibrosCombinados
 } = require ('../../controllers/filterControllers/filterBooksControllers');
 
 
@@ -35,10 +38,44 @@ const filterByName = async (req, res) => {
     }
 }
 
+const filterByLanguage = async (req, res) => {
+    const { name } = req.query;
+    try {
+        const filteredLanguage = await filtroLenguaje(name);
+        res.status(200).json({filteredLanguage});
+    } catch (error) {
+        res.status(400).json({ error: error.message })
+    }
+}
+
+const filterByPublisher = async (req, res) => {
+    const { name } = req.query;
+    try {
+        const filteredPublisher = await filtroEditorial(name);
+        res.status(200).json({filteredPublisher});
+    } catch (error) {
+        res.status(400).json({ error: error.message })
+    }
+}
+
+const combinedFilters =  async (req, res) => {
+    const { title, genre, format, language, publisher } = req.query;
+  
+    try {
+      const filtros = { title, genre, format, language, publisher };
+      const librosFiltrados = await filtrarLibrosCombinados(filtros);
+      res.json(librosFiltrados);
+    } catch (error) {
+      res.status(400).json({ 'error': error });
+    }
+  };
+
+
 module.exports = {
     filterByFormat,
     filterByGenre,
-    filterByName
+    filterByName,
+    filterByLanguage,
+    filterByPublisher,
+    combinedFilters
 }
-
-/* http://localhost:3001/filter/byType?productType=Otcom    Topiramate*/
