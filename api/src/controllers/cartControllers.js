@@ -1,16 +1,16 @@
-const { Cart, Products, User, Cart_Products } = require('../db');
+const { Cart, Book, User, Cart_Books } = require('../db');
 
 
 const getUserCart = async ( user_id ) => {
 
-    const cart = await Cart.findOne({ where: { UserId: user_id }, include: { model: Products, through: { Cart_Products }}});
+    const cart = await Cart.findOne({ where: { UserId: user_id }, include: { model: Book, through: { Cart_Books }}});
     if(!cart) throw new Error('No es posible encontrar el carrito');
 
     return cart;
 }
     
 
-const addToCart = async ( user_id, product_id, quantity ) => {
+const addToCart = async ( user_id, book_id, quantity ) => {
 
     // const user = await User.findByPk(user_id);
     // if(!user) throw new Error('No es posible encontrar al usuario');
@@ -21,25 +21,25 @@ const addToCart = async ( user_id, product_id, quantity ) => {
     let cart = await Cart.findOne({ where: { UserId: user_id }});
     if(!cart) cart = await Cart.create({UserId: user_id});
 
-    const product = await Products.findByPk(product_id);
-    if(!product) throw new Error('No se ha podido encontrar el producto');
+    const book = await Book.findByPk(book_id);
+    if(!book) throw new Error('No se ha podido encontrar el producto');
 
     console.log(user_id);
     console.log(cart);
-    console.log(product);
+    console.log(book);
 
-    if( quantity <= product.stock){
-        await cart.addProducts(product, {through: { quantity: quantity }});
+    if( quantity <= book.stock){
+        await cart.addBooks(book, {through: { quantity: quantity }});
     }else{
         throw new Error('La cantidad solicitada es mayor al stock disponible');
     }
 
     // product.stock -= quantity;
 
-    return product;
+    return book;
 };
 
-const removeFromCart = async ( user_id, product_id ) => {
+const removeFromCart = async ( user_id, book_id ) => {
 
     const user = await User.findByPk(user_id);
     if(!user) throw new Error('No es posible encontrar al usuario');
@@ -47,7 +47,7 @@ const removeFromCart = async ( user_id, product_id ) => {
     const cart = await user.getCart();
     if(!cart) throw new Error('No es posible encontrar el carrito del usuario');
 
-    const product = await Products.findByPk(product_id);
+    const product = await Book.findByPk(book_id);
     if(!product) throw new Error('No se ha podido encontrar el producto');
 
     await cart.removeProduct(product);
@@ -57,7 +57,7 @@ const removeFromCart = async ( user_id, product_id ) => {
 
 const emptyCart = async (user_id) => {
 
-    const cart = await Cart.findOne({ where: { UserId: user_id }, include: { model: Products, through: { Cart_Products }}});
+    const cart = await Cart.findOne({ where: { UserId: user_id }, include: { model: Products, through: { Cart_Books }}});
     if(!cart) throw new Error('No es posible encontrar el carrito');
 
     const user = await User.findByPk(user_id);
