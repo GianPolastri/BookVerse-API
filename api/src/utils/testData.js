@@ -56,7 +56,7 @@ const BooksTest = [
         "image": "https://http2.mlstatic.com/D_NQ_NP_2X_894082-MLA54752885330_032023-F.webp"
     },
     {
-        "title": "Los jeugos del ángel",
+        "title": "Los juegos del ángel",
         "author": "Carlos Ruiz Zafón",
         "price": 27,
         "description": "In the turbulent Barcelona of the 1920s, a young writer obsessed with an impossible love receives an offer from a mysterious publisher to write a book unlike any other, for a fortune and perhaps much more. With dazzling style and a flawless narrative precision, the author of The Shadow of the Wind returns to the Cemetery of Forgotten Books to take readers back to the heart of the old city, where an intriguing new story of intrigue, romance, and tragedy unfolds.",
@@ -200,7 +200,7 @@ const BooksTest = [
         "image": "https://http2.mlstatic.com/D_NQ_NP_2X_863616-MLA48557316097_122021-F.webp"
     },
     {
-        "title": "Don Quixote",
+        "title": "Don Quijote",
         "author": "Miguel de Cervantes Saavedra",
         "price": 24,
         "description": "The novel narrates the adventures of a hidalgo who, driven mad by reading too many books on chivalry, decides to set out and revive chivalry, undo wrongs, and bring justice to the world, under the name Don Quixote.",
