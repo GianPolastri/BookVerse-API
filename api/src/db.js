@@ -2,11 +2,12 @@ require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
-const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, DB_DEPLOY } = process.env;
+const { /* DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, */ DB_DEPLOY } = process.env;
 
 // console.log(DB_USER, DB_PASSWORD, DB_HOST, DB_NAME);
 
-const sequelize = new Sequelize(
+const sequelize = new Sequelize( /* 
+   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}` */
    DB_DEPLOY,
    {
       logging: false, // set to console.log to see the raw SQL queries
@@ -55,6 +56,14 @@ const { Genre, Cart_Products, Cart, Book, Format, Language, Publisher, Review, R
 
 // User.hasOne(Rol);
 // Rol.belongsTo(User);
+User.belongsToMany(Rol, { through: "User_Roles" });
+Rol.belongsToMany(User, { through: "User_Roles"});
+
+User.hasOne(Cart);
+Cart.belongsTo(User);
+
+/* Products.belongsToMany(Cart, { through: Cart_Products});
+Cart.belongsToMany(Products, { through: Cart_Products}); */
 
 Book.belongsToMany(Language, { through: 'Book_Language' });
 Language.belongsToMany(Book, { through: 'Book_Language' });

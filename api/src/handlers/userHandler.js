@@ -32,13 +32,15 @@ const getAllUsersHandler = async (req, res) => {
 
 //* Handler que postea el user en la DB
 const postUserHandler = async (req, res) => {
-  const { name, birthDate, image, phone, email, password, country } = req.body;
+
+  const { name, birthDate, phone, email, password, country, image } = req.body;
+
 
   if (!name || !email) res.status(400).json({ msg: 'Missing required data' });
 
   try {
     const newUser = await postUser(name, birthDate, image, phone, email, password, country);
-    res.status(200).json({ msg: "User added successfully", userId: [newUser.id] });
+    res.status(200).json({ msg: "User added successfully", userId: [newUser.id ] });
   } catch (error) {
       console.log(error, "THIS IS THE ERROR")
     res.status(400).json({ error: error.message });
@@ -58,10 +60,16 @@ const getUserById = async (req, res) => {
 
 // //* Handler que modifica datos del usuario
 const putEditUserHandler = async (req, res) => {
+<<<<<<< HEAD
   const { email, name, birthDate, image, phone, password, country } = req.body
+=======
+  const {image} = req.file
+  const { name, birthDate, phone, email, password, country } = req.body
+>>>>>>> main
   try {
-    await putEditUser(name, birthDate, image, phone, email, password, country)
-    res.status(200).json("Data changed successfully")
+    const editedUser = await putEditUser(name, birthDate, image, phone, email, password, country)
+    console.log({msg: "handler:", email});
+    res.status(200).json({msg: "Data changed successfully", editedUser})
   } catch (error) {
     res.status(400).json({ error: error.message })
   }

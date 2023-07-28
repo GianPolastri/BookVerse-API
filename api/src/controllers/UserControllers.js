@@ -2,6 +2,20 @@
 
 const { User, Activity, Cart } = require("../db");
 const { Op } = require("sequelize");
+const cloudinary = require('cloudinary').v2;
+const { v4: uuidv4 } = require('uuid');
+const fs = require('fs');
+
+const API_KEY = process.env.API_KEY;
+const API_SECRET = process.env.API_SECRET;
+const CLOUD_NAME = process.env.CLOUD_NAME;
+const ASSET_PATH = process.env.ASSET_PATH;
+
+cloudinary.config({
+    cloud_name: CLOUD_NAME,
+    api_key: API_KEY,
+    api_secret: API_SECRET,
+})
 //?----------------------------CONTROLLERS------------------------------
 
 //*---------------GET ALL USERS----------------------
@@ -75,7 +89,7 @@ const postUser = async (
     
     await newUser;
     return newUser;
-}    
+}
 
 //!-------lógica útil pero que sirve para admin------
 
@@ -109,6 +123,7 @@ const getUser = async (/* password, */ email) => {
    }
 
 
+
     /*if (!findUser) {
       throw new Error("El usuario no existe");
     }  else {
@@ -121,29 +136,52 @@ const getUser = async (/* password, */ email) => {
       }
       if(!findUser2.status) throw new Error("Usuario bloqueado") */
   
+
+
 // //*---------------PUT USER---------------------
-   
-const putEditUser = async (email, name, birthDate, image, phone, password, country) => {
+const putEditUser = async (name, birthDate, image, phone, email, password, country) => {
+    /* console.log({msg: "controller:", name, birthDate, image, phone, email, password, country}); */
+
+   const imgPath = ASSET_PATH;
+   console.log(imgPath);
+
+
+     const files = await fs.promises.readdir(imgPath);
+    for (const file of files) {
+        const imageFullPath = imgPath + file;
+        console.log("outside", imageFullPath);
+
+        try {
+            console.log("inside", imageFullPath)
+            const result = await cloudinary.uploader.upload(imageFullPath, { public_id: `image_${uuidv4()}` });
+            const imgLink = result.secure_url;
+            await fs.promises.unlink(imageFullPath);
+            image = imgLink;
+        } catch (error) {
+            throw new Error(error);
+        } 
+    } 
+
     const findUser = await User.findOne({
         where: {
-            email: email,
-        },
-    });
-
+            email: email
+        }
+    })
+    console.log(findUser);
     if (!findUser) { throw new Error("User does not exist") }
 
-    if (name) findUser.name = name
+    if (password) findUser.password = password
     if (birthDate) findUser.birthDate = birthDate
     if (image) findUser.image = image
     if (phone) findUser.phone = phone
-    if (password) findUser.password = password
     if (country) findUser.country = country
-    
+    if (name) findUser.name = name
 
     findUser.save()
 
     return;
 }
+
 
 // //*---------------PUT ROL USER---------------------
 //  const putRolUser = async (id_user, rol) => {
