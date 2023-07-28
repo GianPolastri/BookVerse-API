@@ -8,7 +8,7 @@ const getUserCart = async ( user_id ) => {
 
     return cart;
 }
-
+    
 
 const addToCart = async ( user_id, product_id, quantity ) => {
 
