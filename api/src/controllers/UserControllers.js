@@ -9,7 +9,7 @@ const fs = require('fs');
 const API_KEY = process.env.API_KEY;
 const API_SECRET = process.env.API_SECRET;
 const CLOUD_NAME = process.env.CLOUD_NAME;
-const ASSET_PATH_PRODUCTS = process.env.ASSET_PATH_PRODUCTS;
+const ASSET_PATH = process.env.ASSET_PATH;
 
 cloudinary.config({
     cloud_name: CLOUD_NAME,
@@ -139,11 +139,14 @@ const getUser = async (/* password, */ email) => {
 
 
 // //*---------------PUT USER---------------------
-const putEditUser = async (email, password, birthDate, image, phone, country, name) => {
-    const imgPath = ASSET_PATH_PRODUCTS;
+const putEditUser = async (name, birthDate, image, phone, email, password, country) => {
+    /* console.log({msg: "controller:", name, birthDate, image, phone, email, password, country}); */
+
+   const imgPath = ASSET_PATH;
+   console.log(imgPath);
 
 
-    const files = await fs.promises.readdir(imgPath);
+     const files = await fs.promises.readdir(imgPath);
     for (const file of files) {
         const imageFullPath = imgPath + file;
         console.log("outside", imageFullPath);
@@ -157,13 +160,14 @@ const putEditUser = async (email, password, birthDate, image, phone, country, na
         } catch (error) {
             throw new Error(error);
         } 
+    } 
 
     const findUser = await User.findOne({
         where: {
             email: email
         }
     })
-
+    console.log(findUser);
     if (!findUser) { throw new Error("User does not exist") }
 
     if (password) findUser.password = password
@@ -177,7 +181,7 @@ const putEditUser = async (email, password, birthDate, image, phone, country, na
 
     return;
 }
-}
+
 
 // //*---------------PUT ROL USER---------------------
 //  const putRolUser = async (id_user, rol) => {
