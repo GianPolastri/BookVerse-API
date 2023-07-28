@@ -28,11 +28,13 @@ const addToCart = async ( user_id, book_id, quantity ) => {
     console.log(cart);
     console.log(book);
 
-    if( quantity <= book.stock){
-        await cart.addBooks(book, {through: { quantity: quantity }});
-    }else{
-        throw new Error('La cantidad solicitada es mayor al stock disponible');
-    }
+    cart.addBooks(book, {through: { quantity: quantity }});
+
+    // if( quantity <= book.stock){
+    //     await cart.addBooks(book, {through: { quantity: quantity }});
+    // }else{
+    //     throw new Error('La cantidad solicitada es mayor al stock disponible');
+    // }
 
     // product.stock -= quantity;
 
