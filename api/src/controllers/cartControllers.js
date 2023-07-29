@@ -52,14 +52,14 @@ const removeFromCart = async ( user_id, book_id ) => {
     const product = await Book.findByPk(book_id);
     if(!product) throw new Error('No se ha podido encontrar el producto');
 
-    await cart.removeProduct(product);
+    await cart.removeBook(product);
 
     return;
 };
 
 const emptyCart = async (user_id) => {
 
-    const cart = await Cart.findOne({ where: { UserId: user_id }, include: { model: Products, through: { Cart_Books }}});
+    const cart = await Cart.findOne({ where: { UserId: user_id }, include: { model: Book, through: { Cart_Books }}});
     if(!cart) throw new Error('No es posible encontrar el carrito');
 
     const user = await User.findByPk(user_id);
@@ -68,32 +68,32 @@ const emptyCart = async (user_id) => {
 
     // console.log(cart.Products);
 
-    cart.setProducts([]);
+    cart.setBooks([]);
 }
 
 
-const changeQuantity = async (user_id, product_id, quantity) => {
+const changeQuantity = async (user_id, book_id, quantity) => {
 
     if(!user_id) throw new Error('Falta el ID del usuario');
 
-    const cart = await Cart.findOne({ where: { UserId: user_id }, include: { model: Products, through: { Cart_Products } }})
+    const cart = await Cart.findOne({ where: { UserId: user_id }, include: { model: Book, through: { Cart_Books } }})
 
-    const producto = await Cart_Products.findOne({ where: { CartId: cart.id , ProductId: product_id }});
+    const book = await Cart_Books.findOne({ where: { CartId: cart.id , BookId: book_id }});
 
-    console.log('producto antes de modificarse', producto);
+    console.log('producto antes de modificarse', book);
 
-    if(!product_id){
-        throw new Error('Falta el ID del producto')
+    if(!book_id){
+        throw new Error('Falta el ID del libro')
     }
 
-    const product = await Products.findByPk(product_id);
+    const boo = await Book.findByPk(book_id);
 
 
-    if(producto && product){
-        console.log(product);
-        if(parseInt(quantity) >= 0 && parseInt(quantity) <= product.stock){
-            producto.quantity = Number(quantity);
-            await producto.save();
+    if(book && boo){
+        console.log(boo);
+        if(parseInt(quantity) >= 0){
+            book.quantity = Number(quantity);
+            await book.save();
             return {msg: 'La cantidad fue actualizada correctamente.'};
         }else{
             throw new Error('La cantidad solicitada es mayor al stock disponible')
@@ -102,7 +102,7 @@ const changeQuantity = async (user_id, product_id, quantity) => {
         throw new Error('Error al buscar producto');
     }
     
-    console.log('producto despues de modificarse', producto);
+    console.log('producto despues de modificarse', book);
     throw new Error('Hubo un problema al actualizar la cantidad.')
     
     //? Hasta aca chequeo que llegue la data necesaria
