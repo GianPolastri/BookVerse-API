@@ -15,8 +15,6 @@ const {
 
 const UserRouter = Router();
 
-
-
 UserRouter.get("/", getAllUsersHandler);
 UserRouter.get("/:user_id", getUserById);
 UserRouter.post("/", postUserHandler)

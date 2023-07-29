@@ -33,7 +33,7 @@ const filtroGenero = async (name) => {
         Books.dataValues.Genres.some((p) => p.name === name));  //<---- arreglar metodo some "no se puede aplicar some en un array vacio, pero no esta vacio"
 
     if (!filteredBooks.length) {
-        throw new Error("Genero de libros no encontrados");
+        throw new Error ("Book gender not found");
     }
     return filteredBooks;
 };
@@ -68,7 +68,7 @@ const filtroFormato = async (name) => {
         Books.dataValues.Formats.some((p) => p.name === name));  //<---- arreglar metodo some "no se puede aplicar some en un array vacio, pero no esta vacio"
 
     if (!filteredFormats.length) {
-        throw new Error("Formato no encontrado");
+        throw new Error ("Format not found");
     }
     return filteredFormats;
 };

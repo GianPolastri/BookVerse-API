@@ -141,12 +141,10 @@ const getUser = async (/* password, */ email) => {
 // //*---------------PUT USER---------------------
 const putEditUser = async (name, birthDate, image, phone, email, password, country) => {
     /* console.log({msg: "controller:", name, birthDate, image, phone, email, password, country}); */
+ const imgPath = ASSET_PATH;
+ console.log(imgPath);
 
-   const imgPath = ASSET_PATH;
-   console.log(imgPath);
-
-
-     const files = await fs.promises.readdir(imgPath);
+    const files = await fs.promises.readdir(imgPath);
     for (const file of files) {
         const imageFullPath = imgPath + file;
         console.log("outside", imageFullPath);
@@ -157,6 +155,7 @@ const putEditUser = async (name, birthDate, image, phone, email, password, count
             const imgLink = result.secure_url;
             await fs.promises.unlink(imageFullPath);
             image = imgLink;
+            console.log(image, "esta es la imagen")
         } catch (error) {
             throw new Error(error);
         } 
