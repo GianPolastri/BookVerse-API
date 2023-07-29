@@ -1,6 +1,6 @@
 //?----------------------------IMPORTS--------------------------------
 
-const { User, Activity, Cart } = require("../db");
+const { User, Activity, Cart, Book } = require("../db");
 const { Op } = require("sequelize");
 const cloudinary = require('cloudinary').v2;
 const { v4: uuidv4 } = require('uuid');
@@ -21,11 +21,11 @@ cloudinary.config({
 //*---------------GET ALL USERS----------------------
 const getAllUsers = async () => {
     const allUsers = await User.findAll({
-        // include: [
-        //     {
-        //         model: Cart,
-        //     },
-        // ],
+        include: [
+            {
+                model: Book,
+            },
+        ],
     });
 
 
@@ -38,12 +38,12 @@ const userById = async (id) => {
     if (!id) throw new Error("User ID is missing");
 
     const user = await User.findByPk(id, {
-        // include: [
-        //     {
-        //         model: Activity,
-        //         through: { attributes: [] },
-        //     },
-        // ],
+        include: [
+            {
+                model: Book,
+                through: { attributes: [] },
+            },
+        ],
     });
 
     if (!user) throw new Error("User not found");

@@ -3,7 +3,7 @@ const { checkoutHandler, successHandler } = require('../handlers/paymentHandlers
 
 const paymentRouter = Router();
 
-paymentRouter.post('/create-checkout-session', checkoutHandler)
+paymentRouter.post('/create-checkout-session/:user_id', checkoutHandler)
 
 paymentRouter.get('/success', successHandler)
 

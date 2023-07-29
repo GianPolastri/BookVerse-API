@@ -14,7 +14,7 @@ const successHandler = async (req, res) => {
     const { user_id } = req.query;
     try {
         const response = successController( user_id );
-        res.status(201).send(response);
+        res.status(201).send('Success');
     } catch (error) {
         res.status(500).json({error: error.message});
     }

@@ -2,17 +2,18 @@ require("dotenv").config();
 const { Stripe } = require("stripe");
 const { STRIPE_PRIVATE_KEY } = process.env;
 const stripe = new Stripe(STRIPE_PRIVATE_KEY);
-const { Cart, Cart_Books, User } = require('../db');
+const { Cart, Cart_Books, User, Book } = require('../db');
+const { emptyCart } = require('./cartControllers')
 
 const checkoutController = async (user_id) => {
 
     const cart = await Cart.findOne({
         where: { UserId: user_id },
-        include: { model: Books, through: { Cart_Books } },
+        include: { model: Book, through: { Cart_Books } },
     });
     if (!cart) throw new Error("No es posible encontrar el carrito");
 
-    const resumen = cart.Books?.map( book => {
+    const resumen = cart.Books.map( book => {
 
         const line_item = {
             price_data: {
@@ -21,15 +22,17 @@ const checkoutController = async (user_id) => {
                     description: book.description,
                 },
                 currency: 'usd',
-                unit_amout: (book.price * 100),
+                unit_amount: (book.price * 100),
             },
             quantity: book.Cart_Books.quantity,
         };
 
+        
         return line_item;
         
     })
-
+    
+    // console.log(resumen);
     const session = await stripe.checkout.sessions.create({
         line_items: resumen,
         mode: 'payment',
@@ -44,17 +47,24 @@ const checkoutController = async (user_id) => {
 
 const successController = async ( user_id ) => {
 
-    console.log('Esto llega al success controller: ', user_id);
+    // console.log('Esto llega al success controller: ', user_id);
 
     const cart = await Cart.findOne({
         where: { UserId: user_id },
-        include: { model: Books, through: { Cart_Books } },
+        include: { model: Book, through: { Cart_Books } },
     });
     if (!cart) throw new Error("No es posible encontrar el carrito");
 
-    const user = User.findByPk( user_id );
+    const user = await User.findByPk( user_id );
 
-    cart.Books?.map( book => user.addBooks(book) );
+    cart.Books.map( book => user.addBook(book) );
+
+
+    const userBooks = await user.getBooks;
+
+    await emptyCart(user_id);
+
+    console.log(userBooks);
 
     return 'Success!'
 
