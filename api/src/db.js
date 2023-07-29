@@ -2,22 +2,21 @@ require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
-const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME,   /*DB_DEPLOY */} = process.env;
+const {DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, /*DB_DEPLOY*/ } = process.env;
 
 // console.log(DB_USER, DB_PASSWORD, DB_HOST, DB_NAME);
 
-const sequelize = new Sequelize( 
-   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
-   /*DB_DEPLOY,*/
-
+const sequelize = new Sequelize(
+   // `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
+   DB_DEPLOY,
    {
       logging: false, // set to console.log to see the raw SQL queries
       native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-      // dialectOptions: {
-      //   ssl: {
-      //           require: true,
-      //   }
-      // }
+      dialectOptions: {
+        ssl: {
+                require: true,
+        }
+    }
    }
 );
 const basename = path.basename(__filename);
@@ -62,6 +61,9 @@ Rol.belongsToMany(User, { through: "User_Roles"});
 
 User.hasOne(Cart);
 Cart.belongsTo(User);
+
+User.belongsToMany(Book, { through: "User_Book" });
+Book.belongsToMany(User, { through: "User_Book" });
 
 Book.belongsToMany(Cart, { through: Cart_Books});
 Cart.belongsToMany(Book, { through: Cart_Books});
