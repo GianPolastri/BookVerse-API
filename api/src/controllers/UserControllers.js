@@ -1,6 +1,6 @@
 //?----------------------------IMPORTS--------------------------------
 
-const { User, Activity, Cart } = require("../db");
+const { User, Activity, Cart, Book } = require("../db");
 const { Op } = require("sequelize");
 const cloudinary = require('cloudinary').v2;
 const { v4: uuidv4 } = require('uuid');
@@ -21,11 +21,11 @@ cloudinary.config({
 //*---------------GET ALL USERS----------------------
 const getAllUsers = async () => {
     const allUsers = await User.findAll({
-        // include: [
-        //     {
-        //         model: Cart,
-        //     },
-        // ],
+        include: [
+            {
+                model: Book,
+            },
+        ],
     });
 
 
@@ -38,12 +38,12 @@ const userById = async (id) => {
     if (!id) throw new Error("User ID is missing");
 
     const user = await User.findByPk(id, {
-        // include: [
-        //     {
-        //         model: Activity,
-        //         through: { attributes: [] },
-        //     },
-        // ],
+        include: [
+            {
+                model: Book,
+                through: { attributes: [] },
+            },
+        ],
     });
 
     if (!user) throw new Error("User not found");
@@ -141,12 +141,10 @@ const getUser = async (/* password, */ email) => {
 // //*---------------PUT USER---------------------
 const putEditUser = async (name, birthDate, image, phone, email, password, country) => {
     /* console.log({msg: "controller:", name, birthDate, image, phone, email, password, country}); */
+ const imgPath = ASSET_PATH;
+ console.log(imgPath);
 
-   const imgPath = ASSET_PATH;
-   console.log(imgPath);
-
-
-     const files = await fs.promises.readdir(imgPath);
+    const files = await fs.promises.readdir(imgPath);
     for (const file of files) {
         const imageFullPath = imgPath + file;
         console.log("outside", imageFullPath);
@@ -157,6 +155,7 @@ const putEditUser = async (name, birthDate, image, phone, email, password, count
             const imgLink = result.secure_url;
             await fs.promises.unlink(imageFullPath);
             image = imgLink;
+            console.log(image, "esta es la imagen")
         } catch (error) {
             throw new Error(error);
         } 

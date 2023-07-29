@@ -60,10 +60,12 @@ const getUserById = async (req, res) => {
 
 // //* Handler que modifica datos del usuario
 const putEditUserHandler = async (req, res) => {
-  const image = req.file
-  console.log({msg: "handler:", image});
+  const image = req.file;
   const { name, birthDate, phone, email, password, country } = req.body
-  try {
+  console.log(req.body)
+  console.log(image)
+   try {
+     console.log({msg: "handler:", image});
     const editedUser = await putEditUser(name, birthDate, image, phone, email, password, country)
     res.status(200).json({msg: "Data changed successfully", editedUser})
   } catch (error) {
