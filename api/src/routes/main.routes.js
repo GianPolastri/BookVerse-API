@@ -10,6 +10,7 @@ const languageRouter = require('./languageRouter')
 const publisherRouter = require('./publisherRouter')
 const formsRouter = require("./formsRouter")
 const cartRouter = require("./cartRouter");
+const paymentRouter = require("./paymentRouter");
 
 
 const router = Router();
@@ -26,5 +27,6 @@ router.use('/language', languageRouter);
 router.use('/publisher', publisherRouter);
 router.use("/form", formsRouter);
 router.use("/cart", cartRouter);
+router.use("/payment", paymentRouter);
 
 module.exports = router;
