@@ -8,6 +8,6 @@ const getAllLang = async (req, res) => {
         res.status(400).json("Something went wrong!")
     }
 
-}
+} 
 
 module.exports = {getAllLang} ;
