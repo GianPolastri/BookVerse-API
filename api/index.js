@@ -6,7 +6,7 @@ const PORT = /* process.env.PORT || */ 3001;
 const { testDataUploader, testDataCheck } = require('./src/utils/testDataUpload');
 
 
-conn.sync({ force: true }).then(async () => {
+conn.sync({ force: false }).then(async () => {
 
   const { BookCheck, publisherCheck } = await testDataCheck();
   
