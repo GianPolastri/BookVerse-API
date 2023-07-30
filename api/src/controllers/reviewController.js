@@ -1,16 +1,18 @@
-const { Products, User, Review } = require('../db');
+const { Book, User, Review } = require('../db');
 
 
-const postReview = async (user_id, content, rating, product_id) => {
+const postReview = async (email, content, rating, book_id) => {
 
-    const user = await User.findByPk(user_id);
+    /* const user = await User.findByPk(user_id); */
+    const user = await User.findOne({ where: { email } });
     if(!user) throw new Error ('To leave a comment, you must first log in');
-    const product = await Products.findByPk(product_id);
-    if(!product) throw new Error ('Product not found');
-    console.log(product_id);
+    /* const product = await Book.findByPk(book_id); */
+    const book = await Book.findOne({ where: { book_id } });
+    if(!book) throw new Error ('Book not found');
+    console.log(book_id);
 
-    const review = await Review.create ({ user_id, content, rating, product_id })
-    await product.addReview(review);
+    const review = await Review.create ({ email, content, rating, book_id })
+    await Book.addReview(review);
     return review;
 
 /*     { 
