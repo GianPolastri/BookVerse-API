@@ -91,7 +91,7 @@ const getDetailBooks = async (id) => {
             },
             {
                 model: Review,
-                attributes: ['content', 'rating']
+                attributes: ['content', 'rating', 'email']
             },
             {
                 model: Review,

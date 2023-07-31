@@ -1,6 +1,6 @@
 //?----------------------------IMPORTS--------------------------------
 
-const { User, Activity, Cart } = require("../db");
+const { User, Activity, Cart, Book } = require("../db");
 const { Op } = require("sequelize");
 const cloudinary = require('cloudinary').v2;
 const { v4: uuidv4 } = require('uuid');
@@ -9,7 +9,7 @@ const fs = require('fs');
 const API_KEY = process.env.API_KEY;
 const API_SECRET = process.env.API_SECRET;
 const CLOUD_NAME = process.env.CLOUD_NAME;
-const ASSET_PATH_PRODUCTS = process.env.ASSET_PATH_PRODUCTS;
+const ASSET_PATH = process.env.ASSET_PATH;
 
 cloudinary.config({
     cloud_name: CLOUD_NAME,
@@ -21,11 +21,11 @@ cloudinary.config({
 //*---------------GET ALL USERS----------------------
 const getAllUsers = async () => {
     const allUsers = await User.findAll({
-        // include: [
-        //     {
-        //         model: Cart,
-        //     },
-        // ],
+        include: [
+            {
+                model: Book,
+            },
+        ],
     });
 
 
@@ -38,12 +38,12 @@ const userById = async (id) => {
     if (!id) throw new Error("User ID is missing");
 
     const user = await User.findByPk(id, {
-        // include: [
-        //     {
-        //         model: Activity,
-        //         through: { attributes: [] },
-        //     },
-        // ],
+        include: [
+            {
+                model: Book,
+                through: { attributes: [] },
+            },
+        ],
     });
 
     if (!user) throw new Error("User not found");
@@ -62,23 +62,6 @@ const postUser = async (
     password,
     country
 ) => {
-
-    const imgPath = ASSET_PATH_PRODUCTS;
-
-    const files = await fs.promises.readdir(imgPath);
-    for (const file of files) {
-        const imageFullPath = imgPath + file;
-        console.log("outside", imageFullPath);
-
-        try {
-            console.log("inside", imageFullPath)
-            const result = await cloudinary.uploader.upload(imageFullPath, { public_id: `image_${uuidv4()}` });
-            const imgLink = result.secure_url;
-            await fs.promises.unlink(imageFullPath);
-            image = imgLink;
-        } catch (error) {
-            throw new Error(error);
-        } 
 
     console.log("username:", name);
     console.log("email:", email);
@@ -107,7 +90,6 @@ const postUser = async (
     await newUser;
     return newUser;
 }
-};
 
 //!-------lógica útil pero que sirve para admin------
 
@@ -157,13 +139,34 @@ const getUser = async (/* password, */ email) => {
 
 
 // //*---------------PUT USER---------------------
-const putEditUser = async (email, password, birthDate, image, phone, country, name) => {
+const putEditUser = async (name, birthDate, image, phone, email, password, country) => {
+    /* console.log({msg: "controller:", name, birthDate, image, phone, email, password, country}); */
+ const imgPath = ASSET_PATH;
+ console.log(imgPath);
+
+    const files = await fs.promises.readdir(imgPath);
+    for (const file of files) {
+        const imageFullPath = imgPath + file;
+        console.log("outside", imageFullPath);
+
+        try {
+            console.log("inside", imageFullPath)
+            const result = await cloudinary.uploader.upload(imageFullPath, { public_id: `image_${uuidv4()}` });
+            const imgLink = result.secure_url;
+            await fs.promises.unlink(imageFullPath);
+            image = imgLink;
+            console.log(image, "esta es la imagen")
+        } catch (error) {
+            throw new Error(error);
+        } 
+    } 
+
     const findUser = await User.findOne({
         where: {
-            email,
+            email: email
         }
     })
-
+    console.log(findUser);
     if (!findUser) { throw new Error("User does not exist") }
 
     if (password) findUser.password = password
@@ -177,6 +180,7 @@ const putEditUser = async (email, password, birthDate, image, phone, country, na
 
     return;
 }
+
 
 // //*---------------PUT ROL USER---------------------
 //  const putRolUser = async (id_user, rol) => {
