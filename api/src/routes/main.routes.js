@@ -11,6 +11,7 @@ const publisherRouter = require('./publisherRouter')
 const formsRouter = require("./formsRouter")
 const cartRouter = require("./cartRouter");
 const paymentRouter = require("./paymentRouter");
+const reviewRouter = require('./reviewRouter');
 
 
 const router = Router();
@@ -28,5 +29,6 @@ router.use('/publisher', publisherRouter);
 router.use("/form", formsRouter);
 router.use("/cart", cartRouter);
 router.use("/payment", paymentRouter);
+router.use('/review', reviewRouter);
 
 module.exports = router;

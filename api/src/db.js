@@ -7,16 +7,16 @@ const {DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, /*DB_DEPLOY*/ } = process.env;
 // console.log(DB_USER, DB_PASSWORD, DB_HOST, DB_NAME);
 
 const sequelize = new Sequelize(
-   // `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
-   DB_DEPLOY,
+    `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,/* 
+   DB_DEPLOY, */
    {
       logging: false, // set to console.log to see the raw SQL queries
       native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-      dialectOptions: {
+/*       dialectOptions: {
         ssl: {
                 require: true,
         }
-    }
+    } */
    }
 );
 const basename = path.basename(__filename);
@@ -80,8 +80,11 @@ Format.belongsToMany(Book, { through: 'Book_Format' });
 Book.belongsToMany(Genre, { through: 'Book_Genre' });
 Genre.belongsToMany(Book, { through: 'Book_Genre' });
 
-Book.hasMany(Review, {foreignKey: "Book_Review"}); 
-Review.belongsTo(Book, {foreignKey: "Book_Review"});
+Book.hasMany(Review, {foreignKey: "book_id"}); 
+Review.belongsTo(Book, {foreignKey: "book_id"});
+
+User.hasMany(Review); 
+Review.belongsTo(User, { foreignKey: 'email', targetKey: 'email' });
 
 module.exports = {
    ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
