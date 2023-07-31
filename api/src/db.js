@@ -80,8 +80,11 @@ Format.belongsToMany(Book, { through: 'Book_Format' });
 Book.belongsToMany(Genre, { through: 'Book_Genre' });
 Genre.belongsToMany(Book, { through: 'Book_Genre' });
 
-Book.hasMany(Review, {foreignKey: "Book_Review"}); 
-Review.belongsTo(Book, {foreignKey: "Book_Review"});
+Book.hasMany(Review, {foreignKey: "book_id"}); 
+Review.belongsTo(Book, {foreignKey: "book_id"});
+
+User.hasMany(Review); 
+Review.belongsTo(User, { foreignKey: 'email', targetKey: 'email' });
 
 module.exports = {
    ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

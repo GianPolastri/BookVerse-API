@@ -3,8 +3,9 @@ const { postReview } = require('../controllers/reviewController');
 
 
 const postReviewHandler = async (req, res) => {
-try {
     const { email, content, rating, book_id } = req.body
+    console.log({"email handler" :email});
+try {
     const review = await postReview( email, content, rating, book_id )
     res.status(200).json(review);
 } catch (error) {
