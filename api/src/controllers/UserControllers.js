@@ -9,7 +9,7 @@ const fs = require('fs');
 const API_KEY = process.env.API_KEY;
 const API_SECRET = process.env.API_SECRET;
 const CLOUD_NAME = process.env.CLOUD_NAME;
-const ASSET_PATH = process.env.ASSET_PATH;
+/* const ASSET_PATH = process.env.ASSET_PATH; */
 
 cloudinary.config({
     cloud_name: CLOUD_NAME,
@@ -141,16 +141,13 @@ const getUser = async (/* password, */ email) => {
 // //*---------------PUT USER---------------------
 const putEditUser = async (name, birthDate, image, phone, email, password, country) => {
     /* console.log({msg: "controller:", name, birthDate, image, phone, email, password, country}); */
- const imgPath = ASSET_PATH;
- console.log(imgPath);
+ const imgPath = image.path;
 
-    const files = await fs.promises.readdir(imgPath);
-    for (const file of files) {
-        const imageFullPath = imgPath + file;
-        console.log("outside", imageFullPath);
+        const imageFullPath = imgPath;
+        console.log("outside", imageFullPath); 
 
         try {
-            console.log("inside", imageFullPath)
+            console.log({msg: "imagen qla" , path: image.path});
             const result = await cloudinary.uploader.upload(imageFullPath, { public_id: `image_${uuidv4()}` });
             const imgLink = result.secure_url;
             await fs.promises.unlink(imageFullPath);
@@ -159,7 +156,7 @@ const putEditUser = async (name, birthDate, image, phone, email, password, count
         } catch (error) {
             throw new Error(error);
         } 
-    } 
+     
 
     const findUser = await User.findOne({
         where: {
