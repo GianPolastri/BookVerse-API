@@ -22,4 +22,3 @@ conn.sync({ force: false }).then(async () => {
   });
 });
 
-
