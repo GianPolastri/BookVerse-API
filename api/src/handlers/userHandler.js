@@ -69,7 +69,7 @@ const putEditUserHandler = async (req, res) => {
     const editedUser = await putEditUser(name, birthDate, image, phone, email, password, country)
     res.status(200).json({msg: "Data changed successfully", editedUser})
   } catch (error) {
-    res.status(400).json({ error: error.message })
+    res.status(400).json({ error })
   }
 }
 
