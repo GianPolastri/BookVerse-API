@@ -188,7 +188,16 @@ const BooksTest = [
         "description": "The Silmarillion tells the story of the First Age, the ancient drama spoken of by the characters in The Lord of the Rings, in which some of them took part, such as Elrond and Galadriel. An authentic work of imagination, an inspired, legendary, or mythical vision of the endless conflict between the desire for power and the ability to create. Revised edition of J.R.R. Tolkien's classic The Silmarillion.",
         "pages": 552,
         "publicationDate": "1977-09-15",
-        "image": "https://http2.mlstatic.com/D_NQ_NP_2X_779424-MLU70255708050_072023-F.webp"
+        "image": "https://m.media-amazon.com/images/P/0345325818.01._SCLZZZZZZZ_SX500_.jpg"
+    },
+    {
+        "title": "The Children of Húrin",
+        "author": "J.R.R. Tolkien",
+        "price": 24,
+        "description": "Painstakingly restored from Tolkien’s manuscripts and presented for the first time as a fully continuous and standalone story, this illustrated paperback of the epic tale of The Children of Húrin will reunite fans of The Hobbit and The Lord of the Rings with Elves, dragons, Dwarves and Orcs, and the rich landscape and characters unique to Tolkien. It is a legendary time long before The Lord of the Rings, and Morgoth, the first Dark Lord, dwells in the vast fortress of Angband in the North; and within the shadow of the fear of Angband, and the war waged by Morgoth against the Elves, the fates of Túrin and his sister Niënor will be tragically entwined. Their brief and passionate lives are dominated by the elemental hatred that Morgoth bears them as the children of Húrin, the man who dared to defy him to his face. Against them Morgoth sends his most formidable servant, Glaurung, a powerful spirit in the form of a huge wingless dragon of fire, in an attempt to fulfil the curse of Morgoth, and destroy the children of Húrin.",
+        "pages": 322,
+        "publicationDate": "2007-04-16",
+        "image": "https://m.media-amazon.com/images/I/41Al4kLCadL.jpg"
     },
     {
         "title": "To Kill a Mockingbird",
@@ -269,7 +278,7 @@ const BooksTest = [
         "description": "A bold and original adaptation of Yuval Noah Harari's bestseller into a series of graphic novels, full of wit, humor, nods to pop culture, and colorful illustrations. Harari (as co-writer) has worked with prestigious comic authors David Vandermeulen (co-writer) and Daniel Casanave (illustrator) to retell the history of humanity in a way that captivates all readers, both adults and young, even those who don't typically read history or science books.",
         "pages": 256,
         "publicationDate": "2020-07-10",
-        "image": "https://contentv2.tap-commerce.com/cover/large/9788418006814_1.jpg?id_com=1113"
+        "image": "https://m.media-amazon.com/images/I/81nQ+oGgI3L.jpg"
     },            
     {
         "title": "Behind the Net",
@@ -351,6 +360,168 @@ const BooksTest = [
         "pages": 366,
         "publicationDate": "2023-07-14",
         "image": "https://m.media-amazon.com/images/I/41sLZOpQcRL.jpg"
+    },
+    {
+        "title": "Deception Point",
+        "author": "Dan Brown",
+        "price": 18,
+        "description": "In his most thrilling novel to date, bestselling author Dan Brown transports readers from the ultrasecret National Reconnaissance Office to the towering ice shelves of the Arctic Circle, and back again to the hallways of power inside the West Wing. Heralded for masterfully intermingling science, history, and politics in his critically acclaimed thriller Angels & Demons, Brown has crafted another novel in which nothing is as it seems—and behind every corner is a stunning surprise. Deception Point is pulse-pounding fiction at its best.",
+        "pages": 560,
+        "publicationDate": "2004-07-28",
+        "image": "https://m.media-amazon.com/images/P/1416524800.01._SCLZZZZZZZ_SX500_.jpg"
+    },
+    {
+        "title": "Angels and Demons",
+        "author": "Dan Brown",
+        "price": 19,
+        "description": "In his most thrilling novel to date, bestselling author Dan Brown transports readers from the ultrasecret National Reconnaissance Office to the towering ice shelves of the Arctic Circle, and back again to the hallways of power inside the West Wing. Heralded for masterfully intermingling science, history, and politics in his critically acclaimed thriller Angels & Demons, Brown has crafted another novel in which nothing is as it seems—and behind every corner is a stunning surprise. Deception Point is pulse-pounding fiction at its best.",
+        "pages": 736,
+        "publicationDate": "2006-04-01",
+        "image": "https://m.media-amazon.com/images/I/51pms8KvVuL._SX272_BO1,204,203,200_.jpg"
+    },
+    {
+        "title": "The Da Vinci Code",
+        "author": "Dan Brown",
+        "price": 16,
+        "description": "While in Paris on business, Harvard symbologist Robert Langdon receives an urgent late-night phone call: the elderly curator of the Louvre has been murdered inside the museum. Near the body, police have found a baffling cipher. While working to solve the enigmatic riddle, Langdon is stunned to discover it leads to a trail of clues hidden in the works of Da Vinci -- clues visible for all to see -- yet ingeniously disguised by the painter. Langdon joins forces with a gifted French cryptologist, Sophie Neveu, and learns the late curator was involved in the Priory of Sion -- an actual secret society whose members included Sir Isaac Newton, Botticelli, Victor Hugo, and Da Vinci, among others. In a breathless race through Paris, London, and beyond, Langdon and Neveu match wits with a faceless powerbroker who seems to anticipate their every move. Unless Langdon and Neveu can deipher the labyrinthine puzzle in time, the Priory's ancient secret -- and an explosive historical truth -- will be lost forever.",
+        "pages": 597,
+        "publicationDate": "2009-03-31",
+        "image": "https://m.media-amazon.com/images/P/0307474275.01._SCLZZZZZZZ_SX500_.jpg"
+    },
+    {
+        "title": "The Lost Symbol",
+        "author": "Dan Brown",
+        "price": 10,
+        "description": "Famed Harvard symbologist Robert Langdon answers an unexpected summons to appear at the U.S. Capitol Building. His plans are interrupted when a disturbing object—artfully encoded with five symbols—is discovered in the building. Langdon recognizes in the find an ancient invitation into a lost world of esoteric, potentially dangerous wisdom. When his mentor Peter Solomon—a long-standing Mason and beloved philanthropist—is kidnapped, Langdon realizes that the only way to save Solomon is to accept the mystical invitation and plunge headlong into a clandestine world of Masonic secrets, hidden history, and one inconceivable truth ... all under the watchful eye of Dan Brown's most terrifying villain to date.",
+        "pages": 510,
+        "publicationDate": "2009-09-15",
+        "image": "https://prodimage.images-bn.com/pimages/9781400079148_p0_v2_s600x595.jpg"
+    },
+    {
+        "title": "Inferno",
+        "author": "Dan Brown",
+        "price": 16,
+        "description": "With a relentless female assassin trailing them through Florence, he and his resourceful doctor, Sienna Brooks, are forced to flee. Embarking on a harrowing journey, they must unravel a series of codes, which are the work of a brilliant scientist whose obsession with the end of the world is matched only by his passion for one of the most influential masterpieces ever written, Dante Alighieri's The Inferno. Dan Brown has raised the bar yet again, combining classical Italian art, history, and literature with cutting-edge science in this captivating thriller.",
+        "pages": 624,
+        "publicationDate": "2014-05-06",
+        "image": "https://m.media-amazon.com/images/I/41BF5MBg-rL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg"
+    },
+    {
+        "title": "Democracy Awakening: Notes on the State of America",
+        "author": "Heather Cox Richardson",
+        "price": 27,
+        "description": "“A vibrant, and essential history of America's unending, enraging and utterly compelling struggle since its founding to live up to its own best ideals… It's both a cause for hope, and a call to arms.”—Jane Mayer, author Dark Money .- From historian and author of the popular daily newsletter LETTERS FROM AN AMERICAN, a vital narrative that explains how America, once a beacon of democracy, now teeters on the brink of autocracy — and how we can turn back.",
+        "pages": 304,
+        "publicationDate": "2022-09-26",
+        "image": "https://m.media-amazon.com/images/I/41mekC7h4CL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg"
+    },
+    {
+        "title": "Iron Flame",
+        "author": "Rebecca Yarros",
+        "price": 26,
+        "description": "Everyone expected Violet Sorrengail to die during her first year at Basgiath War College—Violet included. But Threshing was only the first impossible test meant to weed out the weak-willed, the unworthy, and the unlucky. Now the real training begins, and Violet’s already wondering how she’ll get through. It’s not just that it’s grueling and maliciously brutal, or even that it’s designed to stretch the riders’ capacity for pain beyond endurance. It’s the new vice commandant, who’s made it his personal mission to teach Violet exactly how powerless she is–unless she betrays the man she loves. Although Violet’s body might be weaker and frailer than everyone else’s, she still has her wits—and a will of iron. And leadership is forgetting the most important lesson Basgiath has taught her: Dragon riders make their own rules. But a determination to survive won’t be enough this year. Because Violet knows the real secret hidden for centuries at Basgiath War College—and nothing, not even dragon fire, may be enough to save them in the end.",
+        "pages": 640,
+        "publicationDate": "2023-07-11",
+        "image": "https://m.media-amazon.com/images/I/61CrGbiVSnL._SY346_.jpg"
+    },
+    {
+        "title": "Fourth Wing",
+        "author": "Rebecca Yarros",
+        "price": 27,
+        "description": "Twenty-year-old Violet Sorrengail was supposed to enter the Scribe Quadrant, living a quiet life among books and history. Now, the commanding general—also known as her tough-as-talons mother—has ordered Violet to join the hundreds of candidates striving to become the elite of Navarre: dragon riders. But when you’re smaller than everyone else and your body is brittle, death is only a heartbeat away...because dragons don’t bond to “fragile” humans. They incinerate them. With fewer dragons willing to bond than cadets, most would kill Violet to better their own chances of success. The rest would kill her just for being her mother’s daughter—like Xaden Riorson, the most powerful and ruthless wingleader in the Riders Quadrant. She’ll need every edge her wits can give her just to see the next sunrise. Yet, with every day that passes, the war outside grows more deadly, the kingdom's protective wards are failing, and the death toll continues to rise. Even worse, Violet begins to suspect leadership is hiding a terrible secret. Friends, enemies, lovers. Everyone at Basgiath War College has an agenda—because once you enter, there are only two ways out: graduate or die.",
+        "pages": 528,
+        "publicationDate": "2023-05-02",
+        "image": "https://m.media-amazon.com/images/I/51j8bRH5sDL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg"
+    },
+    {
+        "title": "Tom Lake",
+        "author": "Ann Patchett",
+        "price": 24,
+        "description": "In the spring of 2020, Lara’s three daughters return to the family's orchard in Northern Michigan. While picking cherries, they beg their mother to tell them the story of Peter Duke, a famous actor with whom she shared both a stage and a romance years before at a theater company called Tom Lake. As Lara recalls the past, her daughters examine their own lives and relationship with their mother, and are forced to reconsider the world and everything they thought they knew. Tom Lake is a meditation on youthful love, married love, and the lives parents have led before their children were born. Both hopeful and elegiac, it explores what it means to be happy even when the world is falling apart. As in all of her novels, Ann Patchett combines compelling narrative artistry with piercing insights into family dynamics. The result is a rich and luminous story, told with profound intelligence and emotional subtlety, that demonstrates once again why she is one of the most revered and acclaimed literary talents working today.",
+        "pages": 320,
+        "publicationDate": "2023-08-01",
+        "image": "https://m.media-amazon.com/images/I/51Xz8sY0xlL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg"
+    },
+    {
+        "title": "A Little Life",
+        "author": "Hanya Yanagihara",
+        "price": 15,
+        "description": "A Little Life follows four college classmates—broke, adrift, and buoyed only by their friendship and ambition—as they move to New York in search of fame and fortune. While their relationships, which are tinged by addiction, success, and pride, deepen over the decades, the men are held together by their devotion to the brilliant, enigmatic Jude, a man scarred by an unspeakable childhood trauma. A hymn to brotherly bonds and a masterful depiction of love in the twenty-first century, Hanya Yanagihara’s stunning novel is about the families we are born into, and those that we make for ourselves.",
+        "pages": 320,
+        "publicationDate": "2016-01-26",
+        "image": "https://images.cdn3.buscalibre.com/fit-in/360x360/a7/c6/a7c6226d90e3c30e967fb3f7276470d2.jpg"
+    },
+    {
+        "title": "American Prometheus",
+        "author": "Kai Bird, Martin J. Sherwin",
+        "price": 22,
+        "description": "In this magisterial, acclaimed biography twenty-five years in the making, Kai Bird and Martin Sherwin capture Oppenheimer’s life and times, from his early career to his central role in the Cold War. This is biography and history at its finest, riveting and deeply informative.",
+        "pages": 784,
+        "publicationDate": "2006-11-04",
+        "image": "https://m.media-amazon.com/images/I/81yfsIOijJL.jpg"
+    },
+    {
+        "title": "Holly",
+        "author": "Stephen King",
+        "price": 21,
+        "description": "Stephen King’s Holly marks the triumphant return of beloved King character Holly Gibney. Readers have witnessed Holly’s gradual transformation from a shy (but also brave and ethical) recluse in Mr. Mercedes to Bill Hodges’s partner in Finders Keepers to a full-fledged, smart, and occasionally tough private detective in The Outsider. In King’s new novel, Holly is on her own, and up against a pair of unimaginably depraved and brilliantly disguised adversaries.",
+        "pages": 464,
+        "publicationDate": "2023-05-09",
+        "image": "https://m.media-amazon.com/images/I/417kSOgt4aL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg"
+    },
+    {
+        "title": "Mr. Mercedes",
+        "author": "Stephen King",
+        "price": 10,
+        "description": "The stolen Mercedes emerges from the pre-dawn fog and plows through a crowd of men and women on line for a job fair in a distressed American city. Then the lone driver backs up, charges again, and speeds off, leaving eight dead and more wounded. The case goes unsolved and ex-cop Bill Hodges is out of hope when he gets a letter from a man who loved the feel of death under the Mercedes’s wheels…",
+        "pages": 464,
+        "publicationDate": "2014-03-06",
+        "image": "https://images.cdn2.buscalibre.com/fit-in/360x360/56/b9/56b9895afbca35fc7e2c8a8c725e410b.jpg"
+    },
+    {
+        "title": "Fairy Tale",
+        "author": "Stephen King",
+        "price": 23,
+        "description": "Charlie Reade looks like a regular high school kid, great at baseball and football, a decent student. But he carries a heavy load. His mom was killed in a hit-and-run accident when he was seven, and grief drove his dad to drink. Charlie learned how to take care of himself—and his dad. When Charlie is seventeen, he meets a dog named Radar and her aging master, Howard Bowditch, a recluse in a big house at the top of a big hill, with a locked shed in the backyard. Sometimes strange sounds emerge from it. Charlie starts doing jobs for Mr. Bowditch and loses his heart to Radar. Then, when Bowditch dies, he leaves Charlie a cassette tape telling a story no one would believe. What Bowditch knows, and has kept secret all his long life, is that inside the shed is a portal to another world.",
+        "pages": 608,
+        "publicationDate": "2022-06-09",
+        "image": "https://m.media-amazon.com/images/I/51ECRZXoGyL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg"
+    },
+    {
+        "title": "The Outsider",
+        "author": "Stephen King",
+        "price": 14,
+        "description": "An eleven-year-old boy’s violated corpse is discovered in a town park. Eyewitnesses and fingerprints point unmistakably to one of Flint City’s most popular citizens—Terry Maitland, Little League coach, English teacher, husband, and father of two girls. Detective Ralph Anderson, whose son Maitland once coached, orders a quick and very public arrest. Maitland has an alibi, but Anderson and the district attorney soon have DNA evidence to go with the fingerprints and witnesses. Their case seems ironclad. As the investigation expands and horrifying details begin to emerge, King’s story kicks into high gear, generating strong tension and almost unbearable suspense. Terry Maitland seems like a nice guy, but is he wearing another face? When the answer comes, it will shock you as only Stephen King can.",
+        "pages": 608,
+        "publicationDate": "2018-05-22",
+        "image": "https://http2.mlstatic.com/D_NQ_NP_2X_930783-MLA31020810409_062019-F.webp"
+    },
+    {
+        "title": "The Wind through the Keyhole",
+        "author": "Stephen King",
+        "price": 18,
+        "description": "The Wind Through the Keyhole is a sparkling contribution to the series that can be placed between Dark Tower IV and Dark Tower V. This Russian doll of a novel, a story within a story within a story, visits Roland and his ka-tet as a ferocious, frigid storm halts their progress along the Path of the Beam. Roland tells a tale from his early days as a gunslinger, in the guilt-ridden year following his mother’s death. Sent by his father to investigate evidence of a murderous shape-shifter, Roland takes charge of Bill Streeter, a brave but terrified boy who is the sole surviving witness to the beast’s most recent slaughter. Roland, himself only a teenager, calms the boy by reciting a story from the Book of Eld that his mother used to read to him at bedtime, “The Wind through the Keyhole.” “A person’s never too old for stories,” he says to Bill. “Man and boy, girl and woman, we live for them.”",
+        "pages": 320,
+        "publicationDate": "2016-06-12",
+        "image": "https://m.media-amazon.com/images/I/515qDQUttfL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg"
+    },
+    {
+        "title": "The Gunslinger",
+        "author": "Stephen King",
+        "price": 18,
+        "description": "A #1 national bestseller, The Gunslinger introduces readers to one of Stephen King’s most powerful creations, Roland of Gilead: The Last Gunslinger. He is a haunting figure, a loner on a spellbinding journey into good and evil. In his desolate world, which mirrors our own in frightening ways, Roland tracks The Man in Black, encounters an enticing woman named Alice, and begins a friendship with the boy from New York named Jake. Inspired in part by the Robert Browning narrative poem, “Childe Roland to the Dark Tower Came,” The Gunslinger is “a compelling whirlpool of a story that draws one irretrievable to its center” (Milwaukee Sentinel). It is “brilliant and fresh…and will leave you panting for more” (Booklist).",
+        "pages": 320,
+        "publicationDate": "2016-03-05",
+        "image": "https://m.media-amazon.com/images/I/81C-id1AKuL.jpg"
+    },
+    {
+        "title": "Judgment Prey",
+        "author": "John Sandford",
+        "price": 30,
+        "description": "Alex Sand was spending the evening at home playing basketball with his two young sons when all three were shot in cold blood. A wealthy federal judge, there’s no short list of people who could have a vendetta against Sands, but the gruesome murders, especially that of his children, turn their St. Paul community on its head. Sand was on the verge of a major donation to a local housing charity, Heart/Twin Cities, and with the money in limbo, eyes suddenly turn to his grieving widow, Margaret Cooper, to see what she might do with the money. Margaret, distraught over the death of her family, struggles to move forward, and can’t imagine how or why anyone would target her husband. With public pressure mounting and both the local police force and FBI hitting dead end after dead end, Lucas Davenport and Virgil Flowers are called in to do what others could not: find answers. With each potential lead flawed, Davenport and Flowers are determined to chase every theory until they figure out who killed the Sands. But when they find themselves being stonewalled by the most unlikely of forces, the two wonder if perhaps each misdirection could lead them closer to the truth.",
+        "pages": 320,
+        "publicationDate": "2023-03-10",
+        "image": "https://m.media-amazon.com/images/I/51t0fiD65YL._SY346_.jpg"
     },
 ];
 
@@ -451,4 +622,3 @@ module.exports = {
     languageTest,
     formatTest,
 }
-

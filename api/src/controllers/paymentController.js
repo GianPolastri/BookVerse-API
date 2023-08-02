@@ -36,8 +36,8 @@ const checkoutController = async (user_id) => {
     const session = await stripe.checkout.sessions.create({
         line_items: resumen,
         mode: 'payment',
-        success_url: `http://localhost:3001/payment/success?user_id=${user_id}`,
-        cancel_url: 'http://localhost:3001/payment/cancel',
+        success_url: `https://bookverse-m36k.onrender.com/payment/success?user_id=${user_id}`,
+        cancel_url: 'https://bookverse-m36k.onrender.com/payment/cancel',
     });
 
     return session;
