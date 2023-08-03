@@ -3,7 +3,7 @@ const { Cart, Book, User, Cart_Books } = require('../db');
 
 const getUserCart = async ( user_id ) => {
 
-    const cart = await Cart.findOne({ where: { UserId: user_id }, include: { model: Book, through: { Cart_Books }}});
+    const cart = await Cart.findOrCreate({ where: { UserId: user_id }, include: { model: Book, through: { Cart_Books }}});
     if(!cart) throw new Error('No es posible encontrar el carrito');
 
     return cart;
