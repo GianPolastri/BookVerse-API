@@ -13,16 +13,26 @@ const dashboardBalanceController = async () => {
     
     const balance = await stripe.balance.retrieve();
 
-    return balance;
+    return {revenue: balance.pending[0].amount/100, currency: balance.pending[0].currency};
 }
 
 const dashboardTransactionsController = async () => {
 
-    const transactions = await stripe.charges.list({
-        limit: 10,
-      });
+    const charges = await stripe.charges.list();
+    
+    const transactions = charges.data.map(charge => {
+        
+        const transaction = {
+            email: charge.billing_details.email,
+            name: charge.billing_details.name,
+            country: charge.billing_details.address.country,
+            amount: parseFloat(charge.amount)/100,
+        }
 
-      return transactions;
+        return transaction;
+    })
+
+    return transactions;
 }
 
 const dashboardUserController = async () => {
