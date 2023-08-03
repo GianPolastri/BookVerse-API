@@ -2,7 +2,7 @@ require("dotenv").config();
 const { Stripe } = require("stripe");
 const { STRIPE_PRIVATE_KEY } = process.env;
 const stripe = new Stripe(STRIPE_PRIVATE_KEY);
-const { Cart, Cart_Books, User, Book } = require('../db');
+const { Cart, Cart_Books, User, Book, Sale, Genre, Publisher, Format, Language } = require('../db');
 const { emptyCart } = require('./cartControllers')
 
 const checkoutController = async (user_id) => {
@@ -36,7 +36,8 @@ const checkoutController = async (user_id) => {
     const session = await stripe.checkout.sessions.create({
         line_items: resumen,
         mode: 'payment',
-        success_url: `https://bookverse-m36k.onrender.com/payment/success?user_id=${user_id}`,
+        //https://bookverse-m36k.onrender.com/payment/success?user_id=${user_id}
+        success_url: `http://localhost:3001/payment/success?user_id=${user_id}`,
         cancel_url: 'https://bookverse-m36k.onrender.com/payment/cancel',
     });
 
@@ -45,7 +46,7 @@ const checkoutController = async (user_id) => {
 };
 
 
-const successController = async ( user_id ) => {
+const successController = async ( user_id, session_id ) => {
 
     // console.log('Esto llega al success controller: ', user_id);
 
@@ -59,6 +60,51 @@ const successController = async ( user_id ) => {
 
     cart.Books.map( book => user.addBook(book) );
 
+    // const charge = await stripe.charges.retrieve(session_id);
+
+    // console.log(charge);
+
+    cart.Books.map( async book => {
+
+        const ebook = await Book.findByPk(book.id, { include: [
+            {
+                model: Genre,
+                attributes: ['name'],
+                through: { attributes: [] }
+            },
+            {
+                model: Language,
+            },
+            {
+                model: Publisher,
+            }
+        ]});
+
+        const tiempoTranscurrido = Date.now();
+        const hoy = new Date(tiempoTranscurrido);
+
+        const sale = {
+            user_name: user.name,
+            user_email: user.email,
+            user_country: user.country,
+            book: book.title,
+            book_price: ebook.price,
+            book_quantity: book.Cart_Books.quantity,
+            book_genre: ebook.Genres[0].name,
+            book_publisher: ebook.Publishers[0].name,
+            book_language: ebook.Languages[0].name,
+            book_author: book.author,
+            date: hoy.toLocaleDateString(),
+        }
+
+        console.log(sale);
+
+        await Sale.create(sale);
+
+        const allSales = await Sale.findAll();
+        console.log(allSales);
+
+    } );
 
     const userBooks = await user.getBooks;
 
