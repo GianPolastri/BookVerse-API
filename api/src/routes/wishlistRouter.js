@@ -2,16 +2,16 @@ const { Router } = require('express');
 const { getUserWishlistHandler, addWishlistHandler, removeWishlistHandler, emptyWishlistHandler } = require('../handlers/wishlistHandler');
 
 
-const cartRouter = Router();
+const wishRouter = Router();
 
-cartRouter.get('/:user_id', getUserWishlistHandler);
+wishRouter.get('/:user_id', getUserWishlistHandler);
 
-cartRouter.post('/add', addWishlistHandler);
+wishRouter.post('/add/', addWishlistHandler);
 
-cartRouter.delete('/remove', removeWishlistHandler);
+wishRouter.delete('/remove', removeWishlistHandler);
 
-cartRouter.delete('/removeAll', emptyWishlistHandler);
+wishRouter.delete('/removeAll', emptyWishlistHandler);
 
-/* cartRouter.put('/', changeQuantityHandler); */
+/* wishRouter.put('/', changeQuantityHandler); */
 
-module.exports = cartRouter;
+module.exports = wishRouter;
