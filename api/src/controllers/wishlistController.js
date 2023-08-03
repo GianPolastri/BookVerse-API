@@ -1,12 +1,9 @@
+
 const { Book, User, Wishlist, Wishlist_Books } = require('../db')
 
 const getUserWishlist = async (user_id) => {
     const wihsl = await Wishlist.findOrCreate({ where: { UserId: user_id }, include: { model: Book, through: { Wishlist_Books } } });
-<<<<<<< HEAD
-    if (!wihsl) throw new Error('No es posible encontrar el carrito');
-=======
     if (!wihsl) throw new Error('No es posible encontrar la wishlist');
->>>>>>> ca36c909c6ae64b3518781689205b56a6507c82c
 
     return wihsl[0];
 }
