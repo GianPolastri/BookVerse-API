@@ -49,6 +49,13 @@ const dashboardAllSalesController = async () => {
 
 };
 
+const dashboardSalesAmountController = async () => {
+
+    const allSales = await Sale.findAll();
+
+    return allSales.length;
+}
+
 const dashboardSalesByPublisherController = async () => {
 
     const publishers = await Publisher.findAll();
@@ -141,6 +148,7 @@ module.exports = {
     dashboardTransactionsController,
     dashboardUserController,
     dashboardAllSalesController,
+    dashboardSalesAmountController,
     dashboardSalesByPublisherController,
     dashboardSalesByGenreController,
     dashboardSalesByLanguageController,

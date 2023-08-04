@@ -5,6 +5,7 @@ const {
     dashboardTransactionsHandler,
     dashboardUserHandler,
     dashboardAllSalesHandler,
+    dashboardSalesAmountHandler,
     dashboardSalesByPublisherHandler,
     dashboardSalesByGenreHandler,
     dashboardSalesByLanguageHandler,
@@ -31,7 +32,8 @@ dashboardRouter.delete("/books/delete/:id", deleteBooks); //? Soft-delete del li
 //* rutas de data de ventas
 dashboardRouter.get("/balance", dashboardbalanceHandler); //? Trae el total de guita recibida por ventas
 dashboardRouter.get("/balance/transactions", dashboardTransactionsHandler); //? Trae los ultimos 10 recibos
-dashboardRouter.get("/sales/all", dashboardAllSalesHandler); //? Trae todas las ventas por separado
+dashboardRouter.get("/sales/all", dashboardAllSalesHandler); //? Trae todas las ventas en detalle por separado
+dashboardRouter.get("/sales/amount", dashboardSalesAmountHandler); //? Cantidad de ventas (numero)
 dashboardRouter.get("/sales/publisher", dashboardSalesByPublisherHandler); //? ventas por publisher
 dashboardRouter.get("/sales/genre", dashboardSalesByGenreHandler); //? ventas por genre
 dashboardRouter.get("/sales/language", dashboardSalesByLanguageHandler); //? ventas por language

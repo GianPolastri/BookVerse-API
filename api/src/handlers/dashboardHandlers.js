@@ -4,6 +4,7 @@ const {
     dashboardTransactionsController,
     dashboardUserController,
     dashboardAllSalesController,
+    dashboardSalesAmountController,
     dashboardSalesByPublisherController,
     dashboardSalesByGenreController,
     dashboardSalesByLanguageController
@@ -54,6 +55,15 @@ const dashboardAllSalesHandler = async (req, res) => {
     }
 };
 
+const dashboardSalesAmountHandler = async (req, res) => {
+    try {
+        const salesAmount = await dashboardSalesAmountController();
+        res.status(200).json(salesAmount);
+    } catch (error) {
+        res.status(500).json({error: error.message});
+    }
+}
+
 const dashboardSalesByPublisherHandler = async (req, res) => {
 
     try {
@@ -90,7 +100,8 @@ module.exports = {
     dashboardTransactionsHandler,
     dashboardUserHandler,
     dashboardAllSalesHandler,
+    dashboardSalesAmountHandler,
     dashboardSalesByPublisherHandler,
     dashboardSalesByGenreHandler,
-    dashboardSalesByLanguageHandler
+    dashboardSalesByLanguageHandler,
 };
