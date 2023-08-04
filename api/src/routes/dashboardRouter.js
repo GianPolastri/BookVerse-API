@@ -6,7 +6,8 @@ const {
     dashboardUserHandler,
     dashboardAllSalesHandler,
     dashboardSalesByPublisherHandler,
-    dashboardSalesByGenreHandler
+    dashboardSalesByGenreHandler,
+    dashboardSalesByLanguageHandler,
 } = require("../handlers/dashboardHandlers");
 const {
     postBooksHandler,
@@ -22,10 +23,10 @@ const uploadImage = require("./storage");
 const dashboardRouter = Router();
 
 //* rutas de books
-dashboardRouter.get("/books", dashboardBooksHandler);
-// dashboardRouter.post('/books/create', uploadImage, postBooksHandler);
-dashboardRouter.post("/books/restore/:id", restoreBooks);
-dashboardRouter.delete("/books/delete/:id", deleteBooks);
+dashboardRouter.get("/books", dashboardBooksHandler); //? Trae todos los libros sin importar soft-delete
+// dashboardRouter.post('/books/create', uploadImage, postBooksHandler); //! No implementada todavia, sigue en ruta books
+dashboardRouter.post("/books/restore/:id", restoreBooks); //? Restaura el libro
+dashboardRouter.delete("/books/delete/:id", deleteBooks); //? Soft-delete del libro
 
 //* rutas de data de ventas
 dashboardRouter.get("/balance", dashboardbalanceHandler); //? Trae el total de guita recibida por ventas
@@ -33,11 +34,12 @@ dashboardRouter.get("/balance/transactions", dashboardTransactionsHandler); //? 
 dashboardRouter.get("/sales/all", dashboardAllSalesHandler); //? Trae todas las ventas por separado
 dashboardRouter.get("/sales/publisher", dashboardSalesByPublisherHandler); //? ventas por publisher
 dashboardRouter.get("/sales/genre", dashboardSalesByGenreHandler); //? ventas por genre
+dashboardRouter.get("/sales/language", dashboardSalesByLanguageHandler); //? ventas por language
 
 //* rutas de usuarios
-dashboardRouter.get("/user", dashboardUserHandler);
-dashboardRouter.delete("/user/delete/:id_user", putStatusUserHandler);
-dashboardRouter.post("/user/restore/:id_user", restoreStatusUserHandler);
+dashboardRouter.get("/user", dashboardUserHandler); //? Trae todos los usuarios sin importar soft-delete
+dashboardRouter.delete("/user/delete/:id_user", putStatusUserHandler); //? soft-delete del usuario
+dashboardRouter.post("/user/restore/:id_user", restoreStatusUserHandler); //? Desbanea al usuario
 
 module.exports = dashboardRouter;
 
