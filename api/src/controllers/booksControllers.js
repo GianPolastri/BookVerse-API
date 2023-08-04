@@ -8,7 +8,6 @@ const fs = require('fs');
 const API_KEY = process.env.API_KEY;
 const API_SECRET = process.env.API_SECRET;
 const CLOUD_NAME = process.env.CLOUD_NAME;
-const ASSET_PATH_PRODUCTS = process.env.ASSET_PATH_PRODUCTS;
 
 cloudinary.config({
     cloud_name: CLOUD_NAME,
@@ -44,12 +43,8 @@ const getAllBooks = async () => {
     return dbBooks;
 }
 
-const postBooks = async (image, title, author, price, description, pages, publicationDate, format, language, publisher, genre) => {
-    /*     const imgPath = ASSET_PATH_PRODUCTS;
-        
-        const files = await fs.promises.readdir(imgPath);
-        for (const file of files) {
-            const imageFullPath = imgPath + file;
+const postBooks = async (image, title, author, price, description, pages, publicationDate, format, language, publisher, genre) => {    
+            const imageFullPath = image.path;
             console.log("outside", imageFullPath);
     
             try {
@@ -60,7 +55,7 @@ const postBooks = async (image, title, author, price, description, pages, public
                 image = imgLink;
             } catch (error) {
                 throw new Error(error);
-            } */
+            }
 
     if (!title) {
         throw new Error("No puedes enviar un nombre vacio.")
