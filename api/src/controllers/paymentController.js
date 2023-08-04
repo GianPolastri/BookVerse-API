@@ -46,7 +46,7 @@ const checkoutController = async (user_id) => {
 };
 
 
-const successController = async ( user_id, session_id ) => {
+const successController = async ( user_id ) => {
 
     // console.log('Esto llega al success controller: ', user_id);
 
