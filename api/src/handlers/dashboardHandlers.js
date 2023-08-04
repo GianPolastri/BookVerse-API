@@ -5,6 +5,7 @@ const {
     dashboardUserController,
     dashboardAllSalesController,
     dashboardSalesByPublisherController,
+    dashboardSalesByGenreController
 } = require("../controllers/dashboardControllers");
 
 const dashboardBooksHandler = async (req, res) => {
@@ -62,6 +63,16 @@ const dashboardSalesByPublisherHandler = async (req, res) => {
     }
 }
 
+const dashboardSalesByGenreHandler = async (req, res) => {
+
+    try {
+        const salesByGenre = await dashboardSalesByGenreController();
+        res.status(200).json(salesByGenre);
+    } catch (error) {
+        res.status(500).json({error: error.message});
+    }
+}
+
 module.exports = {
     dashboardBooksHandler,
     dashboardbalanceHandler,
@@ -69,4 +80,5 @@ module.exports = {
     dashboardUserHandler,
     dashboardAllSalesHandler,
     dashboardSalesByPublisherHandler,
+    dashboardSalesByGenreHandler,
 };

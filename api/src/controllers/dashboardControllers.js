@@ -1,6 +1,6 @@
 require("dotenv").config();
 const { STRIPE_PRIVATE_KEY } = process.env;
-const { Book, User, Sale, Publisher } = require("../db");
+const { Book, User, Sale, Publisher, Genre } = require("../db");
 const stripe = require("stripe")(STRIPE_PRIVATE_KEY);
 
 const dashboardBooksController = async () => {
@@ -55,10 +55,6 @@ const dashboardSalesByPublisherController = async () => {
     const allSales = await Sale.findAll();
 
     const salesByPublishers = publishers.map(publisher => {
-        
-        // console.log(publisher);
-        // console.log(allSales);
-        // console.log(publishers);
 
         const byPublisher = allSales.filter( sale => {
             
@@ -83,6 +79,34 @@ const dashboardSalesByPublisherController = async () => {
     return salesByPublisherSorted;
 }
 
+const dashboardSalesByGenreController = async () => {
+
+    const genres = await Genre.findAll();
+    const allSales = await Sale.findAll();
+
+    const salesByGenres = genres.map(genre => {
+
+        const byGenre = allSales.filter( sale => {
+            
+            if(sale.book_genre){
+                if(sale.book_genre === genre.name) return sale;
+            }
+        });
+        const genreSales = byGenre.map( sale => sale.book_quantity);
+
+        const byGenreObj = {
+            genre: genre.name,
+            sales: genreSales.reduce((accumulator, currentValue) => accumulator + currentValue, 0),
+        };
+
+        return byGenreObj;
+    })
+
+    const salesByGenreSorted = salesByGenres.sort((a, b) => b.sales - a.sales);
+
+    return salesByGenreSorted;
+};
+
 module.exports = {
     dashboardBooksController,
     dashboardBalanceController,
@@ -90,4 +114,5 @@ module.exports = {
     dashboardUserController,
     dashboardAllSalesController,
     dashboardSalesByPublisherController,
+    dashboardSalesByGenreController,
 };

@@ -6,6 +6,7 @@ const {
     dashboardUserHandler,
     dashboardAllSalesHandler,
     dashboardSalesByPublisherHandler,
+    dashboardSalesByGenreHandler
 } = require("../handlers/dashboardHandlers");
 const {
     postBooksHandler,
@@ -31,6 +32,7 @@ dashboardRouter.get("/balance", dashboardbalanceHandler); //? Trae el total de g
 dashboardRouter.get("/balance/transactions", dashboardTransactionsHandler); //? Trae los ultimos 10 recibos
 dashboardRouter.get("/sales/all", dashboardAllSalesHandler); //? Trae todas las ventas por separado
 dashboardRouter.get("/sales/publisher", dashboardSalesByPublisherHandler); //? ventas por publisher
+dashboardRouter.get("/sales/genre", dashboardSalesByGenreHandler); //? ventas por genre
 
 //* rutas de usuarios
 dashboardRouter.get("/user", dashboardUserHandler);
