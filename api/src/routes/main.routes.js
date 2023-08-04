@@ -13,7 +13,7 @@ const cartRouter = require("./cartRouter");
 const paymentRouter = require("./paymentRouter");
 const reviewRouter = require('./reviewRouter');
 const wishRouter = require('./wishlistRouter');
-
+const dashboardRouter = require('./dashboardRouter')
 
 const router = Router();
 
@@ -32,5 +32,6 @@ router.use("/cart", cartRouter);
 router.use("/payment", paymentRouter);
 router.use('/review', reviewRouter);
 router.use('/wishlist', wishRouter)
+router.use('/dashboard', dashboardRouter);
 
 module.exports = router;
