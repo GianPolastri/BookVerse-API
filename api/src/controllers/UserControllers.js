@@ -196,32 +196,33 @@ const putEditUser = async (name, birthDate, image, phone, email, password, count
 
 // //*------------- INACTIVAR USER -------------------------
 const putStatusUser = async (id_user) => {
+
     const findUser = await User.findByPk(id_user);
 
     if (!findUser) {
         throw new Error("User does not exist");
-    } else {
-        await findUser.update({ status: false }, { where: { id: id_user } });
-        return;
-    }
+    } 
+    
+    await findUser.destroy();
+    
+    return;
+    
 };
 
 
-/////////////////RESTORE USER /////////////////////////////////
+// //*-----------RESTORE USER--------------------- 
 const restoreStatusUser = async (id_user) => {
-    const findUser = await User.findByPk(id_user);
+
+    const findUser = await User.findByPk(id_user, {paranoid: false});
 
     if (!findUser) {
         throw new Error("User does not exist");
-    } else {
-        await findUser.update({
-            status: true
-        },
-            { where: { id: id_user } });
-            
-        return;
     }
 
+    await findUser.restore();
+            
+    return;
+    
 };
 
 module.exports = {
