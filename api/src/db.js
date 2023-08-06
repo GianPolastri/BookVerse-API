@@ -14,9 +14,9 @@ const sequelize = new Sequelize(
       logging: false, // set to console.log to see the raw SQL queries
       native: false, // lets Sequelize know we can use pg-native for ~30% more speed
       dialectOptions: {
-        ssl: {
-                require: true,
-        }
+         ssl: {
+            require: true,
+         }
       }
    }
 );
@@ -48,7 +48,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuringy
-const { Genre, Cart_Books, Cart, Book, Format, Language, Publisher, Review, Rol, User } = sequelize.models;
+const { Genre, Cart_Books, Cart, Book, Format, Language, Publisher, Review, Rol, User, Wishlist, Wishlist_Books, Sale } = sequelize.models;
 
 // console.log(Genre);
 
@@ -62,6 +62,9 @@ Rol.belongsToMany(User, { through: "User_Roles"});
 
 User.hasOne(Cart);
 Cart.belongsTo(User);
+
+User.belongsToMany(Book, { through: "User_Book" });
+Book.belongsToMany(User, { through: "User_Book" });
 
 Book.belongsToMany(Cart, { through: Cart_Books});
 Cart.belongsToMany(Book, { through: Cart_Books});
@@ -78,8 +81,17 @@ Format.belongsToMany(Book, { through: 'Book_Format' });
 Book.belongsToMany(Genre, { through: 'Book_Genre' });
 Genre.belongsToMany(Book, { through: 'Book_Genre' });
 
-Book.hasMany(Review, {foreignKey: "Book_Review"}); 
-Review.belongsTo(Book, {foreignKey: "Book_Review"});
+Book.hasMany(Review, {foreignKey: "book_id"}); 
+Review.belongsTo(Book, {foreignKey: "book_id"});
+
+User.hasMany(Review); 
+Review.belongsTo(User, { foreignKey: 'email', targetKey: 'email' });
+
+User.hasOne(Wishlist);
+Wishlist.belongsTo(User);
+
+Book.belongsToMany(Wishlist, { through: Wishlist_Books});
+Wishlist.belongsToMany(Book, { through: Wishlist_Books});
 
 module.exports = {
    ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

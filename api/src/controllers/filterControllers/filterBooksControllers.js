@@ -190,7 +190,7 @@ const filtroEditorial = async (name) => {
 
 const filtrarLibrosCombinados = async (filtros) => {
     const normalizedSearchTerm = diacritic.clean(filtros.title).replace(/[^\w\s]/g, '').toLowerCase();
-    filters = {};
+    const filters = {};
 
     if (normalizedSearchTerm) {
         filters['$title$'] = { [Op.iLike]: `%${normalizedSearchTerm}%` };
@@ -215,7 +215,7 @@ const filtrarLibrosCombinados = async (filtros) => {
             { model: Format, as: 'Formats' },
             { model: Language, as: 'Languages' },
             { model: Publisher, as: 'Publishers' },
-            { model: Review, attributes: ['content', 'rating'] }
+            { model: Review, attributes: ['content', 'rating', 'email'] }
         ]
     })
     return ({ books, total: count });

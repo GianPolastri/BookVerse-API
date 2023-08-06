@@ -1,6 +1,6 @@
 //?----------------------------IMPORTS--------------------------------
 
-const { User, Activity, Cart } = require("../db");
+const { User, Activity, Cart, Book } = require("../db");
 const { Op } = require("sequelize");
 const cloudinary = require('cloudinary').v2;
 const { v4: uuidv4 } = require('uuid');
@@ -9,7 +9,7 @@ const fs = require('fs');
 const API_KEY = process.env.API_KEY;
 const API_SECRET = process.env.API_SECRET;
 const CLOUD_NAME = process.env.CLOUD_NAME;
-const ASSET_PATH = process.env.ASSET_PATH;
+/* const ASSET_PATH = process.env.ASSET_PATH; */
 
 cloudinary.config({
     cloud_name: CLOUD_NAME,
@@ -21,11 +21,11 @@ cloudinary.config({
 //*---------------GET ALL USERS----------------------
 const getAllUsers = async () => {
     const allUsers = await User.findAll({
-        // include: [
-        //     {
-        //         model: Cart,
-        //     },
-        // ],
+        include: [
+            {
+                model: Book,
+            },
+        ],
     });
 
 
@@ -38,12 +38,12 @@ const userById = async (id) => {
     if (!id) throw new Error("User ID is missing");
 
     const user = await User.findByPk(id, {
-        // include: [
-        //     {
-        //         model: Activity,
-        //         through: { attributes: [] },
-        //     },
-        // ],
+        include: [
+            {
+                model: Book,
+                through: { attributes: [] },
+            },
+        ],
     });
 
     if (!user) throw new Error("User not found");
@@ -141,16 +141,13 @@ const getUser = async (/* password, */ email) => {
 // //*---------------PUT USER---------------------
 const putEditUser = async (name, birthDate, image, phone, email, password, country) => {
     /* console.log({msg: "controller:", name, birthDate, image, phone, email, password, country}); */
- const imgPath = ASSET_PATH;
- console.log(imgPath);
+ const imgPath = image.path;
 
-    const files = await fs.promises.readdir(imgPath);
-    for (const file of files) {
-        const imageFullPath = imgPath + file;
-        console.log("outside", imageFullPath);
+        const imageFullPath = imgPath;
+        console.log("outside", imageFullPath); 
 
         try {
-            console.log("inside", imageFullPath)
+            console.log({msg: "imagen qla" , path: image.path});
             const result = await cloudinary.uploader.upload(imageFullPath, { public_id: `image_${uuidv4()}` });
             const imgLink = result.secure_url;
             await fs.promises.unlink(imageFullPath);
@@ -159,7 +156,7 @@ const putEditUser = async (name, birthDate, image, phone, email, password, count
         } catch (error) {
             throw new Error(error);
         } 
-    } 
+     
 
     const findUser = await User.findOne({
         where: {
@@ -199,32 +196,33 @@ const putEditUser = async (name, birthDate, image, phone, email, password, count
 
 // //*------------- INACTIVAR USER -------------------------
 const putStatusUser = async (id_user) => {
+
     const findUser = await User.findByPk(id_user);
 
     if (!findUser) {
         throw new Error("User does not exist");
-    } else {
-        await findUser.update({ status: false }, { where: { id: id_user } });
-        return;
-    }
+    } 
+    
+    await findUser.destroy();
+    
+    return;
+    
 };
 
 
-/////////////////RESTORE USER /////////////////////////////////
+// //*-----------RESTORE USER--------------------- 
 const restoreStatusUser = async (id_user) => {
-    const findUser = await User.findByPk(id_user);
+
+    const findUser = await User.findByPk(id_user, {paranoid: false});
 
     if (!findUser) {
         throw new Error("User does not exist");
-    } else {
-        await findUser.update({
-            status: true
-        },
-            { where: { id: id_user } });
-            
-        return;
     }
 
+    await findUser.restore();
+            
+    return;
+    
 };
 
 module.exports = {

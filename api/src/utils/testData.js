@@ -622,4 +622,3 @@ module.exports = {
     languageTest,
     formatTest,
 }
-
