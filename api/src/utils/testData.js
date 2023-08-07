@@ -581,19 +581,19 @@ const publisherTest = [
 
 const languageTest = [
     {
-        "name": "Español"
+        "name": "Spanish"
     },
     {
-        "name": "Inglés"
+        "name": "English"
     },
     {
-        "name": "Francés"
+        "name": "French"
     },
     {
-        "name": "Alemán"
+        "name": "German"
     },
     {
-        "name": "Italiano"
+        "name": "Italian"
     },
 ];
 
