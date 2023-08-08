@@ -37,7 +37,7 @@ const checkoutController = async (user_id) => {
         line_items: resumen,
         mode: 'payment',
         //https://bookverse-m36k.onrender.com/payment/success?user_id=${user_id} http://localhost:3001/payment/success?user_id=${user_id}
-        success_url: `http://localhost:3001/payment/success?user_id=${user_id}`,
+        success_url: `https://bookverse-m36k.onrender.com/payment/success?user_id=${user_id}`,
         cancel_url: 'https://bookverse-m36k.onrender.com/payment/cancel',
     });
 
