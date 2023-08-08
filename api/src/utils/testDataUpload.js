@@ -1,10 +1,11 @@
-const { Genre, Book, Format, Language, Publisher, } = require('../db');
+const { Genre, Book, Format, Language, Publisher, Country, } = require('../db');
 const {
     BooksTest,
     genreTest,
     publisherTest,
     languageTest,
     formatTest,
+    countries,
 } = require('./testData');
 
 const testDataUploader = async () => {
@@ -21,13 +22,15 @@ const testDataUploader = async () => {
 
         const format = await Format.bulkCreate( formatTest, { ignoreDuplicates: true });
 
+        const country = await Country.bulkCreate( countries, { ignoreDuplicates: true });
+
         // console.log(Books);
         
         await Books.forEach( book => book.addFormat(Math.floor(Math.random() * 4 + 1)))
         
         await Books.forEach( book => book.addLanguage(Math.floor(Math.random() * 4 + 1)))
         
-        await Books.forEach( book => book.addGenre(Math.floor(Math.random() * 9 + 1)))
+        await Books.forEach( book => book.addGenre(Math.floor(Math.random() * 7 + 1)))
         
         await Books.forEach( book => book.addPublisher(Math.floor(Math.random() * 7 + 1)))
 
