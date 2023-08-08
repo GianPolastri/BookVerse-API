@@ -24,9 +24,9 @@ const addToCart = async ( user_id, book_id, quantity ) => {
     const book = await Book.findByPk(book_id);
     if(!book) throw new Error('No se ha podido encontrar el producto');
 
-    console.log(user_id);
-    console.log(cart);
-    console.log(book);
+    // console.log(user_id);
+    // console.log(cart);
+    // console.log(book);
 
     cart.addBooks(book, {through: { quantity: quantity }});
 
