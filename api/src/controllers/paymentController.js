@@ -33,12 +33,14 @@ const checkoutController = async (user_id) => {
         
     })
     
+     const url = `https://bookverse-m36k.onrender.com/payment/success?user_id=${user_id}`
+    //  const url = `http://localhost:3001/payment/success?user_id=${user_id}`
+
     // console.log(resumen);
     const session = await stripe.checkout.sessions.create({
         line_items: resumen,
         mode: 'payment',
-        //https://bookverse-m36k.onrender.com/payment/success?user_id=${user_id} http://localhost:3001/payment/success?user_id=${user_id}
-        success_url: `https://bookverse-m36k.onrender.com/payment/success?user_id=${user_id}`,
+        success_url: `${url}`,
         cancel_url: 'https://bookverse-m36k.onrender.com/payment/cancel',
     });
 
@@ -58,20 +60,33 @@ const successController = async ( user_id ) => {
     if (!cart) throw new Error("No es posible encontrar el carrito");
 
     const user = await User.findByPk( user_id );
+   
     const mailOptions = {
-        from: 'bookverseweb@gmail.com', // Cambia esto por tu correo
-        to: user.email, // Correo del usuario
-        subject: 'Compra exitosa en BookVerse',
-        text: '¡Gracias por tu compra en BookVerse! Esperamos que disfrutes tus libros.',
+        from: 'bookverseweb@gmail.com', // Change this to your email
+        to: user.email,
+        subject: 'Successful Purchase on BookVerse',
+       html: `
+       <div style="background-color: #f3f3f3; padding: 20px; font-size:15px;">
+       <h2 style="color: #13363e, font-family: 'wicked-grit', sans-serif;">Congratulations, ${user.name}!</h2>
+       <p style="color: #000804;">You have successfully purchased the following book(s):</p>
+       <p style="color: #b38a83;">${cart.Books.map(book => book.title).join(', ')}</p>
+       <p style="color: #000804;">Total amount spent: $${cart.Books.reduce((total, book) => total + book.price, 0).toFixed(2)}</p>
+       <p style="color: #c2bd98;">We hope you enjoy your new book(s)! </p>
+       <p style="color: #13363e;">Best regards,</p>
+      <p style="color: #b38a83;">The Bookverse Team</p>
+   </div>
+        `,
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
-            console.error('Error al enviar el correo:', error);
+            console.error('Error sending email:', error);
         } else {
-            console.log('Correo electrónico enviado:', info.response);
+            console.log('Email sent:', info.response);
         }
     });
+
+
     cart.Books.map( book => user.addBook(book) );
 
     // const charge = await stripe.charges.retrieve(session_id);
