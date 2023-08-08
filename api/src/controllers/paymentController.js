@@ -4,6 +4,7 @@ const { STRIPE_PRIVATE_KEY } = process.env;
 const stripe = new Stripe(STRIPE_PRIVATE_KEY);
 const { Cart, Cart_Books, User, Book, Sale, Genre, Publisher, Format, Language } = require('../db');
 const { emptyCart } = require('./cartControllers')
+const transporter = require('../utils/nodemailer');
 
 const checkoutController = async (user_id) => {
 
@@ -57,7 +58,20 @@ const successController = async ( user_id ) => {
     if (!cart) throw new Error("No es posible encontrar el carrito");
 
     const user = await User.findByPk( user_id );
+    const mailOptions = {
+        from: 'bookverseweb@gmail.com', // Cambia esto por tu correo
+        to: user.email, // Correo del usuario
+        subject: 'Compra exitosa en BookVerse',
+        text: '¡Gracias por tu compra en BookVerse! Esperamos que disfrutes tus libros.',
+    };
 
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.error('Error al enviar el correo:', error);
+        } else {
+            console.log('Correo electrónico enviado:', info.response);
+        }
+    });
     cart.Books.map( book => user.addBook(book) );
 
     // const charge = await stripe.charges.retrieve(session_id);

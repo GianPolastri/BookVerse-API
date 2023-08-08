@@ -10,11 +10,14 @@ const checkoutHandler = async (req, res) => {
     }
 };
 
+const url = "https://bookverse-m36k.onrender.com/confirmation"
+// const url = "http://localhost:3001/confirmation"
+
 const successHandler = async (req, res) => {
     const { user_id } = req.query;
     try {
         const response = successController( user_id );
-        res.status(201).redirect('http://localhost:3000/confirmation');
+        res.status(201).redirect(`${url}`);
     } catch (error) {
         res.status(500).json({error: error.message});
     }

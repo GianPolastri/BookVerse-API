@@ -108,20 +108,21 @@ const postUser = async (
 // }
 
 //*-----------------GET USER---------------------
-const getUser = async (/* password, */ email) => {
- /*  if (!password) {
-    throw new Error("No puede enviar una contraseña vacia");
-  } else if (!email) {
-    throw new Error("No puede enviar un email vacio");
-  } else {};*/
-    const findUser = await User.findOne({ 
-        where: {
-            email: email,
-        }, 
-     });
-     return findUser;
-   }
-
+const getUser = async (email) => {
+    const user = await User.findOne({
+      where: {
+        email: email,
+      },
+      include: [
+        {
+            model: Book,
+            through: { attributes: [] },
+        },
+    ],
+    });
+  
+    return user;
+  };
 
 
     /*if (!findUser) {
