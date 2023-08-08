@@ -1,5 +1,3 @@
-//* Acá van los datos de prueba
-
 const BooksTest = [
     {
         "title": "The Name of the Wind",
@@ -198,6 +196,15 @@ const BooksTest = [
         "pages": 322,
         "publicationDate": "2007-04-16",
         "image": "https://m.media-amazon.com/images/I/41Al4kLCadL.jpg"
+    },
+    {
+        "title": "The Fall of Númenor",
+        "author": "J.R.R. Tolkien",
+        "price": 22,
+        "description": "Even greater insight into the Second Age would be revealed in subsequent publications, first in Unfinished Tales of Númenor and Middle-earth, then expanded upon in Christopher Tolkien’s magisterial twelve-volume The History of Middle-earth, in which he presented and discussed a wealth of further tales written by his father, many in draft form.",
+        "pages": 320,
+        "publicationDate": "2022-15-11",
+        "image": "https://m.media-amazon.com/images/I/41XKLIAiFXL.jpg"
     },
     {
         "title": "To Kill a Mockingbird",
@@ -523,102 +530,94 @@ const BooksTest = [
         "publicationDate": "2023-03-10",
         "image": "https://m.media-amazon.com/images/I/51t0fiD65YL._SY346_.jpg"
     },
+    {
+      "title": "The Complete Guide to Middle-earth",
+      "author": "Robert Foster",
+      "price": 12,
+      "description": "The Complete Guide to Middle-earth has been compiled to enhance the reader’s enjoyment of Tolkien’s books by bringing together in an A-Z sequence all the key facts and information about names, places, languages and events from The Hobbit, The Lord of the Rings and The Silmarillion. Accompanied with numerous genealogical tables and a unique Chronology of the First Age, it will provide an indispensable aid to every reader’s discovery of Tolkien’s world.",
+      "pages": 444,
+      "publicationDate": "2023-03-31",
+      "image": "https://m.media-amazon.com/images/I/51HHDWfl8HL.jpg"
+    },
+    {
+      "title": "Lord of the Flies",
+      "author": "William Golding",
+      "price": 8,
+      "description": "Golding’s iconic 1954 novel, now with a new foreword by Lois Lowry, remains one of the greatest books ever written for young adults and an unforgettable classic for readers of any age. At the dawn of the next world war, a plane crashes on an uncharted island, stranding a group of schoolboys. At first, with no adult supervision, their freedom is something to celebrate. This far from civilization they can do anything they want. Anything. But as order collapses, as strange howls echo in the night, as terror begins its reign, the hope of adventure seems as far removed from reality as the hope of being rescued.",
+      "pages": 189,
+      "publicationDate": "1959-07-27",
+      "image": "https://m.media-amazon.com/images/I/512mrQMBIOL.jpg"
+    },
+    {
+      "title": "Diary of a Wimpy Kid",
+      "author": "Jeff Kinney",
+      "price": 10,
+      "description": "When he decides to tag along with his brother Rodrick’s band, Löded Diper, Greg doesn’t realize what he’s getting into. But he soon learns that late nights, unpaid gigs, fighting between band members, and money troubles are all part of the rock ’n’ roll lifestyle. Can Greg help Löded Diper become the legends they think they are? Or will too much time with Rodrick’s band be a diper överlöde?",
+      "pages": 189,
+      "publicationDate": "2022-10-25",
+      "image": "https://m.media-amazon.com/images/I/5114sNc4CgL.jpg"
+    },
+    {
+      "title": "Fire & Blood",
+      "author": "George R. R. Martin",
+      "price": 6,
+      "description": "Centuries before the events of A Game of Thrones, House Targaryen—the only family of dragonlords to survive the Doom of Valyria—took up residence on Dragonstone. Fire & Blood begins their tale with the legendary Aegon the Conqueror, creator of the Iron Throne, and goes on to recount the generations of Targaryens who fought to hold that iconic seat, all the way up to the civil war that nearly tore their dynasty apart. What really happened during the Dance of the Dragons? Why was it so deadly to visit Valyria after the Doom? What were Maegor the Cruel’s worst crimes? What was it like in Westeros when dragons ruled the skies? These are but a few of the questions answered in this essential chronicle, as related by a learned maester of the Citadel and featuring more than eighty black-and-white illustrations by artist Doug Wheatley. Readers have glimpsed small parts of this narrative in such volumes as The World of Ice & Fire, but now, for the first time, the full tapestry of Targaryen history is revealed.",
+      "pages": 801,
+      "publicationDate": "2018-20-11",
+      "image": "https://m.media-amazon.com/images/I/41gq02g-MoL.jpg"
+    },
+    {
+      "title": "A Game of Thrones",
+      "author": "George R. R. Martin",
+      "price": 7,
+      "description": "Winter is coming. Such is the stern motto of House Stark, the northernmost of the fiefdoms that owe allegiance to King Robert Baratheon in far-off King’s Landing. There Eddard Stark of Winterfell rules in Robert’s name. There his family dwells in peace and comfort: his proud wife, Catelyn; his sons Robb, Brandon, and Rickon; his daughters Sansa and Arya; and his bastard son, Jon Snow. Far to the north, behind the towering Wall, lie savage Wildings and worse—unnatural things relegated to myth during the centuries-long summer, but proving all too real and all too deadly in the turning of the season. Yet a more immediate threat lurks to the south, where Jon Arryn, the Hand of the King, has died under mysterious circumstances. Now Robert is riding north to Winterfell, bringing his queen, the lovely but cold Cersei, his son, the cruel, vainglorious Prince Joffrey, and the queen’s brothers Jaime and Tyrion of the powerful and wealthy House Lannister—the first a swordsman without equal, the second a dwarf whose stunted stature belies a brilliant mind. All are heading for Winterfell and a fateful encounter that will change the course of kingdoms.",
+      "pages": 819,
+      "publicationDate": "1996-08-06",
+      "image": "https://m.media-amazon.com/images/I/51D+-f5UcDL.jpg"
+    },
+    {
+      "title": "A Clash of Kings",
+      "author": "George R. R. Martin",
+      "price": 11,
+      "description": "Time is out of joint. The summer of peace and plenty, ten years long, is drawing to a close, and the harsh, chill winter approaches like an angry beast. Two great leaders—Lord Eddard Stark and Robert Baratheon—who held sway over an age of enforced peace are dead . . . victims of royal treachery. Now, from the ancient citadel of Dragonstone to the forbidding shores of Winterfell, chaos reigns, as pretenders to the Iron Throne of the Seven Kingdoms prepare to stake their claims through tempest, turmoil, and war. As a prophecy of doom cuts across the sky—a comet the color of blood and flame—six factions struggle for control of a divided land. Eddard’s son Robb has declared himself King in the North. In the south, Joffrey, the heir apparent, rules in name only, victim of the scheming courtiers who teem over King’s Landing. Robert’s two brothers each seek their own dominion, while a disfavored house turns once more to conquest. And a continent away, an exiled queen, the Mother of Dragons, risks everything to lead her precious brood across a hard hot desert to win back the crown that is rightfully hers.",
+      "pages": 672,
+      "publicationDate": "1998-11-28",
+      "image": "https://m.media-amazon.com/images/I/515eoj9FL8L.jpg"
+    },
+    {
+      "title": "A Storm of Swords",
+      "author": "George R. R. Martin",
+      "price": 6,
+      "description": "Of the five contenders for power, one is dead, another in disfavor, and still the wars rage as violently as ever, as alliances are made and broken. Joffrey, of House Lannister, sits on the Iron Throne, the uneasy ruler of the land of the Seven Kingdoms. His most bitter rival, Lord Stannis, stands defeated and disgraced, the victim of the jealous sorceress who holds him in her evil thrall. But young Robb, of House Stark, still rules the North from the fortress of Riverrun. Robb plots against his despised Lannister enemies, even as they hold his sister hostage at King’s Landing, the seat of the Iron Throne. Meanwhile, making her way across a blood-drenched continent is the exiled queen, Daenerys, mistress of the only three dragons still left in the world... But as opposing forces maneuver for the final titanic showdown, an army of barbaric wildlings arrives from the outermost line of civilization. In their vanguard is a horde of mythical Others--a supernatural army of the living dead whose animated corpses are unstoppable. As the future of the land hangs in the balance, no one will rest until the Seven Kingdoms have exploded in a veritable storm of swords. . . .",
+      "pages": 1216,
+      "publicationDate": "2000-08-20",
+      "image": "https://m.media-amazon.com/images/I/51e9blEl+LL.jpg"
+    },
+    {
+      "title": "A Feast for Crows",
+      "author": "George R. R. Martin",
+      "price": 6,
+      "description": "It seems too good to be true. After centuries of bitter strife and fatal treachery, the seven powers dividing the land have decimated one another into an uneasy truce. Or so it appears... With the death of the monstrous King Joffrey, Cersei is ruling as regent in King’s Landing. Robb Stark’s demise has broken the back of the Northern rebels, and his siblings are scattered throughout the kingdom like seeds on barren soil. Few legitimate claims to the once desperately sought Iron Throne still exist—or they are held in hands too weak or too distant to wield them effectively. The war, which raged out of control for so long, has burned itself out. But as in the aftermath of any climactic struggle, it is not long before the survivors, outlaws, renegades, and carrion eaters start to gather, picking over the bones of the dead and fighting for the spoils of the soon-to-be dead. Now in the Seven Kingdoms, as the human crows assemble over a banquet of ashes, daring new plots and dangerous new alliances are formed, while surprising faces—some familiar, others only just appearing—are seen emerging from an ominous twilight of past struggles and chaos to take up the challenges ahead.",
+      "pages": 1106,
+      "publicationDate": "2005-10-16",
+      "image": "https://m.media-amazon.com/images/I/51T6kUoKSWL._SY346_.jpg"
+    },
+    {
+      "title": "A Dance with Dragons",
+      "author": "George R. R. Martin",
+      "price": 12,
+      "description": "In the aftermath of a colossal battle, the future of the Seven Kingdoms hangs in the balance—beset by newly emerging threats from every direction. In the east, Daenerys Targaryen, the last scion of House Targaryen, rules with her three dragons as queen of a city built on dust and death. But Daenerys has thousands of enemies, and many have set out to find her. As they gather, one young man embarks upon his own quest for the queen, with an entirely different goal in mind. Fleeing from Westeros with a price on his head, Tyrion Lannister, too, is making his way to Daenerys. But his newest allies in this quest are not the rag-tag band they seem, and at their heart lies one who could undo Daenerys’s claim to Westeros forever.",
+      "pages": 1201,
+      "publicationDate": "2011-07-13",
+      "image": "https://m.media-amazon.com/images/I/51KFegQTQXL._SY346_.jpg"
+    },
+    {
+      "title": "The True Love Experiment",
+      "author": "Christina Lauren",
+      "price": 2,
+      "description": "Felicity 'Fizzy' Chen is lost. Sure, she has an incredible career as a beloved romance novelist with numerous bestsellers to her name, but when she's asked to give a commencement address, it hits her: she hasn't been practising what she's preached. She hasn't been in love. In lust? Sure. But that swoon-worthy, can't-stop-thinking-about-him, all-encompassing feeling? Nope. And suddenly the optimism she's encouraged in her readers starts to feel like a lie. Connor Prince, documentary filmmaker and single father, loves that his work allows him to live near his daughter. Then his profit-minded boss orders him to create a reality TV show, putting it all in jeopardy. Desperate to find his romantic lead, a chance run-in with an exasperated Fizzy offers Connor the perfect solution. What if he could show the queen of romance herself falling head-over-heels? But when production on The True Love Experiment begins, Connor wonders if that perfect match will ever be in the cue cards for him too.",
+      "pages": 416,
+      "publicationDate": "2023-05-16",
+      "image": "https://m.media-amazon.com/images/I/417i0D509ML.jpg"
+    },
 ];
-
-const genreTest = [
-    {
-        "name": "Fiction"
-    },
-    {
-        "name": "Novel"
-    },
-    {
-        "name": "Science Fiction"
-    },
-    {
-        "name": "Fantasy"
-    },
-    {
-        "name": "Mystery"
-    },
-    {
-        "name": "Romance"
-    },
-    {
-        "name": "Adventure"
-    },
-    {
-        "name": "History"
-    },
-    {
-        "name": "Poetry"
-    },
-];
-
-const publisherTest = [
-    {
-        "name": "Alfaguara Publishing"
-    },
-    {
-        "name": "Anagrama Publishing"
-    },
-    {
-        "name": "Planeta Publishing"
-    },
-    {
-        "name": "Penguin Random House Publishing"
-    },
-    {
-        "name": "Gallimard Publishing"
-    },
-    {
-        "name": "Macmillan Publishing"
-    },
-    {
-        "name": "Pantheon Books Publishing"
-    }
-];
-
-const languageTest = [
-    {
-        "name": "Español"
-    },
-    {
-        "name": "Inglés"
-    },
-    {
-        "name": "Francés"
-    },
-    {
-        "name": "Alemán"
-    },
-    {
-        "name": "Italiano"
-    },
-];
-
-const formatTest = [
-    {
-        "name": "EPUB"
-    },
-    {
-        "name": "PDF"
-    },
-    {
-        "name": "MOBI"
-    },
-    {
-        "name": "AZW3"
-    },
-    {
-        "name": "CBZ"
-    }
-];
-
-module.exports = {
-    BooksTest,
-    genreTest,
-    publisherTest,
-    languageTest,
-    formatTest,
-}
