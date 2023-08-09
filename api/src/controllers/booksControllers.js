@@ -78,7 +78,7 @@ const postBooks = async (image, title, author, price, description, pages, public
 
         return newBook;
     }
-}}
+}
 
 const getDetailBooks = async (id) => {
     const books = await Book.findByPk(id, {
