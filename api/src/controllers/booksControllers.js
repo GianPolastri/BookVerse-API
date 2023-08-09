@@ -44,11 +44,7 @@ const getAllBooks = async () => {
 }
 
 const postBooks = async (image, title, author, price, description, pages, publicationDate, format, language, publisher, genre) => {
-        const imgPath = ASSET_PATH_PRODUCTS;
-        
-        const files = await fs.promises.readdir(imgPath);
-        for (const file of files) {
-            const imageFullPath = imgPath + file;
+    const imageFullPath = image.path;
             console.log("outside", imageFullPath);
     
             try {
@@ -79,6 +75,7 @@ const postBooks = async (image, title, author, price, description, pages, public
         return newBook;
     }
 }
+
 
 const getDetailBooks = async (id) => {
     const books = await Book.findByPk(id, {
