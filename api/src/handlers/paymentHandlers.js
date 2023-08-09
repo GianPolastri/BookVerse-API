@@ -10,8 +10,8 @@ const checkoutHandler = async (req, res) => {
     }
 };
 
-// const url = "https://bookverse-m36k.onrender.com/confirmation"
-const url = "http://localhost:3000/confirmation"
+ const url = "https://bookverse-m36k.onrender.com/confirmation"
+// const url = "http://localhost:3000/confirmation"
 
 const successHandler = async (req, res) => {
     const { user_id } = req.query;
