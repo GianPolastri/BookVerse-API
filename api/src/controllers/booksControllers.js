@@ -43,8 +43,8 @@ const getAllBooks = async () => {
     return dbBooks;
 }
 
-const postBooks = async (image, title, author, price, description, pages, publicationDate, format, language, publisher, genre) => {    
-            const imageFullPath = image.path;
+const postBooks = async (image, title, author, price, description, pages, publicationDate, format, language, publisher, genre) => {
+    const imageFullPath = image.path;
             console.log("outside", imageFullPath);
     
             try {
@@ -55,7 +55,7 @@ const postBooks = async (image, title, author, price, description, pages, public
                 image = imgLink;
             } catch (error) {
                 throw new Error(error);
-            }
+            } 
 
     if (!title) {
         throw new Error("No puedes enviar un nombre vacio.")
@@ -75,6 +75,7 @@ const postBooks = async (image, title, author, price, description, pages, public
         return newBook;
     }
 }
+
 
 const getDetailBooks = async (id) => {
     const books = await Book.findByPk(id, {
