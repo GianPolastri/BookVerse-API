@@ -91,7 +91,7 @@ const successController = async ( user_id ) => {
 
     // const charge = await stripe.charges.retrieve(session_id);
 
-    // console.log(charge);
+    console.log('Llegue aca 1');
 
     cart.Books.map( async book => {
 
@@ -108,6 +108,8 @@ const successController = async ( user_id ) => {
                 model: Publisher,
             }
         ]});
+
+        console.log('Llegue aca 2');
 
         const tiempoTranscurrido = Date.now();
         const hoy = new Date(tiempoTranscurrido);
@@ -127,7 +129,7 @@ const successController = async ( user_id ) => {
         }
 
         console.log(sale);
-
+        console.log('Llegue aca 3');
         await Sale.create(sale);
 
         const allSales = await Sale.findAll();
@@ -136,6 +138,7 @@ const successController = async ( user_id ) => {
     } );
 
     const userBooks = await user.getBooks;
+    console.log('Llegue aca 4');
 
     await emptyCart(user_id);
 
