@@ -44,7 +44,7 @@ const getAllBooks = async () => {
 }
 
 const postBooks = async (image, title, author, price, description, pages, publicationDate, format, language, publisher, genre) => {
-    /*     const imgPath = ASSET_PATH_PRODUCTS;
+        const imgPath = ASSET_PATH_PRODUCTS;
         
         const files = await fs.promises.readdir(imgPath);
         for (const file of files) {
@@ -59,7 +59,7 @@ const postBooks = async (image, title, author, price, description, pages, public
                 image = imgLink;
             } catch (error) {
                 throw new Error(error);
-            } */
+            } 
 
     if (!title) {
         throw new Error("No puedes enviar un nombre vacio.")
