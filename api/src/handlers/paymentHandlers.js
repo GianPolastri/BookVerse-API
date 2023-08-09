@@ -14,7 +14,7 @@ const successHandler = async (req, res) => {
     const { user_id } = req.query;
     try {
         const response = successController( user_id );
-        res.status(201).redirect('https://book-verse-client.vercel.app/confirmation');
+        res.status(201).redirect('https://bookverse-client.vercel.app/confirmation');
     } catch (error) {
         res.status(500).json({error: error.message});
     }
