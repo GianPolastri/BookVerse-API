@@ -7,8 +7,8 @@ const {DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, DB_DEPLOY } = process.env;
 // console.log(DB_USER, DB_PASSWORD, DB_HOST, DB_NAME);
 
 const sequelize = new Sequelize(
-   //  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`, 
-   DB_DEPLOY, 
+    `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`, 
+   // DB_DEPLOY, 
    {
       logging: false, // set to console.log to see the raw SQL queries
       native: false, // lets Sequelize know we can use pg-native for ~30% more speed
@@ -47,7 +47,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuringy
-const { Genre, Cart_Books, Cart, Book, Format, Language, Publisher, Review, Rol, User, Wishlist, Wishlist_Books } = sequelize.models;
+const { Genre, Cart_Books, Cart, Book, Format, Language, Publisher, Review, Rol, User, Wishlist, Wishlist_Books, Sale } = sequelize.models;
 
 // console.log(Genre);
 
