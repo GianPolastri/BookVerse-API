@@ -188,7 +188,7 @@ const filtroEditorial = async (name) => {
     return filteredPublishers;
 };
 
-const filtrarLibrosCombinados = async (filtros) => {
+const filtrarLibrosCombinados = async (filtros, ordenamiento) => {
     const normalizedSearchTerm = diacritic.clean(filtros.title).replace(/[^\w\s]/g, '').toLowerCase();
     const filters = {};
 
@@ -210,6 +210,7 @@ const filtrarLibrosCombinados = async (filtros) => {
 
     const { rows: books, count } = await Book.findAndCountAll({
         where: filters,
+        order: ordenamiento,
         include: [
             { model: Genre, as: 'Genres' },
             { model: Format, as: 'Formats' },
@@ -221,4 +222,15 @@ const filtrarLibrosCombinados = async (filtros) => {
     return ({ books, total: count });
 };
 
-module.exports = { filtroGenero, filtroNombre, filtroFormato, filtroLenguaje, filtroEditorial, filtrarLibrosCombinados };
+const porPrecio = async (filtros, precio) => {
+    return await filtrarLibrosCombinados(filtros, [['price', precio]]);
+};
+
+const porNombre = async (filtros, titulo) => {
+    return await filtrarLibrosCombinados(filtros, [['title', titulo]]);
+};
+
+
+
+
+module.exports = { filtroGenero, filtroNombre, filtroFormato, filtroLenguaje, filtroEditorial, filtrarLibrosCombinados, porPrecio, porNombre };

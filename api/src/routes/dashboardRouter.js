@@ -9,6 +9,7 @@ const {
     dashboardSalesByPublisherHandler,
     dashboardSalesByGenreHandler,
     dashboardSalesByLanguageHandler,
+    dashboardSalesByCountryHandler,
 } = require("../handlers/dashboardHandlers");
 const {
     postBooksHandler,
@@ -37,6 +38,7 @@ dashboardRouter.get("/sales/amount", dashboardSalesAmountHandler); //? Cantidad 
 dashboardRouter.get("/sales/publisher", dashboardSalesByPublisherHandler); //? ventas por publisher
 dashboardRouter.get("/sales/genre", dashboardSalesByGenreHandler); //? ventas por genre
 dashboardRouter.get("/sales/language", dashboardSalesByLanguageHandler); //? ventas por language
+dashboardRouter.get("/sales/country", dashboardSalesByCountryHandler); //? ventas por Country
 
 //* rutas de usuarios
 dashboardRouter.get("/user", dashboardUserHandler); //? Trae todos los usuarios sin importar soft-delete
